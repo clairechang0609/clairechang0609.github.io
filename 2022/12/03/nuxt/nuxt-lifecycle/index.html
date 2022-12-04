@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="版本：nuxt 2.15.8  Nuxt 最大的特點就是 Server Side Render，因此他有獨立的生命週期，來看一下官方提供的圖片：  nuxtServerInit只在 Nuxt 環境初始化時觸發，當我們想將 server 端資料提前傳給 client 端，可以使用此方法，要注意只能寫在 VueX store&#x2F;index.js  actions &#x2F;&#x2F; store&#x2F;index.jsex">
+    <meta name="description" content="版本：nuxt 2.15.8  Nuxt 最大的特點就是 Server Side Render，因此他有獨立的生命週期，來看一下官方提供的圖片：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nuxt.js 2.x Lifecycle 生命週期">
 <meta property="og:url" content="https://clairechang0609.github.io/2022/12/03/nuxt/nuxt-lifecycle/index.html">
 <meta property="og:site_name" content="Claire&#39;s Notes">
-<meta property="og:description" content="版本：nuxt 2.15.8  Nuxt 最大的特點就是 Server Side Render，因此他有獨立的生命週期，來看一下官方提供的圖片：  nuxtServerInit只在 Nuxt 環境初始化時觸發，當我們想將 server 端資料提前傳給 client 端，可以使用此方法，要注意只能寫在 VueX store&#x2F;index.js  actions &#x2F;&#x2F; store&#x2F;index.jsex">
+<meta property="og:description" content="版本：nuxt 2.15.8  Nuxt 最大的特點就是 Server Side Render，因此他有獨立的生命週期，來看一下官方提供的圖片：">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/W4ZLvrJ.png">
 <meta property="og:image" content="https://i.imgur.com/tm2jMnC.png">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://i.imgur.com/mT4lCpY.png">
 <meta property="og:image" content="https://i.imgur.com/yKRo61U.png">
 <meta property="article:published_time" content="2022-12-03T09:54:00.000Z">
-<meta property="article:modified_time" content="2022-12-04T04:13:01.585Z">
+<meta property="article:modified_time" content="2022-12-04T04:27:50.465Z">
 <meta property="article:author" content="Claire Chang">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
@@ -151,7 +151,7 @@
         <span class="column is-narrow">
             
             
-            10 分鐘 讀完 (約 1522 字)
+            10 分鐘 讀完 (約 1523 字)
         </span>
          -->
     </div>
@@ -161,6 +161,8 @@
 <p><strong>版本：nuxt 2.15.8</strong></p>
 </blockquote>
 <p>Nuxt 最大的特點就是 Server Side Render，因此他有獨立的<a target="_blank" rel="noopener" href="https://nuxtjs.org/docs/concepts/nuxt-lifecycle#lifecycle">生命週期</a>，來看一下官方提供的圖片：</p>
+<span id="more"></span>
+
 <p><img src="https://i.imgur.com/W4ZLvrJ.png"></p>
 <h1 id="nuxtServerInit"><a href="#nuxtServerInit" class="headerlink" title="nuxtServerInit"></a><strong>nuxtServerInit</strong></h1><p>只在 Nuxt 環境初始化時觸發，當我們想將 server 端資料提前傳給 client 端，可以使用此方法，要注意只能寫在 <strong>VueX</strong> <strong>store/index.js  actions</strong></p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// store/index.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">state</span> = (<span class="hljs-params"></span>) =&gt; ({<br>    <span class="hljs-attr">userInfo</span>: {}<br>});<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> mutations = {<br>    <span class="hljs-title function_">setUserInfo</span>(<span class="hljs-params">state, value</span>) {<br>        state.<span class="hljs-property">userInfo</span> = value;<br>    }<br>};<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> actions = {<br>    <span class="hljs-title function_">nuxtServerInit</span>(<span class="hljs-params">{ commit }, { req }</span>) {<br>        <span class="hljs-comment">// req.session.user = { name: 'claire' }</span><br>        <span class="hljs-title function_">commit</span>(<span class="hljs-string">'setUserInfo'</span>, req.<span class="hljs-property">session</span>.<span class="hljs-property">user</span>);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>

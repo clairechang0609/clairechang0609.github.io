@@ -16,15 +16,15 @@
 
 
 
-    <meta name="description" content="版本：nuxt 2.15.8  全名為 Nuxt configuration file，功能同 Vue 專案內 vue.config.js 檔，如果我們使用 create-nuxt-app 來建置專案，會自動產生這支檔案，在此配置的內容，會全域讀取設定。 接下來介紹一下一些常用的設定 alias路徑別名，大家還記得在 Vue 專案內，如果沒有設定路徑別名，則需要寫相對路徑（例如：..&#x2F;compo">
+    <meta name="description" content="版本：nuxt 2.15.8  全名為 Nuxt configuration file，功能同 Vue 專案內 vue.config.js 檔，如果我們使用 create-nuxt-app 來建置專案，會自動產生這支檔案，在此配置的內容，會全域讀取設定。 接下來介紹一下一些常用的設定：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nuxt.js 2.x nuxt.config.js 設定檔">
 <meta property="og:url" content="https://clairechang0609.github.io/2022/12/03/nuxt/nuxt-config-setting/index.html">
 <meta property="og:site_name" content="Claire&#39;s Notes">
-<meta property="og:description" content="版本：nuxt 2.15.8  全名為 Nuxt configuration file，功能同 Vue 專案內 vue.config.js 檔，如果我們使用 create-nuxt-app 來建置專案，會自動產生這支檔案，在此配置的內容，會全域讀取設定。 接下來介紹一下一些常用的設定 alias路徑別名，大家還記得在 Vue 專案內，如果沒有設定路徑別名，則需要寫相對路徑（例如：..&#x2F;compo">
+<meta property="og:description" content="版本：nuxt 2.15.8  全名為 Nuxt configuration file，功能同 Vue 專案內 vue.config.js 檔，如果我們使用 create-nuxt-app 來建置專案，會自動產生這支檔案，在此配置的內容，會全域讀取設定。 接下來介紹一下一些常用的設定：">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-12-03T09:10:00.000Z">
-<meta property="article:modified_time" content="2022-12-04T04:10:08.238Z">
+<meta property="article:modified_time" content="2022-12-04T04:29:04.357Z">
 <meta property="article:author" content="Claire Chang">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
@@ -145,7 +145,7 @@
         <span class="column is-narrow">
             
             
-            11 分鐘 讀完 (約 1723 字)
+            12 分鐘 讀完 (約 1725 字)
         </span>
          -->
     </div>
@@ -155,7 +155,9 @@
 <p><strong>版本：nuxt 2.15.8</strong></p>
 </blockquote>
 <p>全名為 <strong><strong>Nuxt configuration file</strong></strong>，功能同 Vue 專案內 vue.config.js 檔，如果我們使用 create-nuxt-app 來建置專案，會自動產生這支檔案，在此配置的內容，會全域讀取設定。</p>
-<p>接下來介紹一下一些常用的設定</p>
+<p>接下來介紹一下一些常用的設定：</p>
+<span id="more"></span>
+
 <h1 id="alias"><a href="#alias" class="headerlink" title="alias"></a>alias</h1><p>路徑別名，大家還記得在 Vue 專案內，如果沒有設定路徑別名，則需要寫相對路徑（例如：../components/Navbar.vue），對於維護和開發都很不方便，一些程式碼檢核工具，甚至會視為 bad smell，因此我們會在 vue.config.js 檔內統一設定路徑別名。</p>
 <p>Nuxt 專案很貼心的自動配置了路徑別名，預設值如下</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx">{<br>    <span class="hljs-string">'~~'</span>: <span class="hljs-string">`&lt;rootDir&gt;`</span>,<br>    <span class="hljs-string">'@@'</span>: <span class="hljs-string">`&lt;rootDir&gt;`</span>,<br>    <span class="hljs-string">'~'</span>: <span class="hljs-string">`&lt;srcDir&gt;`</span>,<br>    <span class="hljs-string">'@'</span>: <span class="hljs-string">`&lt;srcDir&gt;`</span>,<br>    <span class="hljs-string">'assets'</span>: <span class="hljs-string">`&lt;srcDir&gt;/assets`</span>, <span class="hljs-comment">// (unless you have set a custom `dir.assets`)</span><br>    <span class="hljs-string">'static'</span>: <span class="hljs-string">`&lt;srcDir&gt;/static`</span>, <span class="hljs-comment">// (unless you have set a custom `dir.static`)</span><br>}<br></code></pre></td></tr></tbody></table></figure>
