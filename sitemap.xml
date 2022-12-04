@@ -146,6 +146,13 @@
   </url>
   
   <url>
+    <loc>https://clairechang0609.github.io/tags/swiper/</loc>
+    <lastmod>2022-12-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://clairechang0609.github.io/tags/vuex/</loc>
     <lastmod>2022-12-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -154,13 +161,6 @@
   
   <url>
     <loc>https://clairechang0609.github.io/tags/nuxt-vuex/</loc>
-    <lastmod>2022-12-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clairechang0609.github.io/tags/swiper/</loc>
     <lastmod>2022-12-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
