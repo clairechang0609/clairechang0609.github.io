@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>Nuxt.js 2.x VueX Store 搭配 vuex-persistedstate 狀態保存工具 - Claire&#39;s Notes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="學習筆記">
+
+
+
+
+
+    <meta name="description" content="版本：nuxt 2.15.8  前情提要一下，在 Vue 的專案下，常會需要做父子元件或是頁面之間的溝通傳值，如果說只是單層（ex：父元件 → 子元件、子元件 → 父元件、頁面 → 頁面），我們可以很簡單的使用 props 、 emit 或 event bus 即可，但在大型專案，共用資料就不是如此單純，可能會有元件內含元件、多層級的溝通，如果只用上述方法，對於開發及除錯都不便利，如下圖範例，元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nuxt.js 2.x VueX Store 搭配 vuex-persistedstate 狀態保存工具">
+<meta property="og:url" content="https://clairechang0609.github.io/2022/12/04/nuxt/nuxt-vuex-store/index.html">
+<meta property="og:site_name" content="Claire&#39;s Notes">
+<meta property="og:description" content="版本：nuxt 2.15.8  前情提要一下，在 Vue 的專案下，常會需要做父子元件或是頁面之間的溝通傳值，如果說只是單層（ex：父元件 → 子元件、子元件 → 父元件、頁面 → 頁面），我們可以很簡單的使用 props 、 emit 或 event bus 即可，但在大型專案，共用資料就不是如此單純，可能會有元件內含元件、多層級的溝通，如果只用上述方法，對於開發及除錯都不便利，如下圖範例，元">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/2y1jUjQ.png">
+<meta property="article:published_time" content="2022-12-04T04:55:00.000Z">
+<meta property="article:modified_time" content="2022-12-04T04:57:44.666Z">
+<meta property="article:author" content="Claire Chang">
+<meta property="article:tag" content="nuxt">
+<meta property="article:tag" content="nuxt.js">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="vue.js">
+<meta property="article:tag" content="ssr">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/2y1jUjQ.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night-eighties.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    claire&#39;s notes
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">文章</a>
+            
+            <a class="navbar-item "
+               href="/categories">分類</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/clairechang0609">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Nuxt.js 2.x VueX Store 搭配 vuex-persistedstate 狀態保存工具
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <!-- 
+                <time datetime="2022-12-04T04:55:00.000Z" itemprop="datePublished">2022-12-04</time>
+             -->
+            <span>2022-12-04</span>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
+        </span>
+        
+        <!-- 
+        <span class="column is-narrow">
+            
+            
+            8 分鐘 讀完 (約 1245 字)
+        </span>
+         -->
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><blockquote>
+<p><strong>版本：nuxt 2.15.8</strong></p>
+</blockquote>
+<p>前情提要一下，在 Vue 的專案下，常會需要做父子元件或是頁面之間的溝通傳值，如果說只是單層（ex：父元件 → 子元件、子元件 → 父元件、頁面 → 頁面），我們可以很簡單的使用 <code>props</code> 、 <code>emit</code> 或 <code>event bus</code> 即可，但在大型專案，共用資料就不是如此單純，可能會有元件內含元件、多層級的溝通，如果只用上述方法，對於開發及除錯都不便利，如下圖範例，<strong>元件 1-1</strong> 跟<strong>元件 2-1</strong> 的溝通相對複雜。</p>
+<span id="more"></span>
+
+<p><img src="https://i.imgur.com/2y1jUjQ.png"></p>
+<p>為了處理高難度溝通，VueX 狀態管理工具就誕生了，那麼在 Nuxt 專案下又該怎麼使用呢？</p>
+<p>首先先安裝 VueX 套件 <code>npm i vuex@3.6.2</code></p>
+<blockquote>
+<p>💡 Nuxt v2.x 必須搭配 VueX v3.x</p>
+</blockquote>
+<p>接著在專案最外層新增 store 資料夾，並在裡面建立 .js 檔，範例使用 userInfo.js</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">state</span> = (<span class="hljs-params"></span>) =&gt; {};<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getters = {};<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> mutations = {};<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> actions = {};<br></code></pre></td></tr></tbody></table></figure>
+
+<p>Nuxt 專案會自動創建實例 <code>new Vuex.Store()</code>，將 store 檔案包裝進模組內，像這樣：</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">new</span> <span class="hljs-title class_">Vuex</span>.<span class="hljs-title class_">Store</span>({<br>    <span class="hljs-attr">modules</span>: {<br>        <span class="hljs-attr">userInfo</span>: {<br>            <span class="hljs-attr">namespaced</span>: <span class="hljs-literal">true</span>,<br>            <span class="hljs-attr">state</span>: <span class="hljs-function">() =&gt;</span> {},<br>            <span class="hljs-attr">getters</span>: {},<br>            <span class="hljs-attr">mutations</span>: {},<br>            <span class="hljs-attr">actions</span>: {}<br>        }<br>    }<br>});<br></code></pre></td></tr></tbody></table></figure>
+
+<p>VueX 基本架構：</p>
+<ul>
+<li>state：用以儲存狀態，功能同 .vue 檔內的 data，因此會使用方法來包裝，並 return 內容</li>
+<li>getters：功能同 computed，用以計算 state 內的狀態，不能直接改變 state</li>
+<li>mutations：用來更改 state，不能使用非同步語法</li>
+<li>actions：非同步語法只能寫在 actions，不能直接改變 state，需透過 mutations 改變 state</li>
+</ul>
+<p>接著來替 store 加入一些內容吧</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">state</span> = (<span class="hljs-params"></span>) =&gt; ({<br>    <span class="hljs-attr">count</span>: <span class="hljs-number">0</span>,<br>    <span class="hljs-attr">products</span>: [<br>        {<br>            <span class="hljs-attr">name</span>: <span class="hljs-string">'food'</span>,<br>            <span class="hljs-attr">onSale</span>: <span class="hljs-literal">false</span><br>        },<br>        {<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'drink'</span>,<br>            <span class="hljs-attr">onSale</span>: <span class="hljs-literal">true</span><br>        }<br>    ]<br>});<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getters = {<br>    <span class="hljs-title function_">onSaleProducts</span>(<span class="hljs-params">state</span>) {<br>        <span class="hljs-keyword">return</span> state.<span class="hljs-property">products</span>.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.<span class="hljs-property">onSale</span>);<br>    }<br>};<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> mutations = {<br>    <span class="hljs-title function_">increment</span>(<span class="hljs-params">state, number</span>) {<br>        state.<span class="hljs-property">count</span> += number;<br>    }<br>};<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> actions = {<br>    <span class="hljs-title function_">incrementAsync</span>(<span class="hljs-params">{ commit }, number</span>) {<br>        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {<br>            <span class="hljs-title function_">commit</span>(<span class="hljs-string">'increment'</span>, number);<br>        }, <span class="hljs-number">1000</span>);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<p>如果要在頁面使用 store 的內容，有以下兩種方式：</p>
+<p><strong>透過 this.$store 操作</strong></p>
+<p>VueX 將 store 注入到 Vue 實例，因此我們透過 $store 就可以取得相關資料及方法，使用方式如下（範例頁面 pages/about.vue）：</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'About'</span>,<br>    <span class="hljs-attr">computed</span>: {<br>        <span class="hljs-title function_">count</span>(<span class="hljs-params"></span>) { <span class="hljs-comment">// state</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-property">state</span>.<span class="hljs-property">userInfo</span>.<span class="hljs-property">count</span>;<br>        }<br>        <span class="hljs-title function_">onSaleProducts</span>(<span class="hljs-params"></span>) { <span class="hljs-comment">// getters</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-property">getters</span>[<span class="hljs-string">'userInfo/onSaleProducts'</span>];<br>        }<br>    },<br>    <span class="hljs-attr">methods</span>: {<br>        <span class="hljs-title function_">increment</span>(<span class="hljs-params">number</span>) { <span class="hljs-comment">// mutations</span><br>            <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-title function_">commit</span>(<span class="hljs-string">'userInfo/increment'</span>, number);<br>        },<br>        <span class="hljs-title function_">incrementAsync</span>(<span class="hljs-params">number</span>) { <span class="hljs-comment">// actions</span><br>            <span class="hljs-variable language_">this</span>.<span class="hljs-property">$store</span>.<span class="hljs-title function_">dispatch</span>(<span class="hljs-string">'userInfo/incrementAsync'</span>, number);<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>但是每一筆資料或是方法，都透過 this.$store 取得，程式碼冗長，如果今天我們有三個 store 儲存庫，易讀性又更低了，難道沒有簡單的使用方式嗎？</p>
+<p><strong>透過輔助函式</strong></p>
+<p>VueX 提供一系列輔助函式（mapState, mapGetters, mapMutations, mapActions），可以幫助我們更簡易的取得 store 內容，首先必須從 VueX 引入輔助函式，接著來改寫 about.vue 頁面</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> { mapState, mapGetters, mapMutations, mapActions } <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'About'</span>,<br>    <span class="hljs-attr">computed</span>: {<br>        ...<span class="hljs-title function_">mapState</span>(<span class="hljs-string">'userInfo'</span>, [ <span class="hljs-string">'count'</span> ]),<br>        ...<span class="hljs-title function_">mapGetters</span>(<span class="hljs-string">'userInfo'</span>, [ <span class="hljs-string">'onSaleProducts'</span> ])<br>    },<br>    <span class="hljs-attr">methods</span>: {<br>        ...<span class="hljs-title function_">mapMutations</span>(<span class="hljs-string">'userInfo'</span>, [ <span class="hljs-string">'increment'</span> ]),<br>        ...<span class="hljs-title function_">mapActions</span>(<span class="hljs-string">'userInfo'</span>, [ <span class="hljs-string">'incrementAsync'</span> ])<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>透過輔助函式，減少許多程式碼，閱讀起來也輕鬆許多。</p>
+<hr>
+<p>VueX 相當方便，但還是存在一個問題，就是<strong>當頁面重新整理的時候，會回復到初始狀態。</strong></p>
+<p>某些情境下，我們需要保留更新後的資料，例如登入後儲存使用者資訊到 store，重整頁面後資料被清空，使用者必須重新登入。為了解決這個問題，我們可以將資料儲存於 localStorage，待畫面重整後再將資料取回放入 store，或者是使用套件 <strong><a target="_blank" rel="noopener" href="https://github.com/robinvdvleuten/vuex-persistedstate">vuex-persistedstate</a></strong></p>
+<blockquote>
+<p>💡 2022.02.04 vuex-persistedstate ****套件已不繼續維護更</p>
+</blockquote>
+<p>接下來說明如何 Nuxt 專案如何搭配 vuex-persistedstate，存放在 localStorage 的內容，可以輕易地被讀取，因此我們需要將內容加密（搭配套件 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/secure-ls">secure-ls</a>） </p>
+<p>首先安裝套件：<code>npm i vuex-persistedstate</code> 及加密套件：<code>npm i secure-ls</code>，接著於 plugins 增加檔案，範例使用 persistedstate.js</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> createPersistedState <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex-persistedstate'</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">SecureLS</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'secure-ls'</span>;<br><br><span class="hljs-keyword">const</span> ls = <span class="hljs-keyword">new</span> <span class="hljs-title class_">SecureLS</span>({<br>    <span class="hljs-attr">encodingType</span>: <span class="hljs-string">'aes'</span>, <span class="hljs-comment">// 加密方式，預設 base64</span><br>    <span class="hljs-attr">isCompression</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// 是否壓縮數據</span><br>    <span class="hljs-attr">encryptionSecret</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">APP_KEY</span> <span class="hljs-comment">// 加密 key</span><br>});<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ({ store, isHMR }) =&gt; {<br>    <span class="hljs-keyword">if</span> (isHMR) { <span class="hljs-comment">// 避免在熱更新的時候重複觸發(npm run dev)</span><br>        <span class="hljs-keyword">return</span>;<br>    }<br>    <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">onNuxtReady</span>(<span class="hljs-function">() =&gt;</span> {<br>        <span class="hljs-title function_">createPersistedState</span>({<br>            <span class="hljs-attr">key</span>: <span class="hljs-string">'test'</span>, <span class="hljs-comment">// 自訂 localStorage key</span><br>            <span class="hljs-attr">storage</span>: {<br>                <span class="hljs-attr">getItem</span>: <span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> ls.<span class="hljs-title function_">get</span>(key),<br>                <span class="hljs-attr">setItem</span>: <span class="hljs-function">(<span class="hljs-params">key, value</span>) =&gt;</span> ls.<span class="hljs-title function_">set</span>(key, value),<br>                <span class="hljs-attr">removeItem</span>: <span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> ls.<span class="hljs-title function_">remove</span>(key)<br>            }<br>        })(store);<br>    });<br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<p>接著配置到 nuxt.config.js 內</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">plugins</span>: [<br>        { <span class="hljs-attr">src</span>: <span class="hljs-string">'@/plugins/persistedstate'</span>, <span class="hljs-attr">ssr</span>: <span class="hljs-literal">false</span> }<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>這樣一來即使畫面重整，store 也可以順利保存資料，在 localStorage 查看 test 內容也確實被加密了！</p>
+<hr>
+<p>參考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/itsems-frontend/vue-vuex1-state-mutations-364163b3acac">https://medium.com/itsems-frontend/vue-vuex1-state-mutations-364163b3acac</a></p>
+<p><a target="_blank" rel="noopener" href="https://chiafangsung.medium.com/%E4%BD%BF%E7%94%A8-vuex-persistedstate-%E7%B6%AD%E6%8C%81-vuex-%E7%8B%80%E6%85%8B-f0d7c522c73a">https://chiafangsung.medium.com/使用-vuex-persistedstate-維持-vuex-狀態-f0d7c522c73a</a></p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt/">#nuxt</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt-js/">#nuxt.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue/">#vue</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue-js/">#vue.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ssr/">#ssr</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+            <a href="/2022/12/04/nuxt/nuxt-axios/">Nuxt.js 2.x 搭配 Axios 與自訂 Error Page</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=638b091d4b058f001938c857&amp;product=sop' async='async'></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    <!-- 
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://clairechang0609.github.io/2022/12/04/nuxt/nuxt-vuex-store/';
+        this.page.identifier = '2022/12/04/nuxt/nuxt-vuex-store/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'claire-chang-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div> -->
+    <style>
+        .utterances{max-width: 100%;}
+    </style>
+    <script src="https://utteranc.es/client.js"
+        repo="clairechang0609/hexo-board"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow">
+                &copy; 2022
+                Claire Chang&nbsp;
+                All rights reserved.
+                <br />
+                Powered by Hexo.
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/clairechang0609">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-TW");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery > p > .gallery-item').unwrap();
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋" />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>
