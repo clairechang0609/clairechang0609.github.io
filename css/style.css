@@ -483,3 +483,19 @@ figure.highlight {
 .ins-section .ins-search-item:hover .ins-search-preview,
 .ins-section .ins-search-item.active .ins-search-preview {
   color: #fff; }
+
+aside {
+  position: relative;
+  padding: 1em 1em 1em 2.5em;
+  margin-bottom: 1em;
+  background-color: #f1f1ef;
+  border-radius: 5px; }
+  aside::before {
+    content: '💡';
+    position: absolute;
+    top: 1em;
+    left: 1em; }
+
+code {
+  background-color: #e6e6e6;
+  border-radius: 3px; }

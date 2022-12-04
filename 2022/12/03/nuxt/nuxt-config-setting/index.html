@@ -24,7 +24,7 @@
 <meta property="og:description" content="版本：nuxt 2.15.8  全名為 Nuxt configuration file，功能同 Vue 專案內 vue.config.js 檔，如果我們使用 create-nuxt-app 來建置專案，會自動產生這支檔案，在此配置的內容，會全域讀取設定。 接下來介紹一下一些常用的設定 alias路徑別名，大家還記得在 Vue 專案內，如果沒有設定路徑別名，則需要寫相對路徑（例如：..&#x2F;compo">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-12-03T09:10:00.000Z">
-<meta property="article:modified_time" content="2022-12-03T09:48:12.363Z">
+<meta property="article:modified_time" content="2022-12-04T04:10:08.238Z">
 <meta property="article:author" content="Claire Chang">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
@@ -48,7 +48,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night-eighties.min.css">
 
 
 <link rel="stylesheet" href="/css/style.css">
@@ -99,9 +99,6 @@
             <a class="navbar-item "
                href="/categories">分類</a>
             
-            <a class="navbar-item "
-               href="/about">關於我</a>
-            
         </div>
         
         <div class="navbar-menu navbar-end">
@@ -148,7 +145,7 @@
         <span class="column is-narrow">
             
             
-            11 分鐘 讀完 (約 1719 字)
+            11 分鐘 讀完 (約 1723 字)
         </span>
          -->
     </div>
@@ -161,112 +158,100 @@
 <p>接下來介紹一下一些常用的設定</p>
 <h1 id="alias"><a href="#alias" class="headerlink" title="alias"></a>alias</h1><p>路徑別名，大家還記得在 Vue 專案內，如果沒有設定路徑別名，則需要寫相對路徑（例如：../components/Navbar.vue），對於維護和開發都很不方便，一些程式碼檢核工具，甚至會視為 bad smell，因此我們會在 vue.config.js 檔內統一設定路徑別名。</p>
 <p>Nuxt 專案很貼心的自動配置了路徑別名，預設值如下</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="hljs-string">'~~'</span>: <span class="hljs-string">`&lt;rootDir&gt;`</span>,</span><br><span class="line">  <span class="hljs-string">'@@'</span>: <span class="hljs-string">`&lt;rootDir&gt;`</span>,</span><br><span class="line">  <span class="hljs-string">'~'</span>: <span class="hljs-string">`&lt;srcDir&gt;`</span>,</span><br><span class="line">  <span class="hljs-string">'@'</span>: <span class="hljs-string">`&lt;srcDir&gt;`</span>,</span><br><span class="line">  <span class="hljs-string">'assets'</span>: <span class="hljs-string">`&lt;srcDir&gt;/assets`</span>, <span class="hljs-comment">// (unless you have set a custom `dir.assets`)</span></span><br><span class="line">  <span class="hljs-string">'static'</span>: <span class="hljs-string">`&lt;srcDir&gt;/static`</span>, <span class="hljs-comment">// (unless you have set a custom `dir.static`)</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx">{<br>    <span class="hljs-string">'~~'</span>: <span class="hljs-string">`&lt;rootDir&gt;`</span>,<br>    <span class="hljs-string">'@@'</span>: <span class="hljs-string">`&lt;rootDir&gt;`</span>,<br>    <span class="hljs-string">'~'</span>: <span class="hljs-string">`&lt;srcDir&gt;`</span>,<br>    <span class="hljs-string">'@'</span>: <span class="hljs-string">`&lt;srcDir&gt;`</span>,<br>    <span class="hljs-string">'assets'</span>: <span class="hljs-string">`&lt;srcDir&gt;/assets`</span>, <span class="hljs-comment">// (unless you have set a custom `dir.assets`)</span><br>    <span class="hljs-string">'static'</span>: <span class="hljs-string">`&lt;srcDir&gt;/static`</span>, <span class="hljs-comment">// (unless you have set a custom `dir.static`)</span><br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>因此在引入元件 Navbar 時可以寫成 <code>@/components/Navbar.vue</code></p>
 <p>如果需要更改配置也可以</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> { resolve } <span class="hljs-keyword">from</span> <span class="hljs-string">'path'</span>;</span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">  <span class="hljs-attr">alias</span>: {</span><br><span class="line">    <span class="hljs-string">'images'</span>: <span class="title function_">resolve</span>(__dirname, <span class="hljs-string">'./assets/images'</span>),</span><br><span class="line">		<span class="hljs-string">'@static'</span>: <span class="title function_">resolve</span>(__dirname, <span class="hljs-string">'./static'</span>)</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> { resolve } <span class="hljs-keyword">from</span> <span class="hljs-string">'path'</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>  <span class="hljs-attr">alias</span>: {<br>    <span class="hljs-string">'images'</span>: <span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">'./assets/images'</span>),<br>        <span class="hljs-string">'@static'</span>: <span class="hljs-title function_">resolve</span>(__dirname, <span class="hljs-string">'./static'</span>)<br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h1 id="ssr"><a href="#ssr" class="headerlink" title="ssr"></a>ssr</h1><p>server side render，預設為 true，如果不需 SEO，只要 spa 操作，設定 <code>ssr: false</code> 即可</p>
-<aside>
-💡 舊版會使用 `mode: 'spa'` 來進行設定，但[官方文件](https://nuxtjs.org/docs/configuration-glossary/configuration-mode/)有說明 [v2.14.5](https://github.com/nuxt/nuxt.js/pull/8044) 版本開始已棄用，改用 `ssr: false`
-
-</aside>
-
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">  <span class="hljs-attr">ssr</span>: <span class="hljs-literal">false</span> <span class="hljs-comment">// spa</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>💡 舊版會使用 <code>mode: 'spa'</code> 來進行設定，但<a target="_blank" rel="noopener" href="https://nuxtjs.org/docs/configuration-glossary/configuration-mode/">官方文件</a>有說明 <a target="_blank" rel="noopener" href="https://github.com/nuxt/nuxt.js/pull/8044">v2.14.5</a> 版本開始已棄用，改用 <code>ssr: false</code></p>
+</blockquote>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">ssr</span>: <span class="hljs-literal">false</span> <span class="hljs-comment">// spa</span><br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h1 id="server"><a href="#server" class="headerlink" title="server"></a>server</h1><p>用來設定 port（預設 3000） 跟 host（預設 localhost）</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">  <span class="hljs-attr">server</span>: {</span><br><span class="line">		<span class="hljs-attr">port</span>: <span class="hljs-number">8000</span>,</span><br><span class="line">		<span class="hljs-attr">host</span>: <span class="hljs-string">'my-website'</span></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">server</span>: {<br>        <span class="hljs-attr">port</span>: <span class="hljs-number">8000</span>,<br>        <span class="hljs-attr">host</span>: <span class="hljs-string">'my-website'</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h1 id="router"><a href="#router" class="headerlink" title="router"></a>router</h1><p>配置 Nuxt 路由（vue-router），這裡以設定 base url 舉例，其他請參考<a target="_blank" rel="noopener" href="https://nuxtjs.org/docs/configuration-glossary/configuration-router">官方文件</a></p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">  <span class="hljs-attr">router</span>: {</span><br><span class="line">    <span class="hljs-attr">base</span>: <span class="hljs-string">'/backoffice/'</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">router</span>: {<br>        <span class="hljs-attr">base</span>: <span class="hljs-string">'/backoffice/'</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h1 id="head"><a href="#head" class="headerlink" title="head"></a>head</h1><p>在 Vue 專案，我們要設定 head 內容，只要在 public/index.html 檔設定就好了，但 Nuxt 專案又該怎麼設定呢？</p>
 <p><strong>全域設定</strong></p>
 <p>在 nuxt.config.js 檔 head 內即可全域設定，通常在建立專案會預先帶入</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">  <span class="hljs-attr">head</span>: {</span><br><span class="line">    <span class="hljs-attr">title</span>: <span class="hljs-string">'test'</span>,</span><br><span class="line">    <span class="hljs-attr">htmlAttrs</span>: {</span><br><span class="line">      <span class="hljs-attr">lang</span>: <span class="hljs-string">'en'</span></span><br><span class="line">    },</span><br><span class="line">    <span class="hljs-attr">meta</span>: [</span><br><span class="line">      { <span class="hljs-attr">charset</span>: <span class="hljs-string">'utf-8'</span> },</span><br><span class="line">      { <span class="hljs-attr">name</span>: <span class="hljs-string">'viewport'</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">'width=device-width, initial-scale=1'</span> },</span><br><span class="line">      { <span class="hljs-attr">hid</span>: <span class="hljs-string">'description'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'description'</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">''</span> },</span><br><span class="line">      { <span class="hljs-attr">name</span>: <span class="hljs-string">'format-detection'</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">'telephone=no'</span> }</span><br><span class="line">    ],</span><br><span class="line">    <span class="hljs-attr">link</span>: [</span><br><span class="line">      { <span class="hljs-attr">rel</span>: <span class="hljs-string">'icon'</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">'image/x-icon'</span>, <span class="hljs-attr">href</span>: <span class="hljs-string">'/favicon.ico'</span> }</span><br><span class="line">    ]</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">head</span>: {<br>        <span class="hljs-attr">title</span>: <span class="hljs-string">'test'</span>,<br>        <span class="hljs-attr">htmlAttrs</span>: {<br>            <span class="hljs-attr">lang</span>: <span class="hljs-string">'en'</span><br>        },<br>        <span class="hljs-attr">meta</span>: [<br>            { <span class="hljs-attr">charset</span>: <span class="hljs-string">'utf-8'</span> },<br>            { <span class="hljs-attr">name</span>: <span class="hljs-string">'viewport'</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">'width=device-width, initial-scale=1'</span> },<br>            { <span class="hljs-attr">hid</span>: <span class="hljs-string">'description'</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'description'</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">''</span> },<br>            { <span class="hljs-attr">name</span>: <span class="hljs-string">'format-detection'</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">'telephone=no'</span> }<br>        ],<br>        <span class="hljs-attr">link</span>: [<br>            { <span class="hljs-attr">rel</span>: <span class="hljs-string">'icon'</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">'image/x-icon'</span>, <span class="hljs-attr">href</span>: <span class="hljs-string">'/favicon.ico'</span> }<br>        ]<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>這樣所有頁面都可以讀到 head 設定</p>
 <p><strong>單頁設定</strong></p>
 <p>Nuxt 專案很重要的一點是 SEO 效能優化，基於這點，通常會需要依照各頁設定自己的 SEO，例如pages/about.vue 頁面的 title 和 description 要單獨設定，方法也很簡單</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">  <span class="hljs-attr">head</span>: {</span><br><span class="line">    <span class="hljs-attr">title</span>: <span class="hljs-string">'關於我們'</span>,</span><br><span class="line">		<span class="hljs-attr">meta</span>: [</span><br><span class="line">			{</span><br><span class="line">				<span class="hljs-attr">hid</span>: <span class="hljs-string">'description'</span>,</span><br><span class="line">				<span class="hljs-attr">name</span>: <span class="hljs-string">'description'</span>,</span><br><span class="line">				<span class="hljs-attr">content</span>: <span class="hljs-string">'這是關於我們頁面'</span></span><br><span class="line">			}</span><br><span class="line">		]</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">head</span>: {<br>        <span class="hljs-attr">title</span>: <span class="hljs-string">'關於我們'</span>,<br>        <span class="hljs-attr">meta</span>: [<br>            {<br>                <span class="hljs-attr">hid</span>: <span class="hljs-string">'description'</span>,<br>                <span class="hljs-attr">name</span>: <span class="hljs-string">'description'</span>,<br>                <span class="hljs-attr">content</span>: <span class="hljs-string">'這是關於我們頁面'</span><br>            }<br>        ]<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>在各頁面設定的內容<strong>優先度較高</strong>，會覆寫全域設定的 head 內容，因此當我們開啟 about 頁面，會看到 <strong>title</strong> 變成 <strong>關於我們</strong>、<strong>description</strong> 變成 <strong>這是關於我們頁面</strong>，其他配置則依照 nuxt.config.js 檔</p>
 <h1 id="css"><a href="#css" class="headerlink" title="css"></a>css</h1><p>引入全域使用的 css 檔，像是外部套件，或是自訂檔，如果要使用 sass，必須安裝 sass-loader</p>
 <p><code>npm install --save-dev sass sass-loader</code></p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">  <span class="hljs-attr">css</span>: [</span><br><span class="line">		<span class="hljs-comment">// 外部套件</span></span><br><span class="line">		{ <span class="hljs-attr">src</span>: <span class="hljs-string">'bootstrap-icons/font/bootstrap-icons.css'</span> },</span><br><span class="line">		<span class="hljs-comment">// scss 檔</span></span><br><span class="line">		{ <span class="hljs-attr">src</span>: <span class="hljs-string">'@/assets/scss/app.scss'</span>, <span class="hljs-attr">lang</span>: <span class="hljs-string">'scss'</span> }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">css</span>: [<br>        <span class="hljs-comment">// 外部套件</span><br>        { <span class="hljs-attr">src</span>: <span class="hljs-string">'bootstrap-icons/font/bootstrap-icons.css'</span> },<br>        <span class="hljs-comment">// scss 檔</span><br>        { <span class="hljs-attr">src</span>: <span class="hljs-string">'@/assets/scss/app.scss'</span>, <span class="hljs-attr">lang</span>: <span class="hljs-string">'scss'</span> }<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h1 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h1><p>全局引入外部套件，以 vue-notification 舉例，在 plugins 新增 notification.js 檔</p>
-<figure class="highlight plaintext hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import Vue from 'vue';</span><br><span class="line">import Notifications from 'vue-notification';</span><br><span class="line"></span><br><span class="line">Vue.use(Notifications);</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// plugins/notification.js</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Notifications</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'vue-notification'</span>;<br><br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">Notifications</span>);<br></code></pre></td></tr></tbody></table></figure>
 
 <p>在 nuxt.config.js 配置 plugins</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">  <span class="hljs-attr">plugins</span>: [</span><br><span class="line">		{ <span class="hljs-attr">src</span>: <span class="hljs-string">'@/plugins/notification.js'</span> }</span><br><span class="line">	]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">plugins</span>: [<br>        { <span class="hljs-attr">src</span>: <span class="hljs-string">'@/plugins/notification.js'</span> }<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>就可以在所有頁面中使用該套件 <code>&lt;Notifications&gt;&lt;/Notifications&gt;</code></p>
 <h1 id="components"><a href="#components" class="headerlink" title="components"></a>components</h1><p>如設定為 true，會全局引入元件，使用方式只要遵循資料夾結構輸入元件名稱就可以了</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">  <span class="hljs-attr">components</span>: <span class="hljs-literal">true</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">components</span>: <span class="hljs-literal">true</span><br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>範例：</p>
 <p>元件路徑：components/home/Banner.vue</p>
 <p>使用元件：<code>&lt;HomeBanner&gt;&lt;/HomeBanner&gt;</code></p>
 <h1 id="buildModules"><a href="#buildModules" class="headerlink" title="buildModules"></a>buildModules</h1><p>用來配置只在開發環境使用的模組，註冊在此可以讓專案在生產環境部署速度提升，並減少 node_modules 容量，詳情可以參考各套件的配置建議</p>
 <p><code>@nuxtjs/eslint-module</code> 套件官方建議配置於 buildModules</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">	<span class="hljs-attr">buildModules</span>: [</span><br><span class="line">		<span class="hljs-string">'@nuxtjs/eslint-module'</span></span><br><span class="line">	]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">buildModules</span>: [<br>        <span class="hljs-string">'@nuxtjs/eslint-module'</span><br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
 
-<aside>
-💡 使用條件：Nuxt 版本必須大於 v2.9
-
-</aside>
-
+<blockquote>
+<p>💡 使用條件：Nuxt 版本必須大於 v2.9</p>
+</blockquote>
 <h1 id="modules"><a href="#modules" class="headerlink" title="modules"></a>modules</h1><p>用來配置開發環境與生產環境共用模組，buildModules 及 modules 配置位置詳請參考各套件建議</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">	<span class="hljs-attr">modules</span>: [</span><br><span class="line">		<span class="hljs-string">'@nuxtjs/style-resources'</span></span><br><span class="line">	]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">modules</span>: [<br>        <span class="hljs-string">'@nuxtjs/style-resources'</span><br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h1 id="styleResources"><a href="#styleResources" class="headerlink" title="styleResources"></a>styleResources</h1><p>用來注入全域共用 sass, scss，如果不引入，在各頁面（.vue）內的 style 會無法使用像是 mixin 等的常用變數，或是要在各頁面單獨 @import scss 檔</p>
 <p>首先必須另外安裝 <code>@nuxtjs/style-resources</code> 套件</p>
 <p>執行：<code>npm i @nuxtjs/style-resources</code></p>
 <p>在 nuxt.config.js 檔設定</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">  <span class="hljs-attr">modules</span>: [</span><br><span class="line">		<span class="hljs-string">'@nuxtjs/style-resources'</span></span><br><span class="line">	],</span><br><span class="line">	<span class="hljs-attr">styleResources</span>: {</span><br><span class="line">		<span class="hljs-attr">scss</span>: [</span><br><span class="line">			<span class="hljs-string">'@/assets/scss/components/_color.scss'</span>,</span><br><span class="line">			<span class="hljs-string">'@/assets/scss/components/_mixin.scss'</span></span><br><span class="line">		]</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">modules</span>: [<br>        <span class="hljs-string">'@nuxtjs/style-resources'</span><br>    ],<br>    <span class="hljs-attr">styleResources</span>: {<br>        <span class="hljs-attr">scss</span>: [<br>            <span class="hljs-string">'@/assets/scss/components/_color.scss'</span>,<br>            <span class="hljs-string">'@/assets/scss/components/_mixin.scss'</span><br>        ]<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>這樣就可以達到變數共用了</p>
-<aside>
-💡 [官方文件](https://github.com/nuxt-community/style-resources-module/)提到，請勿引入實際的 css 樣式，因為每個頁面跟元件都會重複編譯，造成系統極大負擔（筆者踩坑過OQ），建議只注入變數, mixins，因為這些值在編譯後就會消失了。
-
-</aside>
-
+<blockquote>
+<p>💡 <a target="_blank" rel="noopener" href="https://github.com/nuxt-community/style-resources-module/">官方文件</a> 提到，請勿引入實際的 css 樣式，因為每個頁面跟元件都會重複編譯，造成系統極大負擔（筆者踩坑過OQ），建議只注入變數, mixins，因為這些值在編譯後就會消失了。</p>
+</blockquote>
 <h1 id="build"><a href="#build" class="headerlink" title="build"></a>build</h1><p>客製化 webpack 設定，這裡舉例，在開發時，發現在 Vue 樣板無法使用可選串連 Optional Chaining（es2020語法），研究後發現必須需安裝擴充套件</p>
 <p><code>npm install vue-template-babel-compiler --save-dev</code></p>
 <p>接著在 nuxt.config.js 檔設定，就可以成功使用囉</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">	<span class="hljs-attr">build</span>: {</span><br><span class="line">		<span class="hljs-attr">loaders</span>: {</span><br><span class="line">			<span class="hljs-attr">vue</span>: {</span><br><span class="line">				<span class="hljs-attr">compiler</span>: <span class="hljs-built_in">require</span>(<span class="hljs-string">'vue-template-babel-compiler'</span>)</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">build</span>: {<br>        <span class="hljs-attr">loaders</span>: {<br>            <span class="hljs-attr">vue</span>: {<br>                <span class="hljs-attr">compiler</span>: <span class="hljs-built_in">require</span>(<span class="hljs-string">'vue-template-babel-compiler'</span>)<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h1 id="Loading"><a href="#Loading" class="headerlink" title="Loading"></a>Loading</h1><p>Loading 效果，基礎設定如下（<a target="_blank" rel="noopener" href="https://nuxtjs.org/docs/features/loading">參數選項</a>）</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">	<span class="hljs-attr">loading</span>: {</span><br><span class="line">    <span class="hljs-attr">color</span>: <span class="hljs-string">'black'</span>,</span><br><span class="line">    <span class="hljs-attr">height</span>: <span class="hljs-string">'5px'</span>,</span><br><span class="line">		<span class="hljs-attr">continuous</span>: <span class="hljs-literal">true</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">loading</span>: {<br>        <span class="hljs-attr">color</span>: <span class="hljs-string">'black'</span>,<br>        <span class="hljs-attr">height</span>: <span class="hljs-string">'5px'</span>,<br>        <span class="hljs-attr">continuous</span>: <span class="hljs-literal">true</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>如果想自訂更多樣式，也可以包裝成元件後引入</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">	<span class="hljs-attr">loading</span>: <span class="hljs-string">'@/components/TheLoading.vue'</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">loading</span>: <span class="hljs-string">'@/components/TheLoading.vue'</span><br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h1 id="env"><a href="#env" class="headerlink" title="env"></a>env</h1><p>用來定義全局共用的環境變數，Nuxt 專案預設只有 nuxt.config.js 檔內可以讀取環境變數，</p>
 <p>因此如果要讓 .vue 檔或是 .js 檔讀到變數，這裡提供以下兩個做法：</p>
 <p><strong>方法一：直接在 nuxt.config.js 檔內配置屬性</strong></p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">	<span class="hljs-attr">env</span>: {</span><br><span class="line">		<span class="hljs-attr">BASE_URL</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">BASE_URL</span></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">env</span>: {<br>        <span class="hljs-attr">BASE_URL</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">BASE_URL</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>但有時變數多，不想各別配置，可以採用方法二</p>
 <p><strong>方法二：安裝套件 <code>@nuxtjs/dotenv</code></strong></p>
 <p>執行：<code>npm i @nuxtjs/dotenv</code>，在 modules 內設定：</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">	<span class="hljs-attr">modules</span>: [</span><br><span class="line">		<span class="hljs-string">'@nuxtjs/dotenv'</span></span><br><span class="line">	]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">modules</span>: [<br>        <span class="hljs-string">'@nuxtjs/dotenv'</span><br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>這樣就可以全域使用 .env 變數囉。</p>
 <p>專案如果有區分開發跟生產環境 .env 檔，也可以設定如下：</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">	<span class="hljs-attr">modules</span>: [</span><br><span class="line">		[ <span class="hljs-string">'@nuxtjs/dotenv'</span>, { <span class="hljs-attr">filename</span>: <span class="hljs-string">`.env.<span class="hljs-subst">${process.env.ENV}</span>`</span> } ]</span><br><span class="line">	]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">modules</span>: [<br>        [ <span class="hljs-string">'@nuxtjs/dotenv'</span>, { <span class="hljs-attr">filename</span>: <span class="hljs-string">`.env.<span class="hljs-subst">${process.env.ENV}</span>`</span> } ]<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
 
-<aside>
-💡 使用方法二需注意，變數如果內含變數，會讀取不到第二層的變數（饒口），直接提供範例，假設在 .env 檔內有兩個變數
-`BASE_DOMAIN=my-websites`
-`BASE_URL="http://${BASE_DOMAIN}"`
-在 .vue 檔直接使用 process.env.BASE_URL，取得值為 http://${BASE_DOMAIN}，
-無法解析成 http://my-websites，此情況還是需搭配方法一使用
-
-</aside>
-
+<blockquote>
+<p>💡 使用方法二需注意，變數如果內含變數，會讀取不到第二層的變數（饒口），直接提供範例，假設在 .env 檔內有兩個變數<br><code>BASE_DOMAIN=my-websites</code><br><code>BASE_URL="http://${BASE_DOMAIN}"</code><br>在 .vue 檔直接使用 process.env.BASE_URL，取得值為 http://${BASE_DOMAIN}，<br>無法解析成 <a target="_blank" rel="noopener" href="http://my-websites,此情況還是需搭配方法一使用/">http://my-websites，此情況還是需搭配方法一使用</a></p>
+</blockquote>
 <hr>
 <p>參考文章：</p>
 <p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10207330">https://ithelp.ithome.com.tw/articles/10207330</a></p>
@@ -294,12 +279,12 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/2022/12/03/nuxt/nuxt-lifecycle/">Nuxt.js 2.x Lifecycle 生命週期</a>
+            <a href="/2022/12/03/nuxt/nuxt-catalog/">Nuxt.js 2.x 目錄結構</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-            <a href="/2022/12/03/nuxt/nuxt-catalog/">Nuxt.js 2.x 目錄結構</a>
+            <a href="/2022/12/03/nuxt/nuxt-lifecycle/">Nuxt.js 2.x Lifecycle 生命週期</a>
             
         </span>
     </div>
@@ -319,11 +304,23 @@
 <div class="comments">
     <h3 class="title is-4">評論</h3>
     <!-- 
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://clairechang0609.github.io/2022/12/03/nuxt/nuxt-config-setting/';
+        this.page.identifier = '2022/12/03/nuxt/nuxt-config-setting/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'claire-chang-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
 <div id="disqus_thread">
-    
-    <div class="notification is-danger">
-        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
-    </div>
     
     <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div> -->

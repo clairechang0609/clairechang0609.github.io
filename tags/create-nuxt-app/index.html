@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night-eighties.min.css">
 
 
 <link rel="stylesheet" href="/css/style.css">
@@ -91,9 +91,6 @@
             
             <a class="navbar-item "
                href="/categories">分類</a>
-            
-            <a class="navbar-item "
-               href="/about">關於我</a>
             
         </div>
         
@@ -166,10 +163,9 @@
 <p>如同 Vue CLI，Nuxt 也有類似的指令列(command-line)工具 create-nuxt-app，</p>
 <p>依據官方文件提供的專案包建置方式：</p>
 <p><code>npx create-nuxt-app &lt;project-name&gt;</code></p>
-<aside>
-💡 使用 npx 安裝，安裝的套件在執行完後就會被移除 [npx介紹](https://hoyis-note.coderbridge.io/2021/07/20/npm-npx-%E5%B7%AE%E5%88%A5/)
-</aside>
-
+<blockquote>
+<p>💡 使用 npx 安裝，安裝的套件在執行完後就會被移除 <a target="_blank" rel="noopener" href="https://hoyis-note.coderbridge.io/2021/07/20/npm-npx-%E5%B7%AE%E5%88%A5/">npx介紹</a></p>
+</blockquote>
 <p><strong>接著會跑出一些選項：</strong></p>
 <ul>
 <li>Project name：設定專案名稱</li>
@@ -191,7 +187,7 @@
 <p>跟著提示訊息執行：</p>
 <p><code>cd test</code><br><code>npm run dev</code></p>
 <p>在 package.json 內可以看到相關指令</p>
-<figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">"scripts"</span>: {</span><br><span class="line">   <span class="hljs-string">"dev"</span>: <span class="hljs-string">"nuxt"</span>,</span><br><span class="line">   <span class="hljs-string">"build"</span>: <span class="hljs-string">"nuxt build"</span>,</span><br><span class="line">   <span class="hljs-string">"start"</span>: <span class="hljs-string">"nuxt start"</span>,</span><br><span class="line">   <span class="hljs-string">"generate"</span>: <span class="hljs-string">"nuxt generate"</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-string">"scripts"</span>: {<br>    <span class="hljs-string">"dev"</span>: <span class="hljs-string">"nuxt"</span>,<br>    <span class="hljs-string">"build"</span>: <span class="hljs-string">"nuxt build"</span>,<br>    <span class="hljs-string">"start"</span>: <span class="hljs-string">"nuxt start"</span>,<br>    <span class="hljs-string">"generate"</span>: <span class="hljs-string">"nuxt generate"</span><br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>接下來就可以看到畫面囉 👏</p>
 <p><img src="https://i.imgur.com/s38N3oo.png"></p>
