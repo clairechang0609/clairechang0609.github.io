@@ -11,7 +11,7 @@ a.tag.article-tag {
     max-width: 800px;
     width: 800px; }
   .navbar.is-transparent .navbar-dropdown a.navbar-item:hover {
-    color: #7288ad; } }
+    color: #13AA52; } }
 
 .navbar-main {
   border-bottom: 1px solid #dbdbdb;
@@ -22,7 +22,7 @@ a.tag.article-tag {
   .navbar-main .navbar-item {
     text-align: center; }
   .navbar-main a.navbar-item.is-active {
-    color: #7288ad; }
+    color: #13AA52; }
   .navbar-main .toc .navbar-dropdown {
     max-height: 500px;
     overflow-y: auto; }
@@ -499,3 +499,11 @@ aside {
 code {
   background-color: #e6e6e6;
   border-radius: 3px; }
+
+a.navbar-item {
+  color: #21313c; }
+  a.navbar-item:hover {
+    color: #13AA52; }
+
+figure.highlight, blockquote {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05); }
