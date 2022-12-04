@@ -93,11 +93,9 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item "
-               href="/archives">文章</a>
+            <a class="navbar-item " href="/archives">文章</a>
             
-            <a class="navbar-item "
-               href="/categories">分類</a>
+            <a class="navbar-item " href="/categories">分類</a>
             
         </div>
         
@@ -109,7 +107,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/clairechang0609">
+            <a class="navbar-item" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
                 
                 <i class="fab fa-github"></i>
                 
@@ -168,14 +166,14 @@
 
 <h1 id="ssr"><a href="#ssr" class="headerlink" title="ssr"></a>ssr</h1><p>server side render，預設為 true，如果不需 SEO，只要 spa 操作，設定 <code>ssr: false</code> 即可</p>
 <blockquote>
-<p>💡 舊版會使用 <code>mode: 'spa'</code> 來進行設定，但<a target="_blank" rel="noopener" href="https://nuxtjs.org/docs/configuration-glossary/configuration-mode/">官方文件</a>有說明 <a target="_blank" rel="noopener" href="https://github.com/nuxt/nuxt.js/pull/8044">v2.14.5</a> 版本開始已棄用，改用 <code>ssr: false</code></p>
+<p>💡 舊版會使用 <code>mode: 'spa'</code> 來進行設定，但<a target="_blank" rel="external nofollow noopener noreferrer" href="https://nuxtjs.org/docs/configuration-glossary/configuration-mode/">官方文件</a>有說明 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/nuxt/nuxt.js/pull/8044">v2.14.5</a> 版本開始已棄用，改用 <code>ssr: false</code></p>
 </blockquote>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">ssr</span>: <span class="hljs-literal">false</span> <span class="hljs-comment">// spa</span><br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h1 id="server"><a href="#server" class="headerlink" title="server"></a>server</h1><p>用來設定 port（預設 3000） 跟 host（預設 localhost）</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">server</span>: {<br>        <span class="hljs-attr">port</span>: <span class="hljs-number">8000</span>,<br>        <span class="hljs-attr">host</span>: <span class="hljs-string">'my-website'</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
-<h1 id="router"><a href="#router" class="headerlink" title="router"></a>router</h1><p>配置 Nuxt 路由（vue-router），這裡以設定 base url 舉例，其他請參考<a target="_blank" rel="noopener" href="https://nuxtjs.org/docs/configuration-glossary/configuration-router">官方文件</a></p>
+<h1 id="router"><a href="#router" class="headerlink" title="router"></a>router</h1><p>配置 Nuxt 路由（vue-router），這裡以設定 base url 舉例，其他請參考<a target="_blank" rel="external nofollow noopener noreferrer" href="https://nuxtjs.org/docs/configuration-glossary/configuration-router">官方文件</a></p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">router</span>: {<br>        <span class="hljs-attr">base</span>: <span class="hljs-string">'/backoffice/'</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h1 id="head"><a href="#head" class="headerlink" title="head"></a>head</h1><p>在 Vue 專案，我們要設定 head 內容，只要在 public/index.html 檔設定就好了，但 Nuxt 專案又該怎麼設定呢？</p>
@@ -224,14 +222,14 @@
 
 <p>這樣就可以達到變數共用了</p>
 <blockquote>
-<p>💡 <a target="_blank" rel="noopener" href="https://github.com/nuxt-community/style-resources-module/">官方文件</a> 提到，請勿引入實際的 css 樣式，因為每個頁面跟元件都會重複編譯，造成系統極大負擔（筆者踩坑過OQ），建議只注入變數, mixins，因為這些值在編譯後就會消失了。</p>
+<p>💡 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/nuxt-community/style-resources-module/">官方文件</a> 提到，請勿引入實際的 css 樣式，因為每個頁面跟元件都會重複編譯，造成系統極大負擔（筆者踩坑過OQ），建議只注入變數, mixins，因為這些值在編譯後就會消失了。</p>
 </blockquote>
 <h1 id="build"><a href="#build" class="headerlink" title="build"></a>build</h1><p>客製化 webpack 設定，這裡舉例，在開發時，發現在 Vue 樣板無法使用可選串連 Optional Chaining（es2020語法），研究後發現必須需安裝擴充套件</p>
 <p><code>npm install vue-template-babel-compiler --save-dev</code></p>
 <p>接著在 nuxt.config.js 檔設定，就可以成功使用囉</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">build</span>: {<br>        <span class="hljs-attr">loaders</span>: {<br>            <span class="hljs-attr">vue</span>: {<br>                <span class="hljs-attr">compiler</span>: <span class="hljs-built_in">require</span>(<span class="hljs-string">'vue-template-babel-compiler'</span>)<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
-<h1 id="Loading"><a href="#Loading" class="headerlink" title="Loading"></a>Loading</h1><p>Loading 效果，基礎設定如下（<a target="_blank" rel="noopener" href="https://nuxtjs.org/docs/features/loading">參數選項</a>）</p>
+<h1 id="Loading"><a href="#Loading" class="headerlink" title="Loading"></a>Loading</h1><p>Loading 效果，基礎設定如下（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://nuxtjs.org/docs/features/loading">參數選項</a>）</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">loading</span>: {<br>        <span class="hljs-attr">color</span>: <span class="hljs-string">'black'</span>,<br>        <span class="hljs-attr">height</span>: <span class="hljs-string">'5px'</span>,<br>        <span class="hljs-attr">continuous</span>: <span class="hljs-literal">true</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <p>如果想自訂更多樣式，也可以包裝成元件後引入</p>
@@ -252,13 +250,13 @@
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">modules</span>: [<br>        [ <span class="hljs-string">'@nuxtjs/dotenv'</span>, { <span class="hljs-attr">filename</span>: <span class="hljs-string">`.env.<span class="hljs-subst">${process.env.ENV}</span>`</span> } ]<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <blockquote>
-<p>💡 使用方法二需注意，變數如果內含變數，會讀取不到第二層的變數（饒口），直接提供範例，假設在 .env 檔內有兩個變數<br><code>BASE_DOMAIN=my-websites</code><br><code>BASE_URL="http://${BASE_DOMAIN}"</code><br>在 .vue 檔直接使用 process.env.BASE_URL，取得值為 http://${BASE_DOMAIN}，<br>無法解析成 <a target="_blank" rel="noopener" href="http://my-websites,此情況還是需搭配方法一使用/">http://my-websites，此情況還是需搭配方法一使用</a></p>
+<p>💡 使用方法二需注意，變數如果內含變數，會讀取不到第二層的變數（饒口），直接提供範例，假設在 .env 檔內有兩個變數<br><code>BASE_DOMAIN=my-websites</code><br><code>BASE_URL="http://${BASE_DOMAIN}"</code><br>在 .vue 檔直接使用 process.env.BASE_URL，取得值為 http://${BASE_DOMAIN}，<br>無法解析成 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://my-websites,此情況還是需搭配方法一使用/">http://my-websites，此情況還是需搭配方法一使用</a></p>
 </blockquote>
 <hr>
 <p>參考文章：</p>
-<p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10207330">https://ithelp.ithome.com.tw/articles/10207330</a></p>
-<p><a target="_blank" rel="noopener" href="https://nuxtjs.org/docs/configuration-glossary/configuration-alias">https://nuxtjs.org/docs/configuration-glossary</a></p>
-<p><a target="_blank" rel="noopener" href="https://hackmd.io/@xq/nuxt-config">https://hackmd.io/@xq/nuxt-config</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ithelp.ithome.com.tw/articles/10207330">https://ithelp.ithome.com.tw/articles/10207330</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://nuxtjs.org/docs/configuration-glossary/configuration-alias">https://nuxtjs.org/docs/configuration-glossary</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hackmd.io/@xq/nuxt-config">https://hackmd.io/@xq/nuxt-config</a></p>
 </body></html>
     
     </div>
@@ -297,7 +295,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=638b091d4b058f001938c857&amp;product=sop' async='async'></script>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=638b091d4b058f001938c857&amp;product=sop" async="async"></script>
 
 </div>
 
@@ -329,12 +327,7 @@
     <style>
         .utterances{max-width: 100%;}
     </style>
-    <script src="https://utteranc.es/client.js"
-        repo="clairechang0609/hexo-board"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
+    <script src="https://utteranc.es/client.js" repo="clairechang0609/hexo-board" issue-term="title" theme="github-light" crossorigin="anonymous" async>
     </script>
 </div>
 
@@ -347,7 +340,7 @@
                 &copy; 2022
                 Claire Chang&nbsp;
                 All rights reserved.
-                <br />
+                <br>
                 Powered by Hexo.
             </div>
             <div class="column is-hidden-mobile"></div>
@@ -357,7 +350,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/clairechang0609">
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
                     
                     GitHub
                     
@@ -376,7 +369,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="external nofollow noopener noreferrer" href="http://outdatedbrowser.com/">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -522,7 +515,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋" />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

@@ -97,11 +97,9 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item "
-               href="/archives">文章</a>
+            <a class="navbar-item " href="/archives">文章</a>
             
-            <a class="navbar-item "
-               href="/categories">分類</a>
+            <a class="navbar-item " href="/categories">分類</a>
             
         </div>
         
@@ -113,7 +111,7 @@
             
             
             
-            <a class="navbar-item" title="GitHub" target="_blank" rel="noopener" href="https://github.com/clairechang0609">
+            <a class="navbar-item" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
                 
                 <i class="fab fa-github"></i>
                 
@@ -196,11 +194,11 @@
 <p>透過輔助函式，減少許多程式碼，閱讀起來也輕鬆許多。</p>
 <hr>
 <p>VueX 相當方便，但還是存在一個問題，就是<strong>當頁面重新整理的時候，會回復到初始狀態。</strong></p>
-<p>某些情境下，我們需要保留更新後的資料，例如登入後儲存使用者資訊到 store，重整頁面後資料被清空，使用者必須重新登入。為了解決這個問題，我們可以將資料儲存於 localStorage，待畫面重整後再將資料取回放入 store，或者是使用套件 <strong><a target="_blank" rel="noopener" href="https://github.com/robinvdvleuten/vuex-persistedstate">vuex-persistedstate</a></strong></p>
+<p>某些情境下，我們需要保留更新後的資料，例如登入後儲存使用者資訊到 store，重整頁面後資料被清空，使用者必須重新登入。為了解決這個問題，我們可以將資料儲存於 localStorage，待畫面重整後再將資料取回放入 store，或者是使用套件 <strong><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/robinvdvleuten/vuex-persistedstate">vuex-persistedstate</a></strong></p>
 <blockquote>
 <p>💡 2022.02.04 vuex-persistedstate ****套件已不繼續維護更</p>
 </blockquote>
-<p>接下來說明如何 Nuxt 專案如何搭配 vuex-persistedstate，存放在 localStorage 的內容，可以輕易地被讀取，因此我們需要將內容加密（搭配套件 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/secure-ls">secure-ls</a>） </p>
+<p>接下來說明如何 Nuxt 專案如何搭配 vuex-persistedstate，存放在 localStorage 的內容，可以輕易地被讀取，因此我們需要將內容加密（搭配套件 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.npmjs.com/package/secure-ls">secure-ls</a>） </p>
 <p>首先安裝套件：<code>npm i vuex-persistedstate</code> 及加密套件：<code>npm i secure-ls</code>，接著於 plugins 增加檔案，範例使用 persistedstate.js</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// plugins/persistedstate.js</span><br><span class="hljs-keyword">import</span> createPersistedState <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex-persistedstate'</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">SecureLS</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'secure-ls'</span>;<br><br><span class="hljs-keyword">const</span> ls = <span class="hljs-keyword">new</span> <span class="hljs-title class_">SecureLS</span>({<br>    <span class="hljs-attr">encodingType</span>: <span class="hljs-string">'aes'</span>, <span class="hljs-comment">// 加密方式，預設 base64</span><br>    <span class="hljs-attr">isCompression</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// 是否壓縮數據</span><br>    <span class="hljs-attr">encryptionSecret</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">APP_KEY</span> <span class="hljs-comment">// 加密 key</span><br>});<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ({ store, isHMR }) =&gt; {<br>    <span class="hljs-keyword">if</span> (isHMR) { <span class="hljs-comment">// 避免在熱更新的時候重複觸發(npm run dev)</span><br>        <span class="hljs-keyword">return</span>;<br>    }<br>    <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">onNuxtReady</span>(<span class="hljs-function">() =&gt;</span> {<br>        <span class="hljs-title function_">createPersistedState</span>({<br>            <span class="hljs-attr">key</span>: <span class="hljs-string">'test'</span>, <span class="hljs-comment">// 自訂 localStorage key</span><br>            <span class="hljs-attr">storage</span>: {<br>                <span class="hljs-attr">getItem</span>: <span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> ls.<span class="hljs-title function_">get</span>(key),<br>                <span class="hljs-attr">setItem</span>: <span class="hljs-function">(<span class="hljs-params">key, value</span>) =&gt;</span> ls.<span class="hljs-title function_">set</span>(key, value),<br>                <span class="hljs-attr">removeItem</span>: <span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> ls.<span class="hljs-title function_">remove</span>(key)<br>            }<br>        })(store);<br>    });<br>};<br></code></pre></td></tr></tbody></table></figure>
 
@@ -210,8 +208,8 @@
 <p>這樣一來即使畫面重整，store 也可以順利保存資料，在 localStorage 查看 test 內容也確實被加密了！</p>
 <hr>
 <p>參考文章：</p>
-<p><a target="_blank" rel="noopener" href="https://medium.com/itsems-frontend/vue-vuex1-state-mutations-364163b3acac">https://medium.com/itsems-frontend/vue-vuex1-state-mutations-364163b3acac</a></p>
-<p><a target="_blank" rel="noopener" href="https://chiafangsung.medium.com/%E4%BD%BF%E7%94%A8-vuex-persistedstate-%E7%B6%AD%E6%8C%81-vuex-%E7%8B%80%E6%85%8B-f0d7c522c73a">https://chiafangsung.medium.com/使用-vuex-persistedstate-維持-vuex-狀態-f0d7c522c73a</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://medium.com/itsems-frontend/vue-vuex1-state-mutations-364163b3acac">https://medium.com/itsems-frontend/vue-vuex1-state-mutations-364163b3acac</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://chiafangsung.medium.com/%E4%BD%BF%E7%94%A8-vuex-persistedstate-%E7%B6%AD%E6%8C%81-vuex-%E7%8B%80%E6%85%8B-f0d7c522c73a">https://chiafangsung.medium.com/使用-vuex-persistedstate-維持-vuex-狀態-f0d7c522c73a</a></p>
 </body></html>
     
     </div>
@@ -254,7 +252,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=638b091d4b058f001938c857&amp;product=sop' async='async'></script>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=638b091d4b058f001938c857&amp;product=sop" async="async"></script>
 
 </div>
 
@@ -286,12 +284,7 @@
     <style>
         .utterances{max-width: 100%;}
     </style>
-    <script src="https://utteranc.es/client.js"
-        repo="clairechang0609/hexo-board"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
+    <script src="https://utteranc.es/client.js" repo="clairechang0609/hexo-board" issue-term="title" theme="github-light" crossorigin="anonymous" async>
     </script>
 </div>
 
@@ -304,7 +297,7 @@
                 &copy; 2022
                 Claire Chang&nbsp;
                 All rights reserved.
-                <br />
+                <br>
                 Powered by Hexo.
             </div>
             <div class="column is-hidden-mobile"></div>
@@ -314,7 +307,7 @@
                 <div class="columns is-mobile is-multiline is-centered">
                 
                     
-                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/clairechang0609">
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
                     
                     GitHub
                     
@@ -333,7 +326,7 @@
 <!-- test if the browser is outdated -->
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="external nofollow noopener noreferrer" href="http://outdatedbrowser.com/">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
@@ -479,7 +472,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋" />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
