@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>分類 - Claire&#39;s Notes</title>
+<title>標籤: vuex - Claire&#39;s Notes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -19,23 +19,11 @@
     <meta name="description" content="學習筆記">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Claire&#39;s Notes">
-<meta property="og:url" content="https://clairechang0609.github.io/categories/index.html">
+<meta property="og:url" content="https://clairechang0609.github.io/tags/vuex/index.html">
 <meta property="og:site_name" content="Claire&#39;s Notes">
 <meta property="og:description" content="學習筆記">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:author" content="Claire Chang">
-<meta property="article:tag" content="nuxt">
-<meta property="article:tag" content="nuxt.js">
-<meta property="article:tag" content="vue">
-<meta property="article:tag" content="vue.js">
-<meta property="article:tag" content="ssr">
-<meta property="article:tag" content="axios">
-<meta property="article:tag" content="ckeditor">
-<meta property="article:tag" content="ckeditor 5">
-<meta property="article:tag" content="create-nuxt-app">
-<meta property="article:tag" content="swiper">
-<meta property="article:tag" content="vuex">
-<meta property="article:tag" content="nuxt-vuex">
 <meta name="twitter:card" content="summary">
 
 
@@ -101,7 +89,7 @@
             <a class="navbar-item "
                href="/archives">文章</a>
             
-            <a class="navbar-item is-active"
+            <a class="navbar-item "
                href="/categories">分類</a>
             
         </div>
@@ -128,19 +116,60 @@
     <section class="section section-heading">
     <div class="container">
         <div class="content">
-            <h5><i class="far fa-folder"></i>分類</h5>
+            <h5>#vuex</h5>
         </div>
     </div>
 </section>
 <section class="section">
     <div class="container">
-        <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2022/12/04/nuxt/nuxt-vuex-store/" itemprop="url">Nuxt.js 2.x VueX Store 搭配 vuex-persistedstate 狀態保存工具</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <!-- 
+                <time datetime="2022-12-04T04:55:00.000Z" itemprop="datePublished">2022-12-04</time>
+             -->
+            <span>2022-12-04</span>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
+        </span>
+        
+        <!-- 
+        <span class="column is-narrow">
             
-            <span class="column is-narrow">
-                <a class="tag is-light article-tag" href="/categories/Nuxt/">Nuxt&nbsp;(8)</a>
-            </span>
             
-        </div>
+            8 分鐘 讀完 (約 1263 字)
+        </span>
+         -->
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><blockquote>
+<p><strong>版本：nuxt 2.15.8</strong></p>
+</blockquote>
+<p>前情提要一下，在 Vue 的專案下，常會需要做父子元件或是頁面之間的溝通傳值，如果說只是單層（ex：父元件 → 子元件、子元件 → 父元件、頁面 → 頁面），我們可以很簡單的使用 <code>props</code> 、 <code>emit</code> 或 <code>event bus</code> 即可，但在大型專案，共用資料就不是如此單純，可能會有元件內含元件、多層級的溝通，如果只用上述方法，對於開發及除錯都不便利，如下圖範例，<strong>元件 1-1</strong> 跟<strong>元件 2-1</strong> 的溝通相對複雜。</p></body></html>
+        <p class="article-more-link">
+            <a href="/2022/12/04/nuxt/nuxt-vuex-store/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+    
     </div>
 </section>
     <footer class="footer">
