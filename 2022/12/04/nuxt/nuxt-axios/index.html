@@ -24,7 +24,7 @@
 <meta property="og:description" content="版本：nuxt 2.15.8  Axios 是一套相當便利的 Promise Base Ajax 套件，而 Nuxt 又有 Axios 整合套件 @nuxtjs&#x2F;axios，此篇範例會使用到 Async、Await，如果對於 Promise 尚不熟悉，可以參考 Promise 介紹文章">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-12-04T04:41:00.000Z">
-<meta property="article:modified_time" content="2022-12-04T05:15:14.689Z">
+<meta property="article:modified_time" content="2022-12-06T16:11:50.038Z">
 <meta property="article:author" content="Claire Chang">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
@@ -133,6 +133,7 @@
                 <i class="far fa-folder"></i>
                 <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
             </span>
+            <span class="column is-narrow">｜</span>
         
         <span class="column is-narrow">
             <!-- 
@@ -144,7 +145,7 @@
         <span class="column is-narrow">
             
             
-            6 分鐘 讀完 (約 933 字)
+            6 分鐘 讀完 (約 935 字)
         </span>
          -->
     </div>
@@ -191,16 +192,16 @@
 <p>axios 在發生錯誤時，預設會導到 error page，如果我們想避免畫面跳轉，可以加入 resolve promise，這樣在發生錯誤時，都不會跳轉到 error page</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// plugins/axios.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ({ $axios, redirect, store }) =&gt; {<br>    $axios.<span class="hljs-title function_">onError</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {<br>        <span class="hljs-keyword">const</span> code = <span class="hljs-built_in">parseInt</span>(error.<span class="hljs-property">response</span> &amp;&amp; error.<span class="hljs-property">response</span>.<span class="hljs-property">status</span>);<br>        <span class="hljs-keyword">if</span> (code === <span class="hljs-number">401</span>) {<br>            <span class="hljs-title function_">redirect</span>(<span class="hljs-string">'/login'</span>);<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(<span class="hljs-literal">false</span>); <span class="hljs-comment">// 避免畫面轉導錯誤頁</span><br>    });<br>};<br></code></pre></td></tr></tbody></table></figure>
 
-<blockquote>
-<p>💡 如果全域設定 resolve promise，在 axios 發生錯誤時，都不會進到 catch error 歐！</p>
+<blockquote class="colorquote info"><p>如果全域設定 resolve promise，在 axios 發生錯誤時，都不會進到 catch error 歐！</p>
 </blockquote>
+
 <p><strong>自訂 Error Page</strong></p>
 <p>Nuxt 專案有預設的 error page，可以在 .nuxt 資料夾看到 <code>components/nuxt-error.vue</code>，錯誤頁面也可以自訂，檔案放置位置比較特別，在 layouts 資料夾內新增一支檔案 error.vue</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// layouts/error.vue</span><br>&lt;template&gt;<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"nuxt-error-wrap"</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-center py-4"</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{{ error.statusCode }}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>{{ error.message }}<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">nuxt-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">"/"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-primary p-4"</span>&gt;</span>回首頁<span class="hljs-tag">&lt;/<span class="hljs-name">nuxt-link</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-attr">name</span>: <span class="hljs-string">'ErrorPage'</span>,</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-attr">layout</span>: <span class="hljs-string">'error-layout'</span>,</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-attr">props</span>: {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">error</span>: {</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-attr">type</span>: <span class="hljs-title class_">Object</span>,</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-attr">default</span>: <span class="hljs-function">() =&gt;</span> {}</span></span><br><span class="language-javascript"><span class="language-xml">        }</span></span><br><span class="language-javascript"><span class="language-xml">    }</span></span><br><span class="language-javascript"><span class="language-xml">};</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></tbody></table></figure>
 
-<blockquote>
-<p>💡 雖然 error.vue 檔置於 layouts 資料夾，但視為 pages 頁面，因此如果沒有配置 layout，預設會讀取 layouts/default.vue 樣板</p>
+<blockquote class="colorquote info"><p>雖然 error.vue 檔置於 layouts 資料夾，但視為 pages 頁面，因此如果沒有配置 layout，預設會讀取 layouts/default.vue 樣板</p>
 </blockquote>
+
 <p>這樣就完成了，在 Nuxt 發生錯誤時，都會進到我們自訂錯誤頁面，如果要手動進到錯誤頁，呼叫 context 內的 error 方法即可，在 Nuxt 生命週期：</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-keyword">async</span> <span class="hljs-title function_">asyncData</span>(<span class="hljs-params">{ $axios, error }</span>) {<br>        <span class="hljs-keyword">try</span> {<br>            <span class="hljs-keyword">const</span> { seo } = <span class="hljs-keyword">await</span> $axios.$get(<span class="hljs-string">'/api/seo'</span>);<br>            <span class="hljs-keyword">return</span> {<br>                seo<br>            };<br>        } <span class="hljs-keyword">catch</span>(err) {<br>            <span class="hljs-keyword">const</span> { statusCode, message } = err;<br>            <span class="hljs-title function_">error</span>({ statusCode, message });<br>        } <br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 

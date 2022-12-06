@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://i.imgur.com/mT4lCpY.png">
 <meta property="og:image" content="https://i.imgur.com/yKRo61U.png">
 <meta property="article:published_time" content="2022-12-03T09:54:00.000Z">
-<meta property="article:modified_time" content="2022-12-04T05:12:28.862Z">
+<meta property="article:modified_time" content="2022-12-06T15:55:34.652Z">
 <meta property="article:author" content="Claire Chang">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
@@ -138,6 +138,7 @@
                 <i class="far fa-folder"></i>
                 <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
             </span>
+            <span class="column is-narrow">｜</span>
         
         <span class="column is-narrow">
             <!-- 
@@ -149,7 +150,7 @@
         <span class="column is-narrow">
             
             
-            10 分鐘 讀完 (約 1554 字)
+            10 分鐘 讀完 (約 1558 字)
         </span>
          -->
     </div>
@@ -201,9 +202,9 @@
 <h1 id="validate"><a href="#validate" class="headerlink" title="validate"></a>validate</h1><p>於 pages 檔案配置此方法，用來驗證動態路由參數有效性，範例使用 pages/about/_userId.vue</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about/_userId.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'User'</span>,<br>    <span class="hljs-title function_">validate</span>(<span class="hljs-params">{ params, query }</span>) {<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// 驗證通過</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// 驗證無效，會自動轉導 error page</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
-<blockquote>
-<p>💡 驗證通過必須 return <code>true</code>，否則會自動轉跳 404 error page</p>
+<blockquote class="colorquote info"><p>驗證通過必須 return <code>true</code>，否則會自動轉跳 404 error page</p>
 </blockquote>
+
 <h1 id="asyncData"><a href="#asyncData" class="headerlink" title="asyncData"></a>asyncData</h1><p>於 server 端處理非同步的生命週期，在此傳入的內容可以被搜尋引擎爬蟲取得，是提升 SEO 效能的重點生命週期。</p>
 <p>只會在頁面載入時調用，由於生命週期在 Vue 之前，因此無法取得 <code>this</code> ，且 asyncData 僅限 pages 底下頁面使用，方法內會自動帶入 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://nuxtjs.org/docs/concepts/context-helpers">context</a> 參數，我們可以安裝 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://axios.nuxtjs.org/">@nuxtjs/axios</a> 套件，axios 會被注入進 context 內，我們可以物件解構方式使用（ { $axios, params } = context )（範例使用 pages/about.vue） </p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'About'</span>,<br>    <span class="hljs-keyword">async</span> <span class="hljs-title function_">asyncData</span>(<span class="hljs-params">{ $axios, params }</span>) {<br>        <span class="hljs-keyword">const</span> id = params.<span class="hljs-property">id</span>;<br>        <span class="hljs-keyword">const</span> { data } = <span class="hljs-keyword">await</span> $axios.$get(<span class="hljs-string">`/api/user/<span class="hljs-subst">${id}</span>`</span>);<br>        <span class="hljs-keyword">return</span> {<br>            <span class="hljs-attr">userName</span>: data<br>        };<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
@@ -211,16 +212,16 @@
 <p>透過 return value，資料被賦予進 Vue 實體，我們透過 <code>this.userName</code> 即可成功取值</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br>&lt;template&gt;<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{ userName }}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-attr">name</span>: <span class="hljs-string">'About'</span>,</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">async</span> <span class="hljs-title function_">asyncData</span>(<span class="hljs-params">{ $axios, params }</span>) {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">const</span> id = params.<span class="hljs-property">id</span>;</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">const</span> { data } = <span class="hljs-keyword">await</span> $axios.$get(<span class="hljs-string">`/api/user/<span class="hljs-subst">${id}</span>`</span>);</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">return</span> {</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-attr">userName</span>: data</span></span><br><span class="language-javascript"><span class="language-xml">        };</span></span><br><span class="language-javascript"><span class="language-xml">    }</span></span><br><span class="language-javascript"><span class="language-xml">}</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></tbody></table></figure>
 
-<blockquote>
-<p>💡 data 如果有相同變數名稱，會在 asyncData 生命週期被複寫，所以除非需要再次修改變數，否則請避免重複命名變數</p>
+<blockquote class="colorquote info"><p>data 如果有相同變數名稱，會在 asyncData 生命週期被複寫，所以除非需要再次修改變數，否則請避免重複命名變數</p>
 </blockquote>
-<blockquote>
-<p>💡 asyncData 是在 server 端、路由更新前即調用，由於是在瀏覽器渲染前的生命週期，因此無法使用 loading placeholder，也不能使用瀏覽器相關 API</p>
+
+<blockquote class="colorquote info"><p>asyncData 是在 server 端、路由更新前即調用，由於是在瀏覽器渲染前的生命週期，因此無法使用 loading placeholder，也不能使用瀏覽器相關 API</p>
 </blockquote>
+
 <h1 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h1><p>Nuxt v2.12 新增功能，功能類似 <code>asyncData</code> ，在畫面渲染前，同時於 server 端跟 client 端的生命週期，可以使用於任一 .vue 頁面，由於是在 Vue created 之後，因此可以取得 <code>this</code>，初次載入頁面時，fetch 會在 server 端執行，如果是透過 <code>&lt;nuxt-link&gt;</code> 進行路由切換，fetch 在 client 端執行，因此可以在此生命週期加入 loading 效果</p>
-<blockquote>
-<p>💡 <code>&lt;nuxt-link&gt;</code> 為 Nuxt 的路由切換元件，相當於 Vue.js 的 <code>&lt;router-link&gt;</code> ，因此我們只能使用內部連結，外部連結必須使用 <code>&lt;a&gt;</code> 標籤，透過 <code>&lt;nuxt-link&gt;</code> 切換路由，會被視為 SPA 頁面跳轉</p>
+<blockquote class="colorquote info"><p><code>&lt;nuxt-link&gt;</code> 為 Nuxt 的路由切換元件，相當於 Vue.js 的 <code>&lt;router-link&gt;</code> ，因此我們只能使用內部連結，外部連結必須使用 <code>&lt;a&gt;</code> 標籤，透過 <code>&lt;nuxt-link&gt;</code> 切換路由，會被視為 SPA 頁面跳轉</p>
 </blockquote>
+
 <p>以下說明使用方式</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx">&lt;template&gt;<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">"(post, key) in posts"</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">"key"</span>&gt;</span></span><br><span class="language-xml">            {{ post }}</span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">return</span> {</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-attr">posts</span>: []</span></span><br><span class="language-javascript"><span class="language-xml">        }</span></span><br><span class="language-javascript"><span class="language-xml">    },</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">async</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-params"></span>) {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">const</span> { data } = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">$axios</span>.$get(<span class="hljs-string">'/api/posts'</span>);</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-variable language_">this</span>.<span class="hljs-property">posts</span> = data;</span></span><br><span class="language-javascript"><span class="language-xml">    }</span></span><br><span class="language-javascript"><span class="language-xml">}</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></tbody></table></figure>
 

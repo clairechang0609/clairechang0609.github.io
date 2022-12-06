@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://i.imgur.com/0JNnw2N.png">
 <meta property="og:image" content="https://i.imgur.com/q950cN2.png">
 <meta property="article:published_time" content="2022-12-04T05:20:00.000Z">
-<meta property="article:modified_time" content="2022-12-04T07:38:30.225Z">
+<meta property="article:modified_time" content="2022-12-06T16:03:39.609Z">
 <meta property="article:author" content="Claire Chang">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
@@ -138,6 +138,7 @@
                 <i class="far fa-folder"></i>
                 <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
             </span>
+            <span class="column is-narrow">｜</span>
         
         <span class="column is-narrow">
             <!-- 
@@ -149,7 +150,7 @@
         <span class="column is-narrow">
             
             
-            9 分鐘 讀完 (約 1391 字)
+            9 分鐘 讀完 (約 1396 字)
         </span>
          -->
     </div>
@@ -171,9 +172,9 @@
 <p><img src="https://i.imgur.com/df3FV1i.png"></p>
 <p>這樣就完成了，是不是很簡單呢！</p>
 <p>但如果我們想擴充功能，像是新增下底線 <code>@ckeditor/ckeditor5-basic-styles/src/underline</code>，專案會直接報錯：</p>
-<blockquote>
-<p>Uncaught CKEditorError: ckeditor-duplicated-modules</p>
+<blockquote class="colorquote danger"><p>Uncaught CKEditorError: ckeditor-duplicated-modules</p>
 </blockquote>
+
 <p>原因是 <code>@ckeditor/ckeditor5-build-classic</code> 為包裝好的內容，試著進到 node_modules/@ckeditor/ckeditor5-build-classic/package.json 可以看到相依套件已經安裝進去：</p>
 <p><img src="https://i.imgur.com/0JNnw2N.png"></p>
 <p>因此 CKeditor 在初始化時會因為模組重複執行導致錯誤，可以改用以下方法</p>
@@ -194,9 +195,9 @@
 <p>接著來試著安裝編輯器功能，範例安裝 <strong>基本樣式 / 字級 / 字體</strong>：</p>
 <figure class="highlight bash hljs"><table><tbody><tr><td class="code"><pre><code class="hljs bash">npm install --save \<br>    @ckeditor/ckeditor5-essentials \<br>    @ckeditor/ckeditor5-font \<br>    @ckeditor/ckeditor5-paragraph \<br></code></pre></td></tr></tbody></table></figure>
 
-<blockquote>
-<p>💡 所有 ckeditor 所有套件<strong>版本</strong>必須相同，否則會發生錯誤（@ckeditor/ckeditor5-dev-* 跟 @ckeditor/ckeditor5-vue2 除外）</p>
+<blockquote class="colorquote info"><p>所有 ckeditor 所有套件<strong>版本</strong>必須相同，否則會發生錯誤（@ckeditor/ckeditor5-dev-* 跟 @ckeditor/ckeditor5-vue2 除外）</p>
 </blockquote>
+
 <p><strong>基礎設定介紹：</strong></p>
 <ul>
 <li>placeholder：編輯器佔位符</li>
@@ -208,9 +209,9 @@
 
 <p>這樣就可以成功看到畫面囉 🫶</p>
 <p><img src="https://i.imgur.com/q950cN2.png"></p>
-<blockquote>
-<p>💡 是否覺得功能安裝跟配置有點麻煩呢？官方貼心的提供 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://ckeditor.com/ckeditor-5/online-builder/">online-builder</a> ，可以先挑選功能並配置好 toolbar，確認畫面後再安裝</p>
+<blockquote class="colorquote info"><p>是否覺得功能安裝跟配置有點麻煩呢？官方貼心的提供 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://ckeditor.com/ckeditor-5/online-builder/">online-builder</a> ，可以先挑選功能並配置好 toolbar，確認畫面後再安裝</p>
 </blockquote>
+
 <h2 id="全域註冊"><a href="#全域註冊" class="headerlink" title="全域註冊"></a>全域註冊</h2><p>當專案有很多地方會使用到編輯器，我們也可以全域引入</p>
 <p>新增檔案置於 plugins，這裡命名 ckeditor.js</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// plugins/ckeditor.js</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">CKEditor</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'@ckeditor/ckeditor5-vue2'</span>;<br><br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">CKEditor</span>);<br></code></pre></td></tr></tbody></table></figure>
