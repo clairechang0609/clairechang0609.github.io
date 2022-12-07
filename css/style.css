@@ -518,17 +518,18 @@ a.navbar-item {
   .navbar-item.navbar-logo img {
     height: 28px; }
 
-.navbar-menu.navbar-start .navbar-item {
-  position: relative;
-  padding: 0.5rem 2rem; }
-  .navbar-menu.navbar-start .navbar-item:hover::after, .navbar-menu.navbar-start .navbar-item.is-active::after {
-    content: '';
-    position: absolute;
-    height: 3px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to right, #1b6655 13%, #1ea08e 87%); }
+@media screen and (min-width: 1024px) {
+  .navbar-menu.navbar-start .navbar-item {
+    position: relative;
+    padding: 0.5rem 2rem; }
+    .navbar-menu.navbar-start .navbar-item:hover::after, .navbar-menu.navbar-start .navbar-item.is-active::after {
+      content: '';
+      position: absolute;
+      height: 3px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to right, #1b6655 13%, #1ea08e 87%); } }
 
 a {
   color: #0d7ab1; }

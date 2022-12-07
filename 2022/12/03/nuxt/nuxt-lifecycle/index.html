@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://i.imgur.com/mT4lCpY.png">
 <meta property="og:image" content="https://i.imgur.com/yKRo61U.png">
 <meta property="article:published_time" content="2022-12-03T09:54:00.000Z">
-<meta property="article:modified_time" content="2022-12-06T15:55:34.652Z">
+<meta property="article:modified_time" content="2022-12-07T14:46:41.119Z">
 <meta property="article:author" content="Claire Chang">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
@@ -177,35 +177,32 @@
 
 <p>這樣就可以觸發 store/greeting.js setMessage 方法，見下圖開發者工具</p>
 <p><img src="https://i.imgur.com/qj8ViHd.png"></p>
-<h1 id="Route-Middleware"><a href="#Route-Middleware" class="headerlink" title="Route Middleware"></a>Route Middleware</h1><p>中間組件，在頁面渲染前執行，有三種定義方式，執行順序為：<strong>Global → Layout → Page</strong></p>
+<h1 id="Route-Middleware"><a href="#Route-Middleware" class="headerlink" title="Route Middleware"></a><strong>Route Middleware</strong></h1><p>中間組件，在頁面渲染前執行，有三種定義方式，執行順序為：<strong>Global → Layout → Page</strong></p>
 <p>接下來分別說明該如何定義</p>
-<p><strong>Global Middleware</strong></p>
-<p>在 middleware 資料夾內建立檔案，這裡命名為 global.js</p>
+<h4 id="Global-Middleware"><a href="#Global-Middleware" class="headerlink" title="Global Middleware"></a><strong>Global Middleware</strong></h4><p>在 middleware 資料夾內建立檔案，這裡命名為 global.js</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// middleware/global.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ({ <span class="hljs-keyword">from</span>, route, redirect, store, error }) =&gt; {<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'global middleware'</span>);<br><br>    <span class="hljs-keyword">if</span> (!store.<span class="hljs-property">isLogin</span>) {<br>        <span class="hljs-title function_">redirect</span>(<span class="hljs-string">'/login'</span>);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 
 <p>接著在 nuxt.config.js 配置</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// nuxt.config.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">router</span>: {<br>        <span class="hljs-attr">middleware</span>: [ <span class="hljs-string">'global'</span> ]<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
-<p><strong>Layout Middleware</strong></p>
-<p>建立 middleware 檔案，這裡命名為 middleware/layout.js，然後配置到任一 layouts 檔案，範例使用 layouts/default.vue</p>
+<h4 id="Layout-Middleware"><a href="#Layout-Middleware" class="headerlink" title="Layout Middleware"></a><strong>Layout Middleware</strong></h4><p>建立 middleware 檔案，這裡命名為 middleware/layout.js，然後配置到任一 layouts 檔案，範例使用 layouts/default.vue</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// layouts/default.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'Default'</span>,<br>    <span class="hljs-attr">middleware</span>: <span class="hljs-string">'layout'</span><br>};<br></code></pre></td></tr></tbody></table></figure>
 
 <p>或是匿名配置也可以：</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// layouts/default.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'Default'</span>,<br>    <span class="hljs-title function_">middleware</span>(<span class="hljs-params">{ <span class="hljs-keyword">from</span>, route, redirect, store, error }</span>) {<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'layout middleware'</span>);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 
-<p><strong>Page Middleware</strong></p>
-<p>概念同 layouts middleware，配置於任一 pages 檔案，範例使用 pages/about.vue，這裡使用匿名配置來說明</p>
+<h4 id="Page-Middleware"><a href="#Page-Middleware" class="headerlink" title="Page Middleware"></a><strong>Page Middleware</strong></h4><p>概念同 layouts middleware，配置於任一 pages 檔案，範例使用 pages/about.vue，這裡使用匿名配置來說明</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'About'</span>,<br>    <span class="hljs-title function_">middleware</span>(<span class="hljs-params">{ <span class="hljs-keyword">from</span>, route, redirect, store, error }</span>) {<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'page middleware'</span>);<br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
 
 <p>接著我們從開發者工具查看 console 結果依序為下圖，因此我們可以透過 layout 跟 page middleware 來覆寫 global middleware</p>
 <p><img src="https://i.imgur.com/mT4lCpY.png"></p>
-<h1 id="validate"><a href="#validate" class="headerlink" title="validate"></a>validate</h1><p>於 pages 檔案配置此方法，用來驗證動態路由參數有效性，範例使用 pages/about/_userId.vue</p>
+<h1 id="validate"><a href="#validate" class="headerlink" title="validate"></a><strong>validate</strong></h1><p>於 pages 檔案配置此方法，用來驗證動態路由參數有效性，範例使用 pages/about/_userId.vue</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about/_userId.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'User'</span>,<br>    <span class="hljs-title function_">validate</span>(<span class="hljs-params">{ params, query }</span>) {<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// 驗證通過</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// 驗證無效，會自動轉導 error page</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <blockquote class="colorquote info"><p>驗證通過必須 return <code>true</code>，否則會自動轉跳 404 error page</p>
 </blockquote>
 
-<h1 id="asyncData"><a href="#asyncData" class="headerlink" title="asyncData"></a>asyncData</h1><p>於 server 端處理非同步的生命週期，在此傳入的內容可以被搜尋引擎爬蟲取得，是提升 SEO 效能的重點生命週期。</p>
+<h1 id="asyncData"><a href="#asyncData" class="headerlink" title="asyncData"></a><strong>asyncData</strong></h1><p>於 server 端處理非同步的生命週期，在此傳入的內容可以被搜尋引擎爬蟲取得，是提升 SEO 效能的重點生命週期。</p>
 <p>只會在頁面載入時調用，由於生命週期在 Vue 之前，因此無法取得 <code>this</code> ，且 asyncData 僅限 pages 底下頁面使用，方法內會自動帶入 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://nuxtjs.org/docs/concepts/context-helpers">context</a> 參數，我們可以安裝 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://axios.nuxtjs.org/">@nuxtjs/axios</a> 套件，axios 會被注入進 context 內，我們可以物件解構方式使用（ { $axios, params } = context )（範例使用 pages/about.vue） </p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">'About'</span>,<br>    <span class="hljs-keyword">async</span> <span class="hljs-title function_">asyncData</span>(<span class="hljs-params">{ $axios, params }</span>) {<br>        <span class="hljs-keyword">const</span> id = params.<span class="hljs-property">id</span>;<br>        <span class="hljs-keyword">const</span> { data } = <span class="hljs-keyword">await</span> $axios.$get(<span class="hljs-string">`/api/user/<span class="hljs-subst">${id}</span>`</span>);<br>        <span class="hljs-keyword">return</span> {<br>            <span class="hljs-attr">userName</span>: data<br>        };<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
@@ -218,7 +215,7 @@
 <blockquote class="colorquote info"><p>asyncData 是在 server 端、路由更新前即調用，由於是在瀏覽器渲染前的生命週期，因此無法使用 loading placeholder，也不能使用瀏覽器相關 API</p>
 </blockquote>
 
-<h1 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h1><p>Nuxt v2.12 新增功能，功能類似 <code>asyncData</code> ，在畫面渲染前，同時於 server 端跟 client 端的生命週期，可以使用於任一 .vue 頁面，由於是在 Vue created 之後，因此可以取得 <code>this</code>，初次載入頁面時，fetch 會在 server 端執行，如果是透過 <code>&lt;nuxt-link&gt;</code> 進行路由切換，fetch 在 client 端執行，因此可以在此生命週期加入 loading 效果</p>
+<h1 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a><strong>fetch</strong></h1><p>Nuxt v2.12 新增功能，功能類似 <code>asyncData</code> ，在畫面渲染前，同時於 server 端跟 client 端的生命週期，可以使用於任一 .vue 頁面，由於是在 Vue created 之後，因此可以取得 <code>this</code>，初次載入頁面時，fetch 會在 server 端執行，如果是透過 <code>&lt;nuxt-link&gt;</code> 進行路由切換，fetch 在 client 端執行，因此可以在此生命週期加入 loading 效果</p>
 <blockquote class="colorquote info"><p><code>&lt;nuxt-link&gt;</code> 為 Nuxt 的路由切換元件，相當於 Vue.js 的 <code>&lt;router-link&gt;</code> ，因此我們只能使用內部連結，外部連結必須使用 <code>&lt;a&gt;</code> 標籤，透過 <code>&lt;nuxt-link&gt;</code> 切換路由，會被視為 SPA 頁面跳轉</p>
 </blockquote>
 
