@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>Nuxt.js 專案架設 - Claire&#39;s Notes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="學習筆記">
+
+
+
+
+
+    <meta name="description" content="版本：nuxt 2.15.8  說到 Nuxt，必須先從 Vue.js 說起，Vue.js 為專注在視圖層(View) 的 JS 框架，為 SPA（Single Page Application）應用程式，簡而言之整個網站應用只有單一頁面，一但頁面被加載進來後，就不會再進行該頁面請求，由於 Vue 是利用 JS 載入資料，並動態產生元件，SEO 只能抓取到 HTML 內容，因此 SEO 表現趨近">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nuxt.js 專案架設">
+<meta property="og:url" content="https://clairechang0609.github.io/2022/11/16/nuxt/nuxt-installation/index.html">
+<meta property="og:site_name" content="Claire&#39;s Notes">
+<meta property="og:description" content="版本：nuxt 2.15.8  說到 Nuxt，必須先從 Vue.js 說起，Vue.js 為專注在視圖層(View) 的 JS 框架，為 SPA（Single Page Application）應用程式，簡而言之整個網站應用只有單一頁面，一但頁面被加載進來後，就不會再進行該頁面請求，由於 Vue 是利用 JS 載入資料，並動態產生元件，SEO 只能抓取到 HTML 內容，因此 SEO 表現趨近">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/Qyp5Sat.png">
+<meta property="og:image" content="https://i.imgur.com/MSYs5f0.png">
+<meta property="og:image" content="https://i.imgur.com/s38N3oo.png">
+<meta property="article:published_time" content="2022-11-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-09T16:12:02.238Z">
+<meta property="article:author" content="Claire Chang">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="vue.js">
+<meta property="article:tag" content="nuxt">
+<meta property="article:tag" content="nuxt.js">
+<meta property="article:tag" content="ssr">
+<meta property="article:tag" content="create-nuxt-app">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/Qyp5Sat.png">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night-eighties.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    <img src="/images/claire-logo.svg" alt height="28">
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Nuxt.js 專案架設
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        
+            <span class="column is-narrow article-category">
+                <i class="far fa-folder"></i>
+                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
+            </span>
+            <span class="column is-narrow">｜</span>
+        
+        <span class="column is-narrow">
+            <!-- 
+                <time datetime="2022-11-15T16:00:00.000Z" itemprop="datePublished">2022-11-16</time>
+             -->
+            <span>2022-11-16</span>
+        </span>
+        <!-- 
+        <span class="column is-narrow">
+            
+            
+            4 分鐘 讀完 (約 625 字)
+        </span>
+         -->
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><blockquote>
+<p><strong>版本：nuxt 2.15.8</strong></p>
+</blockquote>
+<p>說到 Nuxt，必須先從 Vue.js 說起，Vue.js 為專注在視圖層(View) 的 JS 框架，為 SPA（Single Page Application）應用程式，簡而言之整個網站應用只有單一頁面，一但頁面被加載進來後，就不會再進行該頁面請求，由於 Vue 是利用 JS 載入資料，並動態產生元件，SEO 只能抓取到 HTML 內容，因此 SEO 表現趨近於零。</p>
+<p>而 Nuxt 是基於 Vue.js、Node.js、Webpack 以及 Badel.js 的輕量框架，可以同時創建 SSR（Server Side Render）及 SPA，在頁面載入前即渲染（伺服器回傳完整 HTML 檔，每次跳轉頁面，瀏覽器都需要刷新），搜尋引擎爬蟲可以取得資料，大幅解決 SEO 的問題。</p>
+<span id="more"></span>
+
+<p>以下圖片說明：</p>
+<p><img src="https://i.imgur.com/Qyp5Sat.png"></p>
+<p>接下來一起來嘗試創建一個 Nuxt 專案吧！</p>
+<p>如同 Vue CLI，Nuxt 也有類似的指令列(command-line)工具 create-nuxt-app，</p>
+<p>依據官方文件提供的專案包建置方式：</p>
+<p><code>npx create-nuxt-app &lt;project-name&gt;</code></p>
+<blockquote class="colorquote info"><p>使用 npx 安裝，安裝的套件在執行完後就會被移除 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://hoyis-note.coderbridge.io/2021/07/20/npm-npx-%E5%B7%AE%E5%88%A5/">npx介紹</a></p>
+</blockquote>
+
+<p><strong>接著會跑出一些選項：</strong></p>
+<ul>
+<li>Project name：設定專案名稱</li>
+<li>Programming language：選擇程式語言</li>
+<li>Package manager：軟體套件管理系統 npm / yarn</li>
+<li>UI framework：css 模板</li>
+<li>Template engine：樣版引擎</li>
+<li>Nuxt.js modules：相依套件</li>
+<li>Linting tools：程式碼檢查工具</li>
+<li>Testing framework：測試工具</li>
+<li>Rendering mode：渲染模式</li>
+<li>Deployment target：運行模式 （在此示範 Server Side Render)</li>
+<li>Development tools：開發工具</li>
+<li>Version control system：版控工具</li>
+</ul>
+<p><img src="https://i.imgur.com/MSYs5f0.png"></p>
+<p>以上選擇完畢就開始安裝專案包</p>
+<p>運行完成就可以開始編譯專案</p>
+<p>跟著提示訊息執行：</p>
+<p><code>cd test</code><br><code>npm run dev</code></p>
+<p>在 package.json 內可以看到相關指令</p>
+<figure class="highlight bash hljs"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-string">"scripts"</span>: {<br>    <span class="hljs-string">"dev"</span>: <span class="hljs-string">"nuxt"</span>,<br>    <span class="hljs-string">"build"</span>: <span class="hljs-string">"nuxt build"</span>,<br>    <span class="hljs-string">"start"</span>: <span class="hljs-string">"nuxt start"</span>,<br>    <span class="hljs-string">"generate"</span>: <span class="hljs-string">"nuxt generate"</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>接下來就可以看到畫面囉 👏</p>
+<p><img src="https://i.imgur.com/s38N3oo.png"></p>
+<hr>
+<p>參考文章：</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://medium.com/web-design-zone/%E5%BB%BA%E7%AB%8Bnuxt-js%E5%B0%88%E6%A1%88%E5%88%9D%E9%AB%94%E9%A9%97-21920735e38b">https://medium.com/web-design-zone/建立nuxt-js專案初體驗-21920735e38b</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://levelup.gitconnected.com/spa-ssg-ssr-and-jamstack-a-front-end-acronyms-guide-6add9543f24d">https://levelup.gitconnected.com/spa-ssg-ssr-and-jamstack-a-front-end-acronyms-guide-6add9543f24d</a></p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue/">#vue</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue-js/">#vue.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt/">#nuxt</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt-js/">#nuxt.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ssr/">#ssr</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/create-nuxt-app/">#create-nuxt-app</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2022/11/03/vue/vue-upload-image/">Vue.js 圖片上傳串接後端 API（轉換成base64格式）</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2022/11/17/nuxt/nuxt-catalog/">Nuxt.js 目錄結構</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=638b091d4b058f001938c857&amp;product=sop" async="async"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    <!-- 
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div> -->
+    <style>
+        .utterances{max-width: 100%;}
+    </style>
+    <script src="https://utteranc.es/client.js" repo="clairechang0609/hexo-board" issue-term="title" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow">
+                &copy; 2022
+                Claire Chang&nbsp;
+                All rights reserved.
+                <br>
+                Powered by Hexo.
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="external nofollow noopener noreferrer" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-TW");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery > p > .gallery-item').unwrap();
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>

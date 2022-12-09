@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>Nuxt.js 搭配 Axios 與自訂 Error Page - Claire&#39;s Notes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="學習筆記">
+
+
+
+
+
+    <meta name="description" content="版本：nuxt 2.15.8  Axios 是一套相當便利的 Promise Base Ajax 套件，而 Nuxt 又有 Axios 整合套件 @nuxtjs&#x2F;axios，此篇範例會使用到 Async、Await，如果對於 Promise 尚不熟悉，可以參考 Promise 介紹文章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nuxt.js 搭配 Axios 與自訂 Error Page">
+<meta property="og:url" content="https://clairechang0609.github.io/2022/11/21/nuxt/nuxt-axios/index.html">
+<meta property="og:site_name" content="Claire&#39;s Notes">
+<meta property="og:description" content="版本：nuxt 2.15.8  Axios 是一套相當便利的 Promise Base Ajax 套件，而 Nuxt 又有 Axios 整合套件 @nuxtjs&#x2F;axios，此篇範例會使用到 Async、Await，如果對於 Promise 尚不熟悉，可以參考 Promise 介紹文章">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-11-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-09T16:11:43.563Z">
+<meta property="article:author" content="Claire Chang">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="vue.js">
+<meta property="article:tag" content="nuxt">
+<meta property="article:tag" content="nuxt.js">
+<meta property="article:tag" content="ssr">
+<meta property="article:tag" content="axios">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night-eighties.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    <img src="/images/claire-logo.svg" alt height="28">
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Nuxt.js 搭配 Axios 與自訂 Error Page
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        
+            <span class="column is-narrow article-category">
+                <i class="far fa-folder"></i>
+                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
+            </span>
+            <span class="column is-narrow">｜</span>
+        
+        <span class="column is-narrow">
+            <!-- 
+                <time datetime="2022-11-20T16:00:00.000Z" itemprop="datePublished">2022-11-21</time>
+             -->
+            <span>2022-11-21</span>
+        </span>
+        <!-- 
+        <span class="column is-narrow">
+            
+            
+            6 分鐘 讀完 (約 935 字)
+        </span>
+         -->
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><blockquote>
+<p><strong>版本：nuxt 2.15.8</strong></p>
+</blockquote>
+<p>Axios 是一套相當便利的 Promise Base Ajax 套件，而 Nuxt 又有 Axios 整合套件 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://axios.nuxtjs.org/">@nuxtjs/axios</a>，此篇範例會使用到 Async、Await，如果對於 Promise 尚不熟悉，可以參考 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.casper.tw/development/2020/02/16/all-new-promise/">Promise 介紹文章</a></p>
+<span id="more"></span>
+
+<p>那們我們就來替專案加上 axios 吧！首先執行 <code>npm install @nuxtjs/axios</code></p>
+<p>接著在 nuxt.config.js 進行配置（<a target="_blank" rel="external nofollow noopener noreferrer" href="https://axios.nuxtjs.org/options">參數選項</a>）：</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// nuxt.config.js</span><br>exportdefault {<br>    <span class="hljs-attr">modules</span>: [ <span class="hljs-string">'@nuxtjs/axios'</span> ],<br>    <span class="hljs-attr">axios</span>: {<br>        <span class="hljs-attr">baseUrl</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">SERVER_URL</span>,<br>        <span class="hljs-attr">browserBaseURL</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">BASE_URL</span>,<br>        <span class="hljs-attr">credentials</span>: <span class="hljs-literal">true</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>如果需要區分 client 跟 server 端 base url，可以另外設定 browserBaseURL（於client 端會覆寫 baseUrl），套件將 axios 方法直接 <strong>注入(inject)</strong> 至 Vue 實例，擷取套件原始碼片段</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// node_modules/@nuxtjs/axios/lib/plugin.js</span><br><span class="hljs-comment">// Inject axios to the context as $axios</span><br>ctx.<span class="hljs-property">$axios</span> = axios<br><span class="hljs-title function_">inject</span>(<span class="hljs-string">'axios'</span>, axios)<br></code></pre></td></tr></tbody></table></figure>
+
+<p>因此在 Vue 生命週期或屬性使用 <code>this.$axios</code> 即可呼叫 axios 方法，那麽在 Nuxt 生命週期呢？</p>
+<p>Nuxt 生命週期（asyncData, fetch, plugins, middleware）會自動帶入 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://nuxtjs.org/docs/internals-glossary/context/">context</a> 參數，context 包含以下參數 / 物件：</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> {<br>    $axios<br>    app,<br>    store,<br>    route,<br>    params,<br>    query,<br>    env,<br>    isDev,<br>    isHMR,<br>    redirect,<br>    error,<br>    $config<br>} = context<br></code></pre></td></tr></tbody></table></figure>
+
+<p>使用方式如下（範例使用 asyncData）</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-keyword">async</span> <span class="hljs-title function_">asyncData</span>(<span class="hljs-params">context</span>) {<br>        <span class="hljs-keyword">const</span> { seo } = <span class="hljs-keyword">await</span> context.<span class="hljs-property">$axios</span>.$get(<span class="hljs-string">'/api/seo'</span>);<br>        <span class="hljs-keyword">return</span> {<br>            seo<br>        };<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>我們也可以物件解構方式使用 $axios</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-keyword">async</span> <span class="hljs-title function_">asyncData</span>(<span class="hljs-params">{ $axios }</span>) {<br>        <span class="hljs-keyword">const</span> { seo } = <span class="hljs-keyword">await</span> $axios.$get(<span class="hljs-string">'/api/seo'</span>);<br>        <span class="hljs-keyword">return</span> {<br>            seo<br>        };<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>axios 提供以下方法進行事件捕捉：</strong></p>
+<ul>
+<li>onRequest(config)</li>
+<li>onResponse(response)</li>
+<li>onError(err)</li>
+<li>onRequestError(err)</li>
+<li>onResponseError(err)</li>
+</ul>
+<p>如果我們想要全域註冊攔截器(Interceptors) 進行 api 請求或是錯誤捕捉，也很簡單，</p>
+<p>首先在 plugins 新增檔案，這裡命名為 axios.js，接著在裡面監聽想捕捉的事件方法</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// plugins/axios.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ({ $axios, redirect, store }) =&gt; {<br>    $axios.<span class="hljs-title function_">onRequest</span>(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> {<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'on request'</span>, config.<span class="hljs-property">url</span>);<br>    });<br>    $axios.<span class="hljs-title function_">onError</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {<br>        <span class="hljs-keyword">const</span> code = <span class="hljs-built_in">parseInt</span>(error.<span class="hljs-property">response</span> &amp;&amp; error.<span class="hljs-property">response</span>.<span class="hljs-property">status</span>);<br>        <span class="hljs-keyword">if</span> (code === <span class="hljs-number">401</span>) {<br>            <span class="hljs-title function_">redirect</span>(<span class="hljs-string">'/login'</span>);<br>        }<br>    });<br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<p>接著在 nuxt.config.js plugins 進行擴充</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// nuxt.config.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">plugins</span>: [<br>        { <span class="hljs-attr">src</span>: <span class="hljs-string">'@/plugins/axios'</span> }<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>axios 在發生錯誤時，預設會導到 error page，如果我們想避免畫面跳轉，可以加入 resolve promise，這樣在發生錯誤時，都不會跳轉到 error page</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// plugins/axios.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ({ $axios, redirect, store }) =&gt; {<br>    $axios.<span class="hljs-title function_">onError</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {<br>        <span class="hljs-keyword">const</span> code = <span class="hljs-built_in">parseInt</span>(error.<span class="hljs-property">response</span> &amp;&amp; error.<span class="hljs-property">response</span>.<span class="hljs-property">status</span>);<br>        <span class="hljs-keyword">if</span> (code === <span class="hljs-number">401</span>) {<br>            <span class="hljs-title function_">redirect</span>(<span class="hljs-string">'/login'</span>);<br>        }<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">resolve</span>(<span class="hljs-literal">false</span>); <span class="hljs-comment">// 避免畫面轉導錯誤頁</span><br>    });<br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<blockquote class="colorquote info"><p>如果全域設定 resolve promise，在 axios 發生錯誤時，都不會進到 catch error 歐！</p>
+</blockquote>
+
+<p><strong>自訂 Error Page</strong></p>
+<p>Nuxt 專案有預設的 error page，可以在 .nuxt 資料夾看到 <code>components/nuxt-error.vue</code>，錯誤頁面也可以自訂，檔案放置位置比較特別，在 layouts 資料夾內新增一支檔案 error.vue</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// layouts/error.vue</span><br>&lt;template&gt;<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"nuxt-error-wrap"</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text-center py-4"</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{{ error.statusCode }}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>{{ error.message }}<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">nuxt-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">"/"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-primary p-4"</span>&gt;</span>回首頁<span class="hljs-tag">&lt;/<span class="hljs-name">nuxt-link</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-attr">name</span>: <span class="hljs-string">'ErrorPage'</span>,</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-attr">layout</span>: <span class="hljs-string">'error-layout'</span>,</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-attr">props</span>: {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">error</span>: {</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-attr">type</span>: <span class="hljs-title class_">Object</span>,</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-attr">default</span>: <span class="hljs-function">() =&gt;</span> {}</span></span><br><span class="language-javascript"><span class="language-xml">        }</span></span><br><span class="language-javascript"><span class="language-xml">    }</span></span><br><span class="language-javascript"><span class="language-xml">};</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></tbody></table></figure>
+
+<blockquote class="colorquote info"><p>雖然 error.vue 檔置於 layouts 資料夾，但視為 pages 頁面，因此如果沒有配置 layout，預設會讀取 layouts/default.vue 樣板</p>
+</blockquote>
+
+<p>這樣就完成了，在 Nuxt 發生錯誤時，都會進到我們自訂錯誤頁面，如果要手動進到錯誤頁，呼叫 context 內的 error 方法即可，在 Nuxt 生命週期：</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-keyword">async</span> <span class="hljs-title function_">asyncData</span>(<span class="hljs-params">{ $axios, error }</span>) {<br>        <span class="hljs-keyword">try</span> {<br>            <span class="hljs-keyword">const</span> { seo } = <span class="hljs-keyword">await</span> $axios.$get(<span class="hljs-string">'/api/seo'</span>);<br>            <span class="hljs-keyword">return</span> {<br>                seo<br>            };<br>        } <span class="hljs-keyword">catch</span>(err) {<br>            <span class="hljs-keyword">const</span> { statusCode, message } = err;<br>            <span class="hljs-title function_">error</span>({ statusCode, message });<br>        } <br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>在 Vue 生命週期或屬性，使用 <code>this.$nuxt.error()</code> 就可以囉！</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">methods</span>: {<br>        <span class="hljs-keyword">async</span> <span class="hljs-title function_">getSeo</span>(<span class="hljs-params"></span>) {<br>            <span class="hljs-keyword">try</span> {<br>                <span class="hljs-keyword">const</span> { seo } = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">$axios</span>.$get(<span class="hljs-string">'/api/seo'</span>);<br>                <span class="hljs-variable language_">this</span>.<span class="hljs-property">seo</span> = seo;<br>            } <span class="hljs-keyword">catch</span>(err) {<br>                <span class="hljs-keyword">const</span> { statusCode, message } = err;<br>                <span class="hljs-variable language_">this</span>.<span class="hljs-property">$nuxt</span>.<span class="hljs-title function_">error</span>({ statusCode, message });<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<hr>
+<p>參考文章：</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ithelp.ithome.com.tw/articles/10208852">https://ithelp.ithome.com.tw/articles/10208852</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://mavrickmaster.medium.com/custom-error-pages-with-nuxt-js-3c70e6c51aff">https://mavrickmaster.medium.com/custom-error-pages-with-nuxt-js-3c70e6c51aff</a></p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue/">#vue</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue-js/">#vue.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt/">#nuxt</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt-js/">#nuxt.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ssr/">#ssr</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/axios/">#axios</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2022/11/19/nuxt/nuxt-config-setting/">Nuxt.js nuxt.config.js 設定檔</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2022/11/22/nuxt/nuxt-vuex-store/">Nuxt.js VueX Store 搭配 vuex-persistedstate 狀態保存工具</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=638b091d4b058f001938c857&amp;product=sop" async="async"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    <!-- 
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div> -->
+    <style>
+        .utterances{max-width: 100%;}
+    </style>
+    <script src="https://utteranc.es/client.js" repo="clairechang0609/hexo-board" issue-term="title" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow">
+                &copy; 2022
+                Claire Chang&nbsp;
+                All rights reserved.
+                <br>
+                Powered by Hexo.
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="external nofollow noopener noreferrer" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-TW");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery > p > .gallery-item').unwrap();
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>
