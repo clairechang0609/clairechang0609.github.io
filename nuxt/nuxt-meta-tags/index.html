@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>Nuxt.js 專案架設 - Claire&#39;s Notes</title>
+<title>Nuxt.js Meta Tags and SEO - Claire&#39;s Notes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,27 +16,24 @@
 
 
 
-    <meta name="description" content="版本：nuxt 2.15.8  說到 Nuxt，必須先從 Vue.js 說起，Vue.js 為專注在視圖層(View) 的 JS 框架，為 SPA（Single Page Application）應用程式，簡而言之整個網站應用只有單一頁面，一但頁面被加載進來後，就不會再進行該頁面請求，由於 Vue 是利用 JS 載入資料，並動態產生元件，SEO 只能抓取到 HTML 內容，因此 SEO 表現趨近">
+    <meta name="description" content="版本：nuxt 2.15.8  在 Vue.js 專案，我們可以直接在 index.html &lt;head&gt; 設定全站共用的 meta tags，那在 Nuxt 又該怎麼設定呢？ Nuxt.js 藉由 vue-meta 來更新應用內的 head 設定跟 meta 屬性，使用 create-nuxt-app 建構專案會自動安裝，我們可以在頁面定義不同的內容，幫助搜尋引擎爬蟲掌握頁面內容，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nuxt.js 專案架設">
-<meta property="og:url" content="https://clairechang0609.github.io/2022/11/16/nuxt/nuxt-installation/index.html">
+<meta property="og:title" content="Nuxt.js Meta Tags and SEO">
+<meta property="og:url" content="https://clairechang0609.github.io/nuxt/nuxt-meta-tags/index.html">
 <meta property="og:site_name" content="Claire&#39;s Notes">
-<meta property="og:description" content="版本：nuxt 2.15.8  說到 Nuxt，必須先從 Vue.js 說起，Vue.js 為專注在視圖層(View) 的 JS 框架，為 SPA（Single Page Application）應用程式，簡而言之整個網站應用只有單一頁面，一但頁面被加載進來後，就不會再進行該頁面請求，由於 Vue 是利用 JS 載入資料，並動態產生元件，SEO 只能抓取到 HTML 內容，因此 SEO 表現趨近">
+<meta property="og:description" content="版本：nuxt 2.15.8  在 Vue.js 專案，我們可以直接在 index.html &lt;head&gt; 設定全站共用的 meta tags，那在 Nuxt 又該怎麼設定呢？ Nuxt.js 藉由 vue-meta 來更新應用內的 head 設定跟 meta 屬性，使用 create-nuxt-app 建構專案會自動安裝，我們可以在頁面定義不同的內容，幫助搜尋引擎爬蟲掌握頁面內容，">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://i.imgur.com/Qyp5Sat.png">
-<meta property="og:image" content="https://i.imgur.com/MSYs5f0.png">
-<meta property="og:image" content="https://i.imgur.com/s38N3oo.png">
-<meta property="article:published_time" content="2022-11-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-12-09T16:12:02.238Z">
+<meta property="article:published_time" content="2022-12-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-09T16:18:47.866Z">
 <meta property="article:author" content="Claire Chang">
-<meta property="article:tag" content="vue">
-<meta property="article:tag" content="vue.js">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="vue.js">
 <meta property="article:tag" content="ssr">
-<meta property="article:tag" content="create-nuxt-app">
+<meta property="article:tag" content="seo">
+<meta property="article:tag" content="meta tags">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.imgur.com/Qyp5Sat.png">
 
 
 
@@ -128,7 +125,7 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            Nuxt.js 專案架設
+            Nuxt.js Meta Tags and SEO
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -141,15 +138,15 @@
         
         <span class="column is-narrow">
             <!-- 
-                <time datetime="2022-11-15T16:00:00.000Z" itemprop="datePublished">2022-11-16</time>
+                <time datetime="2022-12-09T16:00:00.000Z" itemprop="datePublished">2022-12-10</time>
              -->
-            <span>2022-11-16</span>
+            <span>2022-12-10</span>
         </span>
         <!-- 
         <span class="column is-narrow">
             
             
-            4 分鐘 讀完 (約 625 字)
+            2 分鐘 讀完 (約 342 字)
         </span>
          -->
     </div>
@@ -158,78 +155,57 @@
         <html><head></head><body><blockquote>
 <p><strong>版本：nuxt 2.15.8</strong></p>
 </blockquote>
-<p>說到 Nuxt，必須先從 Vue.js 說起，Vue.js 為專注在視圖層(View) 的 JS 框架，為 SPA（Single Page Application）應用程式，簡而言之整個網站應用只有單一頁面，一但頁面被加載進來後，就不會再進行該頁面請求，由於 Vue 是利用 JS 載入資料，並動態產生元件，SEO 只能抓取到 HTML 內容，因此 SEO 表現趨近於零。</p>
-<p>而 Nuxt 是基於 Vue.js、Node.js、Webpack 以及 Badel.js 的輕量框架，可以同時創建 SSR（Server Side Render）及 SPA，在頁面載入前即渲染（伺服器回傳完整 HTML 檔，每次跳轉頁面，瀏覽器都需要刷新），搜尋引擎爬蟲可以取得資料，大幅解決 SEO 的問題。</p>
+<p>在 Vue.js 專案，我們可以直接在 <code>index.html</code> <code>&lt;head&gt;</code> 設定全站共用的 meta tags，那在 Nuxt 又該怎麼設定呢？</p>
+<p>Nuxt.js 藉由 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://vue-meta.nuxtjs.org/api/#link">vue-meta</a> 來更新應用內的 head 設定跟 meta 屬性，使用 <code>create-nuxt-app</code> 建構專案會自動安裝，我們可以在頁面定義不同的內容，幫助搜尋引擎爬蟲掌握頁面內容，提升 SEO。</p>
 <span id="more"></span>
 
-<p>以下圖片說明：</p>
-<p><img src="https://i.imgur.com/Qyp5Sat.png"></p>
-<p>接下來一起來嘗試創建一個 Nuxt 專案吧！</p>
-<p>如同 Vue CLI，Nuxt 也有類似的指令列(command-line)工具 create-nuxt-app，</p>
-<p>依據官方文件提供的專案包建置方式：</p>
-<p><code>npx create-nuxt-app &lt;project-name&gt;</code></p>
-<blockquote class="colorquote info"><p>使用 npx 安裝，安裝的套件在執行完後就會被移除 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://hoyis-note.coderbridge.io/2021/07/20/npm-npx-%E5%B7%AE%E5%88%A5/">npx介紹</a></p>
+<h3 id="全域配置"><a href="#全域配置" class="headerlink" title="全域配置"></a><strong>全域配置</strong></h3><figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">head</span>: {<br>        <span class="hljs-attr">title</span>: <span class="hljs-string">'my website title'</span>,<br>        <span class="hljs-attr">meta</span>: [<br>            { <span class="hljs-attr">charset</span>: <span class="hljs-string">'utf-8'</span> },<br>            { <span class="hljs-attr">name</span>: <span class="hljs-string">'viewport'</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">'width=device-width, initial-scale=1'</span> },<br>            {<br>                <span class="hljs-attr">hid</span>: <span class="hljs-string">'description'</span>,<br>                <span class="hljs-attr">name</span>: <span class="hljs-string">'description'</span>,<br>                <span class="hljs-attr">content</span>: <span class="hljs-string">'my website description'</span><br>            },<br>            {<br>                <span class="hljs-attr">hid</span>: <span class="hljs-string">'og:title'</span>,<br>                <span class="hljs-attr">property</span>: <span class="hljs-string">'og:title'</span>,<br>                <span class="hljs-attr">content</span>: <span class="hljs-string">'my website title'</span><br>            }<br>        ],<br>        <span class="hljs-attr">link</span>: [<br>            { <span class="hljs-attr">rel</span>: <span class="hljs-string">'icon'</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">'image/x-icon'</span>, <span class="hljs-attr">href</span>: <span class="hljs-string">'/favicon.ico'</span> }<br>        ]<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>我們可以看到 head 自動渲染：</p>
+<figure class="highlight html hljs"><table><tbody><tr><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>my website title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">data-n-head</span>=<span class="hljs-string">"ssr"</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br></code></pre></td></tr></tbody></table></figure>
+
+<blockquote class="colorquote info"><p>為了避免元件內 <strong>局部配置</strong> head 造成 meta tags 重複，需加上 <code>hid</code> key，並賦予唯一值，這樣當元件定義相同 <code>hid</code> 的 meta 標籤，<code>vue-meta</code> 會自動覆蓋掉 <strong>全域配置</strong></p>
 </blockquote>
 
-<p><strong>接著會跑出一些選項：</strong></p>
-<ul>
-<li>Project name：設定專案名稱</li>
-<li>Programming language：選擇程式語言</li>
-<li>Package manager：軟體套件管理系統 npm / yarn</li>
-<li>UI framework：css 模板</li>
-<li>Template engine：樣版引擎</li>
-<li>Nuxt.js modules：相依套件</li>
-<li>Linting tools：程式碼檢查工具</li>
-<li>Testing framework：測試工具</li>
-<li>Rendering mode：渲染模式</li>
-<li>Deployment target：運行模式 （在此示範 Server Side Render)</li>
-<li>Development tools：開發工具</li>
-<li>Version control system：版控工具</li>
-</ul>
-<p><img src="https://i.imgur.com/MSYs5f0.png"></p>
-<p>以上選擇完畢就開始安裝專案包</p>
-<p>運行完成就可以開始編譯專案</p>
-<p>跟著提示訊息執行：</p>
-<p><code>cd test</code><br><code>npm run dev</code></p>
-<p>在 package.json 內可以看到相關指令</p>
-<figure class="highlight bash hljs"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-string">"scripts"</span>: {<br>    <span class="hljs-string">"dev"</span>: <span class="hljs-string">"nuxt"</span>,<br>    <span class="hljs-string">"build"</span>: <span class="hljs-string">"nuxt build"</span>,<br>    <span class="hljs-string">"start"</span>: <span class="hljs-string">"nuxt start"</span>,<br>    <span class="hljs-string">"generate"</span>: <span class="hljs-string">"nuxt generate"</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="局部配置"><a href="#局部配置" class="headerlink" title="局部配置"></a><strong>局部配置</strong></h3><p>以物件定義：</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">head</span>: {<br>        <span class="hljs-attr">title</span>: <span class="hljs-string">'about-us'</span>,<br>        <span class="hljs-attr">meta</span>: [<br>            {<br>                <span class="hljs-attr">hid</span>: <span class="hljs-string">'description'</span>,<br>                <span class="hljs-attr">name</span>: <span class="hljs-string">'description'</span>,<br>                <span class="hljs-attr">content</span>: <span class="hljs-string">'about-us'</span><br>            }<br>        ]<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 
-<p>接下來就可以看到畫面囉 👏</p>
-<p><img src="https://i.imgur.com/s38N3oo.png"></p>
+<p>如果需要透過 <code>this</code> 來取得 meta 資料，需要調整為 <strong>function return</strong>：</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) {<br>        <span class="hljs-keyword">return</span> {<br>            <span class="hljs-attr">seo</span>: {<br>                <span class="hljs-attr">title</span>: <span class="hljs-string">'about-us'</span>,<br>                <span class="hljs-attr">description</span>: <span class="hljs-string">'about-us'</span><br>            }<br>        }<br>    },<br>    <span class="hljs-title function_">head</span>(<span class="hljs-params"></span>) {<br>        <span class="hljs-keyword">return</span> {<br>            <span class="hljs-attr">title</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">seo</span>.<span class="hljs-property">title</span>,<br>            <span class="hljs-attr">meta</span>: [<br>                {<br>                    <span class="hljs-attr">hid</span>: <span class="hljs-string">'description'</span>,<br>                    <span class="hljs-attr">name</span>: <span class="hljs-string">'description'</span>,<br>                    <span class="hljs-attr">content</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">seo</span>.<span class="hljs-property">description</span><br>                }<br>            ]<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
 <hr>
 <p>參考文章：</p>
-<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://medium.com/web-design-zone/%E5%BB%BA%E7%AB%8Bnuxt-js%E5%B0%88%E6%A1%88%E5%88%9D%E9%AB%94%E9%A9%97-21920735e38b">https://medium.com/web-design-zone/建立nuxt-js專案初體驗-21920735e38b</a></p>
-<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://levelup.gitconnected.com/spa-ssg-ssr-and-jamstack-a-front-end-acronyms-guide-6add9543f24d">https://levelup.gitconnected.com/spa-ssg-ssr-and-jamstack-a-front-end-acronyms-guide-6add9543f24d</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://nuxtjs.org/docs/features/meta-tags-seo/">https://nuxtjs.org/docs/features/meta-tags-seo/</a></p>
 </body></html>
     
     </div>
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue/">#vue</a></span>
-    
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue-js/">#vue.js</a></span>
-    
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt/">#nuxt</a></span>
     
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt-js/">#nuxt.js</a></span>
     
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue/">#vue</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue-js/">#vue.js</a></span>
+    
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ssr/">#ssr</a></span>
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/create-nuxt-app/">#create-nuxt-app</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/seo/">#seo</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/meta-tags/">#meta tags</a></span>
     
     </div>
     
     
     <div class="columns is-mobile is-multiline article-nav">
-        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
             
-            <a href="/2022/11/03/vue/vue-upload-image/">Vue.js 圖片上傳串接後端 API（轉換成base64格式）</a>
+            <a href="/nuxt/nuxt-ckeditor5/">Nuxt.js 套件應用-CKEditor 5</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
-            
-            <a href="/2022/11/17/nuxt/nuxt-catalog/">Nuxt.js 目錄結構</a>
             
         </span>
     </div>

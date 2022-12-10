@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>Nuxt.js Meta Tags and SEO - Claire&#39;s Notes</title>
+<title>Vue.js 圖片上傳串接後端 API（轉換成base64格式） - Claire&#39;s Notes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,23 +16,18 @@
 
 
 
-    <meta name="description" content="版本：nuxt 2.15.8  在 Vue.js 專案，我們可以直接在 index.html &lt;head&gt; 設定全站共用的 meta tags，那在 Nuxt 又該怎麼設定呢？ Nuxt.js 藉由 vue-meta 來更新應用內的 head 設定跟 meta 屬性，使用 create-nuxt-app 建構專案會自動安裝，我們可以在頁面定義不同的內容，幫助搜尋引擎爬蟲掌握頁面內容，">
+    <meta name="description" content="版本：vue 2.6.14  這次介紹的上傳步驟為，使用者填寫一份表單，在選取欲上傳圖片後，系統會先將檔案上傳至雲端資料庫，待使用者確認整份表單填寫無誤後，才送出表單。 操作步驟：  點擊 input 選擇本地端圖片 進行圖片轉換（轉成 base64 格式） 呼叫後端 api 進行上傳（至雲端資料庫） 成功回傳圖片路徑 將該路徑顯示於畫面預覽">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nuxt.js Meta Tags and SEO">
-<meta property="og:url" content="https://clairechang0609.github.io/2022/12/10/nuxt/nuxt-meta-tags/index.html">
+<meta property="og:title" content="Vue.js 圖片上傳串接後端 API（轉換成base64格式）">
+<meta property="og:url" content="https://clairechang0609.github.io/vue/vue-upload-image/index.html">
 <meta property="og:site_name" content="Claire&#39;s Notes">
-<meta property="og:description" content="版本：nuxt 2.15.8  在 Vue.js 專案，我們可以直接在 index.html &lt;head&gt; 設定全站共用的 meta tags，那在 Nuxt 又該怎麼設定呢？ Nuxt.js 藉由 vue-meta 來更新應用內的 head 設定跟 meta 屬性，使用 create-nuxt-app 建構專案會自動安裝，我們可以在頁面定義不同的內容，幫助搜尋引擎爬蟲掌握頁面內容，">
+<meta property="og:description" content="版本：vue 2.6.14  這次介紹的上傳步驟為，使用者填寫一份表單，在選取欲上傳圖片後，系統會先將檔案上傳至雲端資料庫，待使用者確認整份表單填寫無誤後，才送出表單。 操作步驟：  點擊 input 選擇本地端圖片 進行圖片轉換（轉成 base64 格式） 呼叫後端 api 進行上傳（至雲端資料庫） 成功回傳圖片路徑 將該路徑顯示於畫面預覽">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-12-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-12-09T16:18:47.866Z">
+<meta property="article:published_time" content="2022-11-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-09T16:19:30.596Z">
 <meta property="article:author" content="Claire Chang">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="vue.js">
-<meta property="article:tag" content="nuxt">
-<meta property="article:tag" content="nuxt.js">
-<meta property="article:tag" content="ssr">
-<meta property="article:tag" content="seo">
-<meta property="article:tag" content="meta tags">
 <meta name="twitter:card" content="summary">
 
 
@@ -125,57 +120,70 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            Nuxt.js Meta Tags and SEO
+            Vue.js 圖片上傳串接後端 API（轉換成base64格式）
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         
             <span class="column is-narrow article-category">
                 <i class="far fa-folder"></i>
-                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
+                <a class="article-category-link" href="/categories/Vue/">Vue</a>
             </span>
             <span class="column is-narrow">｜</span>
         
         <span class="column is-narrow">
             <!-- 
-                <time datetime="2022-12-09T16:00:00.000Z" itemprop="datePublished">2022-12-10</time>
+                <time datetime="2022-11-02T16:00:00.000Z" itemprop="datePublished">2022-11-03</time>
              -->
-            <span>2022-12-10</span>
+            <span>2022-11-03</span>
         </span>
         <!-- 
         <span class="column is-narrow">
             
             
-            2 分鐘 讀完 (約 342 字)
+            3 分鐘 讀完 (約 429 字)
         </span>
          -->
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <html><head></head><body><blockquote>
-<p><strong>版本：nuxt 2.15.8</strong></p>
+<p><strong>版本：vue 2.6.14</strong></p>
 </blockquote>
-<p>在 Vue.js 專案，我們可以直接在 <code>index.html</code> <code>&lt;head&gt;</code> 設定全站共用的 meta tags，那在 Nuxt 又該怎麼設定呢？</p>
-<p>Nuxt.js 藉由 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://vue-meta.nuxtjs.org/api/#link">vue-meta</a> 來更新應用內的 head 設定跟 meta 屬性，使用 <code>create-nuxt-app</code> 建構專案會自動安裝，我們可以在頁面定義不同的內容，幫助搜尋引擎爬蟲掌握頁面內容，提升 SEO。</p>
+<p>這次介紹的上傳步驟為，使用者填寫一份表單，在選取欲上傳圖片後，系統會先將檔案上傳至雲端資料庫，待使用者確認整份表單填寫無誤後，才送出表單。</p>
+<p><strong>操作步驟：</strong></p>
+<ol>
+<li>點擊 input 選擇本地端圖片</li>
+<li>進行圖片轉換（轉成 base64 格式）</li>
+<li>呼叫後端 api 進行上傳（至雲端資料庫）</li>
+<li>成功回傳圖片路徑</li>
+<li>將該路徑顯示於畫面預覽</li>
+</ol>
 <span id="more"></span>
 
-<h3 id="全域配置"><a href="#全域配置" class="headerlink" title="全域配置"></a><strong>全域配置</strong></h3><figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">head</span>: {<br>        <span class="hljs-attr">title</span>: <span class="hljs-string">'my website title'</span>,<br>        <span class="hljs-attr">meta</span>: [<br>            { <span class="hljs-attr">charset</span>: <span class="hljs-string">'utf-8'</span> },<br>            { <span class="hljs-attr">name</span>: <span class="hljs-string">'viewport'</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">'width=device-width, initial-scale=1'</span> },<br>            {<br>                <span class="hljs-attr">hid</span>: <span class="hljs-string">'description'</span>,<br>                <span class="hljs-attr">name</span>: <span class="hljs-string">'description'</span>,<br>                <span class="hljs-attr">content</span>: <span class="hljs-string">'my website description'</span><br>            },<br>            {<br>                <span class="hljs-attr">hid</span>: <span class="hljs-string">'og:title'</span>,<br>                <span class="hljs-attr">property</span>: <span class="hljs-string">'og:title'</span>,<br>                <span class="hljs-attr">content</span>: <span class="hljs-string">'my website title'</span><br>            }<br>        ],<br>        <span class="hljs-attr">link</span>: [<br>            { <span class="hljs-attr">rel</span>: <span class="hljs-string">'icon'</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">'image/x-icon'</span>, <span class="hljs-attr">href</span>: <span class="hljs-string">'/favicon.ico'</span> }<br>        ]<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><p>說明：</p>
+<ul>
+<li>accept：檔案接受格式</li>
+</ul>
+<figure class="highlight html hljs"><table><tbody><tr><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"file"</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"image-input"</span> <span class="hljs-attr">accept</span>=<span class="hljs-string">"image/jpeg, image/png"</span> @<span class="hljs-attr">change</span>=<span class="hljs-string">"changeImage()"</span> /&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">:src</span>=<span class="hljs-string">"image"</span> <span class="hljs-attr">:alt</span>=<span class="hljs-string">"image"</span> /&gt;</span><br></code></pre></td></tr></tbody></table></figure>
 
-<p>我們可以看到 head 自動渲染：</p>
-<figure class="highlight html hljs"><table><tbody><tr><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>my website title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">data-n-head</span>=<span class="hljs-string">"ssr"</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br></code></pre></td></tr></tbody></table></figure>
-
-<blockquote class="colorquote info"><p>為了避免元件內 <strong>局部配置</strong> head 造成 meta tags 重複，需加上 <code>hid</code> key，並賦予唯一值，這樣當元件定義相同 <code>hid</code> 的 meta 標籤，<code>vue-meta</code> 會自動覆蓋掉 <strong>全域配置</strong></p>
+<h3 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h3><p>點擊圖片觸發 changeImage 方法：</p>
+<blockquote>
+<p>注意：vue 語法糖 v-model 綁定的是 v-on:input 事件，因此 input[type=file] 不適用</p>
 </blockquote>
+<p>說明：</p>
+<ul>
+<li>FileReader 為 javascript 物件，能以非同步方式（在此使用到 onload 事件）讀取儲存在用戶端的檔案內容，讀取格式可為可&nbsp;File 或&nbsp;Blob 物件</li>
+<li>readAsDataURL 方法會讀取指定的&nbsp;File 或&nbsp;Blob 物件，讀取完成後將其轉換成 base64 格式</li>
+</ul>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-title function_">changeImage</span>(<span class="hljs-params"></span>) {<br>	<span class="hljs-keyword">const</span> input = <span class="hljs-variable language_">this</span>.<span class="hljs-property">$refs</span>[<span class="hljs-string">'image-input'</span>];<br>	<span class="hljs-keyword">const</span> file = input.<span class="hljs-property">files</span>[<span class="hljs-number">0</span>];<br><br>	<span class="hljs-comment">// reset input，避免使用者重複選同一檔案無法觸發 change 事件</span><br>	input.<span class="hljs-property">files</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataTransfer</span>().<span class="hljs-property">files</span>;<br>	<br>	<span class="hljs-comment">// 檢查圖片檔大小</span><br>	<span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">checkFileSize</span>(file)) {<br>		<span class="hljs-keyword">return</span>;<br>	}<br>	<br>	<span class="hljs-comment">// 上傳圖片</span><br>	<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">uploadImage</span>(file);<br>}<br></code></pre></td></tr></tbody></table></figure>
 
-<h3 id="局部配置"><a href="#局部配置" class="headerlink" title="局部配置"></a><strong>局部配置</strong></h3><p>以物件定義：</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">head</span>: {<br>        <span class="hljs-attr">title</span>: <span class="hljs-string">'about-us'</span>,<br>        <span class="hljs-attr">meta</span>: [<br>            {<br>                <span class="hljs-attr">hid</span>: <span class="hljs-string">'description'</span>,<br>                <span class="hljs-attr">name</span>: <span class="hljs-string">'description'</span>,<br>                <span class="hljs-attr">content</span>: <span class="hljs-string">'about-us'</span><br>            }<br>        ]<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-title function_">checkFileSize</span>(<span class="hljs-params">file</span>) {<br>	<span class="hljs-comment">// 限制 1 MB</span><br>	<span class="hljs-keyword">if</span> (file.<span class="hljs-property">size</span> &gt; (<span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>)) {<br>		<span class="hljs-variable language_">this</span>.$notify({<br>			<span class="hljs-attr">type</span>: <span class="hljs-string">'danger'</span>,<br>			<span class="hljs-attr">text</span>: <span class="hljs-string">'檔案大小不可大於 1 MB'</span><br>		});<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	}<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
 
-<p>如果需要透過 <code>this</code> 來取得 meta 資料，需要調整為 <strong>function return</strong>：</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) {<br>        <span class="hljs-keyword">return</span> {<br>            <span class="hljs-attr">seo</span>: {<br>                <span class="hljs-attr">title</span>: <span class="hljs-string">'about-us'</span>,<br>                <span class="hljs-attr">description</span>: <span class="hljs-string">'about-us'</span><br>            }<br>        }<br>    },<br>    <span class="hljs-title function_">head</span>(<span class="hljs-params"></span>) {<br>        <span class="hljs-keyword">return</span> {<br>            <span class="hljs-attr">title</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">seo</span>.<span class="hljs-property">title</span>,<br>            <span class="hljs-attr">meta</span>: [<br>                {<br>                    <span class="hljs-attr">hid</span>: <span class="hljs-string">'description'</span>,<br>                    <span class="hljs-attr">name</span>: <span class="hljs-string">'description'</span>,<br>                    <span class="hljs-attr">content</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">seo</span>.<span class="hljs-property">description</span><br>                }<br>            ]<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>FileReader 正式上場！</strong></p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-title function_">uploadImage</span>(<span class="hljs-params">file</span>) {<br>	<span class="hljs-keyword">const</span> reader = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>();<br>	reader.<span class="hljs-title function_">readAsDataURL</span>(file);<br>	reader.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'load'</span>, <span class="hljs-keyword">async</span> () =&gt; {<br>		<span class="hljs-keyword">const</span> apiUrl = <span class="hljs-string">'/api/v1/image'</span>; <span class="hljs-comment">// api url</span><br>		<span class="hljs-keyword">const</span> configData = { file };<br>		<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">$axios</span>.$post(apiUrl, configData);<br>		<span class="hljs-variable language_">this</span>.<span class="hljs-property">image</span> = response.<span class="hljs-property">image</span>;<br>	});<br>}<br></code></pre></td></tr></tbody></table></figure>
 
-<hr>
-<p>參考文章：</p>
-<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://nuxtjs.org/docs/features/meta-tags-seo/">https://nuxtjs.org/docs/features/meta-tags-seo/</a></p>
+<p>最後就可以把 api 呼叫成功回傳回來的圖片路徑渲染在畫面上啦！<br>大功告成。</p>
 </body></html>
     
     </div>
@@ -186,26 +194,16 @@
     
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue-js/">#vue.js</a></span>
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt/">#nuxt</a></span>
-    
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt-js/">#nuxt.js</a></span>
-    
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ssr/">#ssr</a></span>
-    
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/seo/">#seo</a></span>
-    
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/meta-tags/">#meta tags</a></span>
-    
     </div>
     
     
     <div class="columns is-mobile is-multiline article-nav">
-        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
-            
-            <a href="/2022/12/01/nuxt/nuxt-ckeditor5/">Nuxt.js 套件應用-CKEditor 5</a>
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
         </span>
-        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-next">
+            
+            <a href="/nuxt/nuxt-installation/">Nuxt.js 專案架設</a>
             
         </span>
     </div>
