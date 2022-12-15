@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>Nuxt.js 專案架設 - Claire&#39;s Notes</title>
+<title>Nuxt.js 設定 GA &amp; GTM - Claire&#39;s Notes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,27 +16,34 @@
 
 
 
-    <meta name="description" content="版本：nuxt 2.15.8  說到 Nuxt，必須先從 Vue.js 說起，Vue.js 為專注在視圖層(View) 的 JS 框架，為 SPA（Single Page Application）應用程式，簡而言之整個網站應用只有單一頁面，一但頁面被加載進來後，就不會再進行該頁面請求，由於 Vue 是利用 JS 載入資料，並動態產生元件，SEO 只能抓取到 HTML 內容，因此 SEO 表現趨近">
+    <meta name="description" content="版本：nuxt 2.15.8  網站上線後，我們會需要 Google Analytics 和 Google Tag Manager 工具來追蹤分析網站流量，接下來說明如何在 Nuxt.js 專案內加入追蹤碼。 Google Analytics申請代碼： 至 Google Analytics 分析，使用 google 帳戶登入，點選左下角的管理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nuxt.js 專案架設">
-<meta property="og:url" content="https://clairechang0609.github.io/2022/11/16/nuxt/nuxt-installation/index.html">
+<meta property="og:title" content="Nuxt.js 設定 GA &amp; GTM">
+<meta property="og:url" content="https://clairechang0609.github.io/2022/12/14/nuxt/nuxt-ga-and-gtm/index.html">
 <meta property="og:site_name" content="Claire&#39;s Notes">
-<meta property="og:description" content="版本：nuxt 2.15.8  說到 Nuxt，必須先從 Vue.js 說起，Vue.js 為專注在視圖層(View) 的 JS 框架，為 SPA（Single Page Application）應用程式，簡而言之整個網站應用只有單一頁面，一但頁面被加載進來後，就不會再進行該頁面請求，由於 Vue 是利用 JS 載入資料，並動態產生元件，SEO 只能抓取到 HTML 內容，因此 SEO 表現趨近">
+<meta property="og:description" content="版本：nuxt 2.15.8  網站上線後，我們會需要 Google Analytics 和 Google Tag Manager 工具來追蹤分析網站流量，接下來說明如何在 Nuxt.js 專案內加入追蹤碼。 Google Analytics申請代碼： 至 Google Analytics 分析，使用 google 帳戶登入，點選左下角的管理">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://i.imgur.com/Qyp5Sat.png">
-<meta property="og:image" content="https://i.imgur.com/MSYs5f0.png">
-<meta property="og:image" content="https://i.imgur.com/s38N3oo.png">
-<meta property="article:published_time" content="2022-11-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-12-09T16:12:02.238Z">
+<meta property="og:image" content="https://i.imgur.com/mfP02by.png">
+<meta property="og:image" content="https://i.imgur.com/1OJjgHR.png">
+<meta property="og:image" content="https://i.imgur.com/vdj1oVP.png">
+<meta property="og:image" content="https://i.imgur.com/UrwlaOH.png">
+<meta property="og:image" content="https://i.imgur.com/LznGmph.png">
+<meta property="og:image" content="https://i.imgur.com/s70CuqO.png">
+<meta property="og:image" content="https://i.imgur.com/sPonBte.png">
+<meta property="article:published_time" content="2022-12-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-15T16:27:33.600Z">
 <meta property="article:author" content="Claire Chang">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="vue.js">
 <meta property="article:tag" content="ssr">
-<meta property="article:tag" content="create-nuxt-app">
+<meta property="article:tag" content="seo">
+<meta property="article:tag" content="meta tags">
+<meta property="article:tag" content="ga">
+<meta property="article:tag" content="gtm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.imgur.com/Qyp5Sat.png">
+<meta name="twitter:image" content="https://i.imgur.com/mfP02by.png">
 
 
 
@@ -127,7 +134,7 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            Nuxt.js 專案架設
+            Nuxt.js 設定 GA &amp; GTM
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -140,7 +147,7 @@
         
         <span class="column is-narrow">
             
-                <span>2022-11-16</span>
+                <span>2022-12-14</span>
             
         </span>
     </div>
@@ -149,48 +156,68 @@
         <html><head></head><body><blockquote>
 <p><strong>版本：nuxt 2.15.8</strong></p>
 </blockquote>
-<p>說到 Nuxt，必須先從 Vue.js 說起，Vue.js 為專注在視圖層(View) 的 JS 框架，為 SPA（Single Page Application）應用程式，簡而言之整個網站應用只有單一頁面，一但頁面被加載進來後，就不會再進行該頁面請求，由於 Vue 是利用 JS 載入資料，並動態產生元件，SEO 只能抓取到 HTML 內容，因此 SEO 表現趨近於零。</p>
-<p>而 Nuxt 是基於 Vue.js、Node.js、Webpack 以及 Badel.js 的輕量框架，可以同時創建 SSR（Server Side Render）及 SPA，在頁面載入前即渲染（伺服器回傳完整 HTML 檔，每次跳轉頁面，瀏覽器都需要刷新），搜尋引擎爬蟲可以取得資料，大幅解決 SEO 的問題。</p>
+<p>網站上線後，我們會需要 Google Analytics 和 Google Tag Manager 工具來追蹤分析網站流量，接下來說明如何在 Nuxt.js 專案內加入追蹤碼。</p>
+<h2 id="Google-Analytics"><a href="#Google-Analytics" class="headerlink" title="Google Analytics"></a><strong>Google Analytics</strong></h2><h5 id="申請代碼："><a href="#申請代碼：" class="headerlink" title="申請代碼："></a><strong>申請代碼：</strong></h5><ol>
+<li>至 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://analytics.google.com/analytics/web/">Google Analytics 分析</a>，使用 google 帳戶登入，點選左下角的<strong>管理</strong></li>
+</ol>
 <span id="more"></span>
 
-<p>以下圖片說明：</p>
-<p><img src="https://i.imgur.com/Qyp5Sat.png"></p>
-<p>接下來一起來嘗試創建一個 Nuxt 專案吧！</p>
-<p>如同 Vue CLI，Nuxt 也有類似的指令列(command-line)工具 create-nuxt-app，</p>
-<p>依據官方文件提供的專案包建置方式：</p>
-<p><code>npx create-nuxt-app &lt;project-name&gt;</code></p>
-<blockquote class="colorquote info"><p>使用 npx 安裝，安裝的套件在執行完後就會被移除 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://hoyis-note.coderbridge.io/2021/07/20/npm-npx-%E5%B7%AE%E5%88%A5/">npx介紹</a></p>
+<p><img src="https://i.imgur.com/mfP02by.png"></p>
+<ol start="2">
+<li>選擇<strong>建立資源</strong></li>
+</ol>
+<p><img src="https://i.imgur.com/1OJjgHR.png"></p>
+<ol start="3">
+<li>設定<strong>資源名稱</strong>，選項勾選後，點選建立</li>
+</ol>
+<p><img src="https://i.imgur.com/vdj1oVP.png"></p>
+<ol start="4">
+<li>選擇資料串流平台：<strong>網站</strong></li>
+</ol>
+<p><img src="https://i.imgur.com/UrwlaOH.png"></p>
+<ol start="5">
+<li>設定<strong>網站網址</strong>跟<strong>串流名稱</strong>，接著就新增成功並取得 GA 代碼。</li>
+</ol>
+<p><img src="https://i.imgur.com/LznGmph.png"></p>
+<h5 id="設定代碼："><a href="#設定代碼：" class="headerlink" title="設定代碼："></a><strong>設定代碼：</strong></h5><p>搭配套件 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://matteo-gabriele.gitbook.io/vue-gtag/v/master/">vue-gtag</a> ，執行：<code>npm i vue-gtag@1.16.1</code></p>
+<blockquote class="colorquote info"><p>Vue v2.x 需搭配 vue-gtag v1.x</p>
 </blockquote>
 
-<p><strong>接著會跑出一些選項：</strong></p>
-<ul>
-<li>Project name：設定專案名稱</li>
-<li>Programming language：選擇程式語言</li>
-<li>Package manager：軟體套件管理系統 npm / yarn</li>
-<li>UI framework：css 模板</li>
-<li>Template engine：樣版引擎</li>
-<li>Nuxt.js modules：相依套件</li>
-<li>Linting tools：程式碼檢查工具</li>
-<li>Testing framework：測試工具</li>
-<li>Rendering mode：渲染模式</li>
-<li>Deployment target：運行模式 （在此示範 Server Side Render)</li>
-<li>Development tools：開發工具</li>
-<li>Version control system：版控工具</li>
-</ul>
-<p><img src="https://i.imgur.com/MSYs5f0.png"></p>
-<p>以上選擇完畢就開始安裝專案包</p>
-<p>運行完成就可以開始編譯專案</p>
-<p>跟著提示訊息執行：</p>
-<p><code>cd test</code><br><code>npm run dev</code></p>
-<p>在 package.json 內可以看到相關指令</p>
-<figure class="highlight bash hljs"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-string">"scripts"</span>: {<br>    <span class="hljs-string">"dev"</span>: <span class="hljs-string">"nuxt"</span>,<br>    <span class="hljs-string">"build"</span>: <span class="hljs-string">"nuxt build"</span>,<br>    <span class="hljs-string">"start"</span>: <span class="hljs-string">"nuxt start"</span>,<br>    <span class="hljs-string">"generate"</span>: <span class="hljs-string">"nuxt generate"</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>接著我們新增檔案至 plugins，這裡命名為 gtag.js</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">VueGtag</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'vue-gtag'</span>;<br><br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">VueGtag</span>, {<br>  <span class="hljs-attr">config</span>: { <span class="hljs-attr">id</span>: <span class="hljs-string">'UA-XXXXXXXXX-X'</span> }<br>});<br></code></pre></td></tr></tbody></table></figure>
 
-<p>接下來就可以看到畫面囉 👏</p>
-<p><img src="https://i.imgur.com/s38N3oo.png"></p>
+<p>配置到 nuxt.config.js</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>	<span class="hljs-attr">plugins</span>: [<br>		{ <span class="hljs-attr">src</span>: <span class="hljs-string">'@/plugins/gtag.js'</span> }<br>	]<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="Google-Tag-Manager"><a href="#Google-Tag-Manager" class="headerlink" title="Google Tag Manager"></a><strong>Google Tag Manager</strong></h2><h5 id="申請代碼：-1"><a href="#申請代碼：-1" class="headerlink" title="申請代碼："></a><strong>申請代碼：</strong></h5><ol>
+<li>至 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://tagmanager.google.com/">Google Tag Manager 代碼管理工具</a>，使用 google 帳戶登入並建立帳戶</li>
+</ol>
+<p><img src="https://i.imgur.com/s70CuqO.png"></p>
+<ol start="2">
+<li>設定帳戶名稱（命名一個容易辨識網站的名稱），接著設定容器（GTM 要放入的網域），按下建立，就可以看到新增的容器跟 GTM 代碼囉</li>
+</ol>
+<p><img src="https://i.imgur.com/sPonBte.png"></p>
+<h5 id="設定代碼：-1"><a href="#設定代碼：-1" class="headerlink" title="設定代碼："></a><strong>設定代碼：</strong></h5><p>搭配套件 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/nuxt-community/gtm-module#readme">@nuxtjs/gtm</a> ，執行：<code>npm i @nuxtjs/gtm</code>，然後配置 nuxt.config.js</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>  <span class="hljs-attr">modules</span>: [<br>    <span class="hljs-string">'@nuxtjs/gtm'</span>,<br>  ],<br>  <span class="hljs-attr">gtm</span>: {<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">'GTM-XXXXXXX'</span><br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/nuxt-community/gtm-module#options">預設內容</a> 參考，也可以調整設定</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>  <span class="hljs-attr">modules</span>: [<br>    <span class="hljs-string">'@nuxtjs/gtm'</span>,<br>  ],<br>  <span class="hljs-attr">gtm</span>: {<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">'GTM-XXXXXXX'</span>,<br>		<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// for dev mode</span><br>		<span class="hljs-attr">pageTracking</span>: <span class="hljs-literal">true</span><br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>如果代碼都是固定的內容，這樣就完成囉～</p>
+<p>不過事情總沒這麼簡單，如果今天專案有後台，GA 跟 GTM 都可供使用者設定，代碼都是變動的參數，又該怎麼做呢？</p>
+<h2 id="整合後端-API-進行代碼設定"><a href="#整合後端-API-進行代碼設定" class="headerlink" title="整合後端 API 進行代碼設定"></a><strong>整合後端 API 進行代碼設定</strong></h2><p>這裡同時說明 GA 跟 GTM 的配置，首先安裝套件 <code>npm i vue-gtag@1.16.1</code> <code>npm i @nuxtjs/gtm</code></p>
+<p>由於要串接 API，這裡搭配 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://axios.nuxtjs.org/">@nuxtjs/axios</a> 使用，執行：<code>npm i @nuxtjs/axios</code></p>
+<p>新增 plugins/gtag.js</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">VueGtag</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'vue-gtag'</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">async</span> ({ $gtm, $axios }) =&gt; {<br>	<span class="hljs-keyword">const</span> { gaFour, gtm } = <span class="hljs-keyword">await</span> $axios.$get(<span class="hljs-string">'/api/ga'</span>);<br><br>	<span class="hljs-comment">// GA4</span><br>	<span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">VueGtag</span>, {<br>		<span class="hljs-attr">config</span>: { <span class="hljs-attr">id</span>: gaFour }<br>	});<br><br>	<span class="hljs-comment">// GTM</span><br>	<span class="hljs-keyword">if</span> (gtm) {<br>		$gtm.<span class="hljs-title function_">init</span>(gtm);<br>	}<br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<p>配置 nuxt.config.js</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>	<span class="hljs-attr">plugins</span>: [<br>		{ <span class="hljs-attr">src</span>: <span class="hljs-string">'@/plugins/gtag.js'</span> }<br>	],<br>  <span class="hljs-attr">modules</span>: [<br>    <span class="hljs-string">'@nuxtjs/gtm'</span><br>  ],<br>  <span class="hljs-attr">gtm</span>: {<br>		<span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>,<br>		<span class="hljs-attr">pageTracking</span>: <span class="hljs-literal">true</span><br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
 <hr>
 <p>參考文章：</p>
-<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://medium.com/web-design-zone/%E5%BB%BA%E7%AB%8Bnuxt-js%E5%B0%88%E6%A1%88%E5%88%9D%E9%AB%94%E9%A9%97-21920735e38b">https://medium.com/web-design-zone/建立nuxt-js專案初體驗-21920735e38b</a></p>
-<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://levelup.gitconnected.com/spa-ssg-ssr-and-jamstack-a-front-end-acronyms-guide-6add9543f24d">https://levelup.gitconnected.com/spa-ssg-ssr-and-jamstack-a-front-end-acronyms-guide-6add9543f24d</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.turingdigital.com.tw/blog/install-ga4-property">https://www.turingdigital.com.tw/blog/install-ga4-property</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.cyberbiz.io/support/?p=228">https://www.cyberbiz.io/support/?p=228</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://stackoverflow.com/questions/64612031/setup-google-analytics-4-in-nuxt-js">https://stackoverflow.com/questions/64612031/setup-google-analytics-4-in-nuxt-js</a></p>
 </body></html>
     
     </div>
@@ -207,20 +234,24 @@
     
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ssr/">#ssr</a></span>
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/create-nuxt-app/">#create-nuxt-app</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/seo/">#seo</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/meta-tags/">#meta tags</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ga/">#ga</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/gtm/">#gtm</a></span>
     
     </div>
     
     
     <div class="columns is-mobile is-multiline article-nav">
-        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
             
-            <a href="/2022/11/03/vue/vue-upload-image/">Vue.js 圖片上傳串接後端 API（轉換成base64格式）</a>
+            <a href="/2022/12/10/nuxt/nuxt-meta-tags/">Nuxt.js Meta Tags and SEO</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
-            
-            <a href="/2022/11/17/nuxt/nuxt-catalog/">Nuxt.js 目錄結構</a>
             
         </span>
     </div>
