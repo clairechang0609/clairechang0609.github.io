@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>Nuxt.js 替網站增加 sitemap 網站地圖 - Claire&#39;s Notes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="程式學習筆記">
+
+
+
+
+
+    <meta name="description" content="版本：nuxt 2.15.8  當我們的新網站上線，外部連結少，或是網站規模很大時，透過 sitemap 網站地圖，可以讓 google 搜尋引擎爬蟲可以更快速的了解我們的網站上有哪些網頁並加以收錄，並建立索引，提升網頁出現的機率。 我們可以透過 @nuxtjs&#x2F;sitemap 來快速建立 sitemap，執行：npm i @nuxtjs&#x2F;sitemap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nuxt.js 替網站增加 sitemap 網站地圖">
+<meta property="og:url" content="https://clairechang0609.github.io/2022/12/15/nuxt/nuxt-sitemap/index.html">
+<meta property="og:site_name" content="Claire&#39;s Notes">
+<meta property="og:description" content="版本：nuxt 2.15.8  當我們的新網站上線，外部連結少，或是網站規模很大時，透過 sitemap 網站地圖，可以讓 google 搜尋引擎爬蟲可以更快速的了解我們的網站上有哪些網頁並加以收錄，並建立索引，提升網頁出現的機率。 我們可以透過 @nuxtjs&#x2F;sitemap 來快速建立 sitemap，執行：npm i @nuxtjs&#x2F;sitemap">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/Ajnso8p.png">
+<meta property="article:published_time" content="2022-12-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-15T16:36:32.112Z">
+<meta property="article:author" content="Claire Chang">
+<meta property="article:tag" content="nuxt">
+<meta property="article:tag" content="nuxt.js">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="vue.js">
+<meta property="article:tag" content="ssr">
+<meta property="article:tag" content="seo">
+<meta property="article:tag" content="sitemap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/Ajnso8p.png">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night-eighties.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    <img src="/images/claire-logo.svg" alt height="28">
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Nuxt.js 替網站增加 sitemap 網站地圖
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        
+            <span class="column is-narrow article-category">
+                <i class="far fa-folder"></i>
+                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
+            </span>
+            <span class="column is-narrow">｜</span>
+        
+        <span class="column is-narrow">
+            
+                <span>2022-12-15</span>
+            
+        </span>
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><blockquote>
+<p><strong>版本：nuxt 2.15.8</strong></p>
+</blockquote>
+<p>當我們的新網站上線，外部連結少，或是網站規模很大時，透過 sitemap 網站地圖，可以讓 google 搜尋引擎爬蟲可以更快速的了解我們的網站上有哪些網頁並加以收錄，並建立索引，提升網頁出現的機率。</p>
+<p>我們可以透過 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.npmjs.com/package/@nuxtjs/sitemap">@nuxtjs/sitemap</a> 來快速建立 sitemap，執行：<code>npm i @nuxtjs/sitemap</code></p>
+<span id="more"></span>
+
+<p>在 config 資料夾新增 sitemap.js 檔案，接著在 nuxt.config.js 配置：</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> sitemap <span class="hljs-keyword">from</span> <span class="hljs-string">'./config/sitemap'</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">modules</span>: [<br>        <span class="hljs-string">'@nuxtjs/sitemap'</span>,<br>    ],<br>    <span class="hljs-attr">sitemap</span>: sitemap<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>接著移動到到 config/sitemap.js 進行設定。</p>
+<h4 id="sitemap-選項說明："><a href="#sitemap-選項說明：" class="headerlink" title="sitemap 選項說明："></a><strong>sitemap 選項說明：</strong></h4><ul>
+<li><p><strong>path：</strong>設定 sitemap 名稱，預設為 ****<code>/sitemap.xml</code></p>
+</li>
+<li><p><strong>hostname</strong>：網站 domain</p>
+</li>
+<li><p><strong>cacheTime：</strong>sitemap 更新的頻率（預設為 <code>1000 * 60 * 15</code> 15 分鐘）</p>
+</li>
+<li><p><strong>gzip：</strong>是否生成壓縮檔，預設 <code>false</code></p>
+</li>
+<li><p><strong>exclude：</strong>排除被加進 sitemap 的頁面（陣列）</p>
+  <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-attr">sitemap</span>: {<br>    <span class="hljs-attr">exclude</span>: [<br>      <span class="hljs-string">'/guideline'</span>,<br>      <span class="hljs-string">'/sample/**'</span><br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong>defaults：</strong>預設設定（自動帶入 routes）</p>
+  <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-attr">sitemap</span>: {<br>    <span class="hljs-attr">defaults</span>: {<br>        <span class="hljs-attr">changefreq</span>: <span class="hljs-string">'daily'</span>, <span class="hljs-comment">// 更新頻率</span><br>        <span class="hljs-attr">priority</span>: <span class="hljs-number">0.8</span>, <span class="hljs-comment">// 優先度</span><br>        <span class="hljs-attr">lastmod</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>() <span class="hljs-comment">// 最後更新時間</span><br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong>filter：</strong>篩選路徑（function）</p>
+  <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-attr">sitemap</span>: {<br>    <span class="hljs-title function_">filter</span>(<span class="hljs-params">{ routes }</span>) {<br>        <span class="hljs-keyword">return</span> routes.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">route</span> =&gt;</span> {<br>            <span class="hljs-comment">// 設定首頁優先度為 1</span><br>            <span class="hljs-keyword">if</span> (route.<span class="hljs-property">url</span> === <span class="hljs-string">'/'</span>) {<br>                route.<span class="hljs-property">priority</span> = <span class="hljs-number">1</span>;<br>            }<br>            <span class="hljs-keyword">return</span> route;<br>        });<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong>routes：</strong>加入路徑<strong>（本篇重點，以下詳細說明）</strong></p>
+</li>
+</ul>
+<h3 id="Routes-設定"><a href="#Routes-設定" class="headerlink" title="Routes 設定"></a><strong>Routes 設定</strong></h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.npmjs.com/package/@nuxtjs/sitemap">@nuxtjs/sitemap</a> 會自動加入 <strong>靜態路由</strong> 頁面，但 <strong>動態路由</strong> 必須手動加入</p>
+<figure class="highlight plaintext hljs"><table><tbody><tr><td class="code"><pre><code class="hljs plaintext">-| pages/<br>---| index.vue  --&gt; static route<br>---| about.vue  --&gt; static route<br>---| users/<br>-----| _id.vue  --&gt; dynamic route<br></code></pre></td></tr></tbody></table></figure>
+
+<h4 id="加入動態路由方法："><a href="#加入動態路由方法：" class="headerlink" title="加入動態路由方法："></a><strong>加入動態路由方法：</strong></h4><ol>
+<li><p>手動加入（使用陣列）</p>
+ <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-attr">sitemap</span>: {<br>    <span class="hljs-attr">routes</span>: [<br>        {<br>            <span class="hljs-attr">url</span>: <span class="hljs-string">'/users/1'</span>,<br>            <span class="hljs-attr">changefreq</span>: <span class="hljs-string">'daily'</span>,<br>            <span class="hljs-attr">priority</span>: <span class="hljs-number">0.6</span>,<br>            <span class="hljs-attr">lastmod</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()<br>        },<br>        {<br>            <span class="hljs-attr">url</span>: <span class="hljs-string">'/users/2'</span>,<br>            <span class="hljs-attr">changefreq</span>: <span class="hljs-string">'daily'</span>,<br>            <span class="hljs-attr">priority</span>: <span class="hljs-number">0.6</span>,<br>            <span class="hljs-attr">lastmod</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()<br>        }<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>透過 API 串接加入（使用 function 回傳 promise）</p>
+<p> 範例會使用 <code>@nuxtjs/axios</code> 進行 API 串接，執行：<code>npm i @nuxtjs/axios</code></p>
+ <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-attr">sitemap</span>: {<br>    <span class="hljs-attr">routes</span>: <span class="hljs-keyword">async</span> () =&gt; {<br>        <span class="hljs-keyword">const</span> { data } = <span class="hljs-keyword">await</span> axios.<span class="hljs-title function_">get</span>(<span class="hljs-string">'https://test/api/sitemap'</span>);<br>        <span class="hljs-keyword">return</span> data.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> {<br>            <span class="hljs-keyword">return</span> {<br>                <span class="hljs-attr">url</span>: <span class="hljs-string">`/users/<span class="hljs-subst">${user.id}</span>`</span>,<br>                <span class="hljs-attr">changefreq</span>: <span class="hljs-string">'daily'</span>,<br>                <span class="hljs-attr">priority</span>: <span class="hljs-number">0.6</span>,<br>                <span class="hljs-attr">lastmod</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()<br>            }<br>        });<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+</ol>
+<p>將上述設定合併起來：</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">const</span> axios = <span class="hljs-built_in">require</span>(<span class="hljs-string">'axios'</span>);<br><br><span class="hljs-keyword">const</span> sitemap = {<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">'/sitemap.xml'</span>, <span class="hljs-comment">// sitemap 名稱</span><br>    <span class="hljs-attr">hostname</span>: <span class="hljs-string">'https://test.com'</span>, <span class="hljs-comment">// domain</span><br>    <span class="hljs-attr">cacheTime</span>: <span class="hljs-number">1000</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">24</span>, <span class="hljs-comment">// update frequency of the day</span><br>    <span class="hljs-attr">defaults</span>: {<br>        <span class="hljs-attr">changefreq</span>: <span class="hljs-string">'daily'</span>,<br>        <span class="hljs-attr">priority</span>: <span class="hljs-number">0.8</span>,<br>        <span class="hljs-attr">lastmod</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()<br>    },<br>    <span class="hljs-title function_">filter</span>(<span class="hljs-params">{ routes }</span>) {<br>        <span class="hljs-keyword">return</span> routes.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">route</span> =&gt;</span> {<br>            <span class="hljs-keyword">if</span> (route.<span class="hljs-property">url</span> === <span class="hljs-string">'/'</span>) {<br>                route.<span class="hljs-property">priority</span> = <span class="hljs-number">1</span>;<br>            }<br>            <span class="hljs-keyword">return</span> route;<br>        });<br>    }<br>    <span class="hljs-attr">routes</span>: <span class="hljs-keyword">async</span> () =&gt; {<br>        <span class="hljs-keyword">const</span> { data } = <span class="hljs-keyword">await</span> axios.<span class="hljs-title function_">get</span>(<span class="hljs-string">'https://test.com/api/sitemap'</span>);<br>        <span class="hljs-keyword">return</span> data.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> {<br>            <span class="hljs-keyword">return</span> {<br>                <span class="hljs-attr">url</span>: <span class="hljs-string">`/users/<span class="hljs-subst">${user.id}</span>`</span>,<br>                <span class="hljs-attr">changefreq</span>: <span class="hljs-string">'daily'</span>,<br>                <span class="hljs-attr">priority</span>: <span class="hljs-number">0.6</span>,<br>                <span class="hljs-attr">lastmod</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()<br>            }<br>        });<br>    }<br>};<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> sitemap;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>接著在頁面上輸入 hostname/sitemap.xml（EX：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://test.com/sitemap.xml%EF%BC%89%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E6%88%91%E5%80%91%E7%9A%84">https://test.com/sitemap.xml），就可以看到我們的</a> sitemap 檔案囉 🙌</p>
+<p><img src="https://i.imgur.com/Ajnso8p.png"></p>
+<hr>
+<p>參考文章：</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.hellosanta.com.tw/knowledge/category-13/post-236">https://www.hellosanta.com.tw/knowledge/category-13/post-236</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://sitemap.nuxtjs.org/usage/sitemap-options#routes-declaration">https://sitemap.nuxtjs.org/usage/sitemap-options</a></p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt/">#nuxt</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt-js/">#nuxt.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue/">#vue</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue-js/">#vue.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ssr/">#ssr</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/seo/">#seo</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/sitemap/">#sitemap</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+            <a href="/2022/12/14/nuxt/nuxt-ga-and-gtm/">Nuxt.js 設定 GA &amp; GTM</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=638b091d4b058f001938c857&amp;product=sop" async="async"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    <!-- 
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div> -->
+    <style>
+        .utterances{max-width: 100%;}
+    </style>
+    <script src="https://utteranc.es/client.js" repo="clairechang0609/hexo-board" issue-term="title" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow">
+                &copy; 2022
+                Claire Chang&nbsp;
+                All rights reserved.
+                <br>
+                Powered by Hexo.
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="external nofollow noopener noreferrer" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-TW");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery > p > .gallery-item').unwrap();
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>

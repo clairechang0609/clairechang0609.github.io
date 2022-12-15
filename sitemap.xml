@@ -11,6 +11,33 @@
   </url>
   
   <url>
+    <loc>https://clairechang0609.github.io/2022/12/15/nuxt/nuxt-sitemap/</loc>
+    
+    <lastmod>2022-12-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/2022/12/01/nuxt/nuxt-ckeditor5/</loc>
+    
+    <lastmod>2022-12-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/2022/11/29/nuxt/nuxt-swiper/</loc>
+    
+    <lastmod>2022-12-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://clairechang0609.github.io/2022/11/03/vue/vue-upload-image/</loc>
     
     <lastmod>2022-12-15</lastmod>
@@ -47,15 +74,6 @@
   </url>
   
   <url>
-    <loc>https://clairechang0609.github.io/2022/11/29/nuxt/nuxt-swiper/</loc>
-    
-    <lastmod>2022-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://clairechang0609.github.io/2022/11/24/nuxt/nuxt-lifecycle/</loc>
     
     <lastmod>2022-12-09</lastmod>
@@ -75,15 +93,6 @@
   
   <url>
     <loc>https://clairechang0609.github.io/2022/11/19/nuxt/nuxt-config-setting/</loc>
-    
-    <lastmod>2022-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://clairechang0609.github.io/2022/12/01/nuxt/nuxt-ckeditor5/</loc>
     
     <lastmod>2022-12-09</lastmod>
     
@@ -204,6 +213,13 @@
   
   <url>
     <loc>https://clairechang0609.github.io/tags/create-nuxt-app/</loc>
+    <lastmod>2022-12-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/tags/sitemap/</loc>
     <lastmod>2022-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
