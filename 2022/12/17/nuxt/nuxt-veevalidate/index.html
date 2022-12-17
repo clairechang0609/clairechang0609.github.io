@@ -16,20 +16,20 @@
 
 
 
-    <meta name="description" content="版本：nuxt 2.15.8">
+    <meta name="description" content="版本：nuxt 2.15.8  vee-validate 是使用於 Vue.js 的輕量表單驗證套件（參考 php 框架 laravel 表單驗證所開發），僅需在表單上加入簡易語法就能進行驗證，執行：npm i vee-validate@3.4.14 Vue.js v2.x 需搭配 vee-validate v3.x   新增 plugins&#x2F;vee-validate.js，在 nuxt.con">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nuxt.js 套件應用：VeeValidate 表單驗證">
 <meta property="og:url" content="https://clairechang0609.github.io/2022/12/17/nuxt/nuxt-veevalidate/index.html">
 <meta property="og:site_name" content="Claire&#39;s Notes">
-<meta property="og:description" content="版本：nuxt 2.15.8">
+<meta property="og:description" content="版本：nuxt 2.15.8  vee-validate 是使用於 Vue.js 的輕量表單驗證套件（參考 php 框架 laravel 表單驗證所開發），僅需在表單上加入簡易語法就能進行驗證，執行：npm i vee-validate@3.4.14 Vue.js v2.x 需搭配 vee-validate v3.x   新增 plugins&#x2F;vee-validate.js，在 nuxt.con">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-12-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-12-17T11:12:11.627Z">
+<meta property="article:modified_time" content="2022-12-17T11:15:48.053Z">
 <meta property="article:author" content="Claire Chang">
-<meta property="article:tag" content="vue">
-<meta property="article:tag" content="vue.js">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="vue.js">
 <meta property="article:tag" content="ssr">
 <meta property="article:tag" content="vee-validate">
 <meta name="twitter:card" content="summary">
@@ -147,8 +147,6 @@
         <html><head></head><body><blockquote>
 <p><strong>版本：nuxt 2.15.8</strong></p>
 </blockquote>
-<span id="more"></span>
-
 <p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://vee-validate.logaretm.com/v3/">vee-validate</a> 是使用於 Vue.js 的輕量表單驗證套件（參考 php 框架 laravel 表單驗證所開發），僅需在表單上加入簡易語法就能進行驗證，執行：<code>npm i vee-validate@3.4.14</code></p>
 <blockquote class="colorquote info"><p>Vue.js v2.x 需搭配 vee-validate v3.x</p>
 </blockquote>
@@ -156,19 +154,21 @@
 <p>新增 plugins/vee-validate.js，在 nuxt.config.js 配置</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">plugins</span>: [<br>        { <span class="hljs-attr">src</span>: <span class="hljs-string">'@/plugins/vee-validate.js'</span>, <span class="hljs-attr">mode</span>: <span class="hljs-string">'client'</span> }<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
 
+<span id="more"></span>
+
 <p>移動到 plugins/vee-validate.js 註冊全域表單驗證元件，步驟如下：</p>
-<h3 id="1-規則引入"><a href="#1-規則引入" class="headerlink" title="1. 規則引入"></a>1. <strong>規則引入</strong></h3><p><strong>引入部分規則：</strong></p>
+<h3 id="1-規則引入"><a href="#1-規則引入" class="headerlink" title="1. 規則引入"></a><strong>1. 規則引入</strong></h3><p><strong>引入部分規則：</strong></p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> { extend } <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate'</span>;<br><span class="hljs-keyword">import</span> { required, email } <span class="hljs-keyword">from</span> <span class="hljs-string">"vee-validate/dist/rules"</span>;<br><br><span class="hljs-title function_">extend</span>(<span class="hljs-string">'email'</span>, email);<br><span class="hljs-title function_">extend</span>(<span class="hljs-string">'required'</span>, {<br>  ...required,<br>  <span class="hljs-attr">message</span>: <span class="hljs-string">'欄位必填'</span><br>});<br></code></pre></td></tr></tbody></table></figure>
 
 <p><strong>引入全部規則：</strong></p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> { extend } <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate'</span>;<br><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> rules <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate/dist/rules'</span>;<br><br><span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(rules).<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">rule</span> =&gt;</span> {<br>  <span class="hljs-title function_">extend</span>(rule, rules[rule]);<br>});<br></code></pre></td></tr></tbody></table></figure>
 
-<h3 id="2-語系設定（以繁體中文舉例）"><a href="#2-語系設定（以繁體中文舉例）" class="headerlink" title="2. 語系設定（以繁體中文舉例）"></a>2. 語系設定（以繁體中文舉例）</h3><figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> { localize } <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate'</span>;<br><span class="hljs-keyword">import</span> tw <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate/dist/locale/zh_TW.json'</span>;<br><br><span class="hljs-title function_">localize</span>(<span class="hljs-string">'zh_TW'</span>, tw);<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="2-語系設定（以繁體中文舉例）"><a href="#2-語系設定（以繁體中文舉例）" class="headerlink" title="2. 語系設定（以繁體中文舉例）"></a><strong>2. 語系設定（以繁體中文舉例）</strong></h3><figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> { localize } <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate'</span>;<br><span class="hljs-keyword">import</span> tw <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate/dist/locale/zh_TW.json'</span>;<br><br><span class="hljs-title function_">localize</span>(<span class="hljs-string">'zh_TW'</span>, tw);<br></code></pre></td></tr></tbody></table></figure>
 
 <p>全域自訂提示訊息</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-title function_">localize</span>(<span class="hljs-string">'zh_TW'</span>, {<br>    ...tw,<br>    <span class="hljs-attr">messages</span>: {<br>        <span class="hljs-attr">required</span>: <span class="hljs-string">'{_field_} 必填'</span><br>    },<br>    <span class="hljs-attr">fields</span>: {<br>        <span class="hljs-attr">email</span>: {<br>            <span class="hljs-attr">required</span>: <span class="hljs-string">'郵件 必填'</span><br>        }<br>    }<br>});<br></code></pre></td></tr></tbody></table></figure>
 
-<h3 id="3-調整互動模式跟-CSS-classes"><a href="#3-調整互動模式跟-CSS-classes" class="headerlink" title="3. 調整互動模式跟 CSS classes"></a>3. 調整互動模式跟 CSS classes</h3><p><strong>互動模式選項：</strong></p>
+<h3 id="3-調整互動模式跟-CSS-classes"><a href="#3-調整互動模式跟-CSS-classes" class="headerlink" title="3. 調整互動模式跟 CSS classes"></a><strong>3. 調整互動模式跟 CSS classes</strong></h3><p><strong>互動模式選項：</strong></p>
 <ul>
 <li>aggressive：<strong>預設模式</strong>，<code>input</code> 跟 <code>blur</code> 事件進行驗證</li>
 <li>lazy：<code>change</code> 或 <code>blur</code> 事件進行驗證</li>
@@ -177,7 +177,7 @@
 </ul>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> { configure } <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate'</span>;<br><br><span class="hljs-title function_">configure</span>({<br>    <span class="hljs-attr">mode</span>: <span class="hljs-string">'eager'</span>, <span class="hljs-comment">// Interaction Modes</span><br>  <span class="hljs-attr">classes</span>: {<br>    <span class="hljs-attr">valid</span>: <span class="hljs-string">'is-valid'</span>,<br>    <span class="hljs-attr">invalid</span>: <span class="hljs-string">'is-invalid'</span><br>  }<br>});<br></code></pre></td></tr></tbody></table></figure>
 
-<h3 id="4-將元件註冊至-Vue-Instance"><a href="#4-將元件註冊至-Vue-Instance" class="headerlink" title="4. 將元件註冊至 Vue Instance"></a>4. 將元件註冊至 Vue Instance</h3><p><strong>ValidationObserver：</strong>驗證完整表單</p>
+<h3 id="4-將元件註冊至-Vue-Instance"><a href="#4-將元件註冊至-Vue-Instance" class="headerlink" title="4. 將元件註冊至 Vue Instance"></a><strong>4. 將元件註冊至 Vue Instance</strong></h3><p><strong>ValidationObserver：</strong>驗證完整表單</p>
 <p><strong>ValidationProvider：</strong>驗證單一表單內容</p>
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ValidationObserver</span>, <span class="hljs-title class_">ValidationProvider</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate'</span>;<br><br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">component</span>(<span class="hljs-string">'ValidationObserver'</span>, <span class="hljs-title class_">ValidationObserver</span>);<br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">component</span>(<span class="hljs-string">'ValidationProvider'</span>, <span class="hljs-title class_">ValidationProvider</span>);<br></code></pre></td></tr></tbody></table></figure>
 
@@ -185,11 +185,7 @@
 <figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>;<br><span class="hljs-keyword">import</span> tw <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate/dist/locale/zh_TW.json'</span>;<br><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> <span class="hljs-title class_">VeeValidate</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate'</span>;<br><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> rules <span class="hljs-keyword">from</span> <span class="hljs-string">'vee-validate/dist/rules'</span>;<br><br><span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(rules).<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">rule</span> =&gt;</span> {<br>    <span class="hljs-title class_">VeeValidate</span>.<span class="hljs-title function_">extend</span>(rule, rules[rule]);<br>});<br><span class="hljs-title class_">VeeValidate</span>.<span class="hljs-title function_">localize</span>(<span class="hljs-string">'zh_TW'</span>, tw);<br><br><span class="hljs-title class_">VeeValidate</span>.<span class="hljs-title function_">configure</span>({<br>    <span class="hljs-attr">mode</span>: <span class="hljs-string">'eager'</span>,<br>    <span class="hljs-attr">classes</span>: {<br>        <span class="hljs-attr">valid</span>: <span class="hljs-string">'is-valid'</span>,<br>        <span class="hljs-attr">invalid</span>: <span class="hljs-string">'is-invalid'</span><br>    }<br>});<br><br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">component</span>(<span class="hljs-string">'ValidationObserver'</span>, <span class="hljs-title class_">VeeValidate</span>.<span class="hljs-property">ValidationObserver</span>);<br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">component</span>(<span class="hljs-string">'ValidationProvider'</span>, <span class="hljs-title class_">VeeValidate</span>.<span class="hljs-property">ValidationProvider</span>);<br></code></pre></td></tr></tbody></table></figure>
 
 <p>接下來就可以在各頁面、元件使用表單驗證功能囉：</p>
-<h3 id="Validation-Provider：驗證單一表單內容（input）"><a href="#Validation-Provider：驗證單一表單內容（input）" class="headerlink" title="Validation Provider：驗證單一表單內容（input）"></a><strong><strong>Validation Provider：</strong></strong>驗證單一表單內容（input）</h3><ol>
-<li><strong>v-slot：</strong>取得元件回傳的內容</li>
-<li><strong>rules：</strong>規則選擇，多個規則可以使用 ‘|’ 分隔</li>
-<li><strong>props：</strong>回傳內容給元件，EX: name</li>
-</ol>
+<h3 id="Validation-Provider：驗證單一表單內容（input）"><a href="#Validation-Provider：驗證單一表單內容（input）" class="headerlink" title="Validation Provider：驗證單一表單內容（input）"></a><strong><strong>Validation Provider：</strong></strong>驗證單一表單內容（input）</h3><p><strong>1. v-slot：</strong>取得元件回傳的內容<br><strong>2. rules：</strong>規則選擇，多個規則可以使用 ‘|’ 分隔<br><strong>3. props：</strong>回傳內容給元件，EX: name</p>
 <figure class="highlight html hljs"><table><tbody><tr><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ValidationProvider</span> <span class="hljs-attr">rules</span>=<span class="hljs-string">"required|email"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"E-mail"</span> <span class="hljs-attr">v-slot</span>=<span class="hljs-string">"{ errors, classes }"</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"請輸入信箱"</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">:class</span>=<span class="hljs-string">"classes"</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">small</span>&gt;</span>{{ errors[0] }}<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ValidationProvider</span>&gt;</span><br></code></pre></td></tr></tbody></table></figure>
 
 <h3 id="Validation-Observer：驗證完整表單"><a href="#Validation-Observer：驗證完整表單" class="headerlink" title="Validation Observer：驗證完整表單"></a><strong><strong>Validation Observer：</strong></strong>驗證完整表單</h3><p><strong>方法一：</strong>使用 ****<code>v-slot="{ invalid }"</code> ，驗證不通過 disabled 按鈕（<code>type="submit"</code>），<code>submitForm()</code> 為自訂方法</p>
@@ -214,13 +210,13 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue/">#vue</a></span>
-    
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue-js/">#vue.js</a></span>
-    
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt/">#nuxt</a></span>
     
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt-js/">#nuxt.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue/">#vue</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue-js/">#vue.js</a></span>
     
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ssr/">#ssr</a></span>
     
