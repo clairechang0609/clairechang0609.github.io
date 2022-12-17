@@ -2,6 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://clairechang0609.github.io/2022/11/16/nuxt/nuxt-installation/</loc>
+    
+    <lastmod>2022-12-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/2022/11/17/nuxt/nuxt-catalog/</loc>
+    
+    <lastmod>2022-12-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/2022/11/22/nuxt/nuxt-vuex-store/</loc>
+    
+    <lastmod>2022-12-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/2022/11/24/nuxt/nuxt-lifecycle/</loc>
+    
+    <lastmod>2022-12-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/2022/12/01/nuxt/nuxt-ckeditor5/</loc>
+    
+    <lastmod>2022-12-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://clairechang0609.github.io/2022/12/17/nuxt/nuxt-veevalidate/</loc>
     
     <lastmod>2022-12-17</lastmod>
@@ -47,15 +92,6 @@
   </url>
   
   <url>
-    <loc>https://clairechang0609.github.io/2022/12/01/nuxt/nuxt-ckeditor5/</loc>
-    
-    <lastmod>2022-12-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://clairechang0609.github.io/2022/11/29/nuxt/nuxt-swiper/</loc>
     
     <lastmod>2022-12-15</lastmod>
@@ -83,43 +119,7 @@
   </url>
   
   <url>
-    <loc>https://clairechang0609.github.io/2022/11/22/nuxt/nuxt-vuex-store/</loc>
-    
-    <lastmod>2022-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://clairechang0609.github.io/2022/11/24/nuxt/nuxt-lifecycle/</loc>
-    
-    <lastmod>2022-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://clairechang0609.github.io/2022/11/16/nuxt/nuxt-installation/</loc>
-    
-    <lastmod>2022-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://clairechang0609.github.io/2022/11/19/nuxt/nuxt-config-setting/</loc>
-    
-    <lastmod>2022-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://clairechang0609.github.io/2022/11/17/nuxt/nuxt-catalog/</loc>
     
     <lastmod>2022-12-09</lastmod>
     
@@ -251,13 +251,6 @@
   </url>
   
   <url>
-    <loc>https://clairechang0609.github.io/tags/vee-validate/</loc>
-    <lastmod>2022-12-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://clairechang0609.github.io/tags/vuex/</loc>
     <lastmod>2022-12-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -266,6 +259,13 @@
   
   <url>
     <loc>https://clairechang0609.github.io/tags/nuxt-vuex/</loc>
+    <lastmod>2022-12-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/tags/vee-validate/</loc>
     <lastmod>2022-12-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://i.imgur.com/0JNnw2N.png">
 <meta property="og:image" content="https://i.imgur.com/q950cN2.png">
 <meta property="article:published_time" content="2022-11-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-12-15T16:29:58.137Z">
+<meta property="article:modified_time" content="2022-12-17T16:36:12.154Z">
 <meta property="article:author" content="Claire Chang">
 <meta property="article:tag" content="nuxt">
 <meta property="article:tag" content="nuxt.js">
@@ -169,7 +169,8 @@
 </blockquote>
 
 <p>原因是 <code>@ckeditor/ckeditor5-build-classic</code> 為包裝好的內容，試著進到 node_modules/@ckeditor/ckeditor5-build-classic/package.json 可以看到相依套件已經安裝進去：</p>
-<p><img src="https://i.imgur.com/0JNnw2N.png"></p>
+<img style="max-width: 500px;" src="https://i.imgur.com/0JNnw2N.png">
+
 <p>因此 CKeditor 在初始化時會因為模組重複執行導致錯誤，可以改用以下方法</p>
 <h2 id="Adding-a-plugin-to-an-editor"><a href="#Adding-a-plugin-to-an-editor" class="headerlink" title="Adding a plugin to an editor"></a><strong>Adding a plugin to an editor</strong></h2><p>客製化配置所有功能，步驟相對複雜，首先安裝基本套件：</p>
 <figure class="highlight bash hljs"><table><tbody><tr><td class="code"><pre><code class="hljs bash">npm install --save \<br>    @ckeditor/ckeditor5-vue2 \<br>    @ckeditor/ckeditor5-editor-classic \<br>    @ckeditor/ckeditor5-dev-webpack-plugin \<br>    @ckeditor/ckeditor5-dev-utils \<br>    @ckeditor/ckeditor5-theme-lark \<br>    postcss@8 \<br>    postcss-loader@4 \<br>    raw-loader@4<br></code></pre></td></tr></tbody></table></figure>
