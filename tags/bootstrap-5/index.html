@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>Claire&#39;s Notes</title>
+<title>標籤: bootstrap 5 - Claire&#39;s Notes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -19,7 +19,7 @@
     <meta name="description" content="程式學習筆記">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Claire&#39;s Notes">
-<meta property="og:url" content="https://clairechang0609.github.io/page/2/index.html">
+<meta property="og:url" content="https://clairechang0609.github.io/tags/bootstrap-5/index.html">
 <meta property="og:site_name" content="Claire&#39;s Notes">
 <meta property="og:description" content="程式學習筆記">
 <meta property="og:locale" content="zh_TW">
@@ -112,13 +112,20 @@
         </div>
     </div>
 </nav>
-    <section class="section">
+    <section class="section section-heading">
+    <div class="container">
+        <div class="content">
+            <h5>#bootstrap 5</h5>
+        </div>
+    </div>
+</section>
+<section class="section">
     <div class="container">
     
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/2022/11/22/nuxt/nuxt-vuex-store/" itemprop="url">Nuxt.js VueX Store 搭配 vuex-persistedstate 狀態保存工具</a>
+            <a href="/2022/12/22/nuxt/nuxt-bootstrap5/" itemprop="url">Nuxt.js 套件應用：Bootstrap 5 搭配 SCSS 打造網頁 UI</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -131,7 +138,7 @@
         
         <span class="column is-narrow">
             
-                <span>2022-11-22</span>
+                <span>2022-12-22</span>
             
         </span>
     </div>
@@ -140,9 +147,10 @@
         <html><head></head><body><blockquote>
 <p><strong>版本：nuxt 2.15.8</strong></p>
 </blockquote>
-<p>前情提要一下，在 Vue 的專案下，常會需要做父子元件或是頁面之間的溝通傳值，如果說只是單層（ex：父元件 → 子元件、子元件 → 父元件、頁面 → 頁面），我們可以很簡單的使用 <code>props</code> 、 <code>emit</code> 或 <code>event bus</code> 即可，但在大型專案，共用資料就不是如此單純，可能會有元件內含元件、多層級的溝通，如果只用上述方法，對於開發及除錯都不便利，如下圖範例，<strong>元件 1-1</strong> 跟<strong>元件 2-1</strong> 的溝通相對複雜。</p></body></html>
+<p>Bootstrap 是一款相當熱門的前端開發工具，可以幫助我們快速的設計跟自訂 RWD 網站，過去 Bootstrap 相依於 jQuery 開發，Bootstrap 5 不需使用 jQuery，新增 Utilities API，可以更簡易的管理或擴充樣式，讓程式碼更輕量，另外也新增了 Bootstrap Icons 供免費使用。</p>
+<p>透過 create-nuxt-app 建置 Nuxt.js 專案時，雖然可以選擇 CSS 模板（UI framework），但選項內並沒有 <code>Bootstrap</code> （Bootstrap Vue 搭配的是 <code>Bootstrap 4.5</code>），因此需手動安裝。</p></body></html>
         <p class="article-more-link">
-            <a href="/2022/11/22/nuxt/nuxt-vuex-store/#more">閱讀更多</a>
+            <a href="/2022/12/22/nuxt/nuxt-bootstrap5/#more">閱讀更多</a>
         </p>
     
     </div>
@@ -155,233 +163,6 @@
 
 
     
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2022/11/21/nuxt/nuxt-axios/" itemprop="url">Nuxt.js 搭配 Axios 與自訂 Error Page</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        
-            <span class="column is-narrow article-category">
-                <i class="far fa-folder"></i>
-                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
-            </span>
-            <span class="column is-narrow">｜</span>
-        
-        <span class="column is-narrow">
-            
-                <span>2022-11-21</span>
-            
-        </span>
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><blockquote>
-<p><strong>版本：nuxt 2.15.8</strong></p>
-</blockquote>
-<p>Axios 是一套相當便利的 Promise Base Ajax 套件，而 Nuxt 又有 Axios 整合套件 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://axios.nuxtjs.org/">@nuxtjs/axios</a>，此篇範例會使用到 Async、Await，如果對於 Promise 尚不熟悉，可以參考 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.casper.tw/development/2020/02/16/all-new-promise/">Promise 介紹文章</a></p></body></html>
-        <p class="article-more-link">
-            <a href="/2022/11/21/nuxt/nuxt-axios/#more">閱讀更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2022/11/19/nuxt/nuxt-config-setting/" itemprop="url">Nuxt.js nuxt.config.js 設定檔</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        
-            <span class="column is-narrow article-category">
-                <i class="far fa-folder"></i>
-                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
-            </span>
-            <span class="column is-narrow">｜</span>
-        
-        <span class="column is-narrow">
-            
-                <span>2022-11-19</span>
-            
-        </span>
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><blockquote>
-<p><strong>版本：nuxt 2.15.8</strong></p>
-</blockquote>
-<p>全名為 <strong><strong>Nuxt configuration file</strong></strong>，功能同 Vue 專案內 vue.config.js 檔，如果我們使用 create-nuxt-app 來建置專案，會自動產生這支檔案，在此配置的內容，會全域讀取設定。</p>
-<p>接下來介紹一下一些常用的設定：</p></body></html>
-        <p class="article-more-link">
-            <a href="/2022/11/19/nuxt/nuxt-config-setting/#more">閱讀更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2022/11/17/nuxt/nuxt-catalog/" itemprop="url">Nuxt.js 目錄結構</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        
-            <span class="column is-narrow article-category">
-                <i class="far fa-folder"></i>
-                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
-            </span>
-            <span class="column is-narrow">｜</span>
-        
-        <span class="column is-narrow">
-            
-                <span>2022-11-17</span>
-            
-        </span>
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><blockquote>
-<p><strong>版本：nuxt 2.15.8</strong></p>
-</blockquote>
-<p>使用 create-nuxt-app 安裝完成後，可以看到以下的資料夾結構：</p></body></html>
-        <p class="article-more-link">
-            <a href="/2022/11/17/nuxt/nuxt-catalog/#more">閱讀更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2022/11/16/nuxt/nuxt-installation/" itemprop="url">Nuxt.js 專案架設</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        
-            <span class="column is-narrow article-category">
-                <i class="far fa-folder"></i>
-                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
-            </span>
-            <span class="column is-narrow">｜</span>
-        
-        <span class="column is-narrow">
-            
-                <span>2022-11-16</span>
-            
-        </span>
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><blockquote>
-<p><strong>版本：nuxt 2.15.8</strong></p>
-</blockquote>
-<p>說到 Nuxt，必須先從 Vue.js 說起，Vue.js 為專注在視圖層(View) 的 JS 框架，為 SPA（Single Page Application）應用程式，簡而言之整個網站應用只有單一頁面，一但頁面被加載進來後，就不會再進行該頁面請求，由於 Vue 是利用 JS 載入資料，並動態產生元件，SEO 只能抓取到 HTML 內容，因此 SEO 表現趨近於零。</p>
-<p>而 Nuxt 是基於 Vue.js、Node.js、Webpack 以及 Badel.js 的輕量框架，可以同時創建 SSR（Server Side Render）及 SPA，在頁面載入前即渲染（伺服器回傳完整 HTML 檔，每次跳轉頁面，瀏覽器都需要刷新），搜尋引擎爬蟲可以取得資料，大幅解決 SEO 的問題。</p></body></html>
-        <p class="article-more-link">
-            <a href="/2022/11/16/nuxt/nuxt-installation/#more">閱讀更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2022/11/03/vue/vue-upload-image/" itemprop="url">Vue.js 圖片上傳串接後端 API（轉換成base64格式）</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        
-            <span class="column is-narrow article-category">
-                <i class="far fa-folder"></i>
-                <a class="article-category-link" href="/categories/Vue/">Vue</a>
-            </span>
-            <span class="column is-narrow">｜</span>
-        
-        <span class="column is-narrow">
-            
-                <span>2022-11-03</span>
-            
-        </span>
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><blockquote>
-<p><strong>版本：vue 2.6.14</strong></p>
-</blockquote>
-<p>這次介紹的上傳步驟為，使用者填寫一份表單，在選取欲上傳圖片後，系統會先將檔案上傳至雲端資料庫，待使用者確認整份表單填寫無誤後，才送出表單。</p>
-<p><strong>操作步驟：</strong></p>
-<ol>
-<li>點擊 input 選擇本地端圖片</li>
-<li>進行圖片轉換（轉成 base64 格式）</li>
-<li>呼叫後端 api 進行上傳（至雲端資料庫）</li>
-<li>成功回傳圖片路徑</li>
-<li>將該路徑顯示於畫面預覽</li>
-</ol></body></html>
-        <p class="article-more-link">
-            <a href="/2022/11/03/vue/vue-upload-image/#more">閱讀更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-
-    
-    
-        
-<nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
-    <div class="pagination-previous">
-        <a href="/">上一頁</a>
-    </div>
-    <div class="pagination-next is-invisible is-hidden-mobile">
-        <a href="/page/3/">下一頁</a>
-    </div>
-    <ul class="pagination-list is-hidden-mobile">
-        
-        <li><a class="pagination-link" href="/">1</a></li>
-        
-        <li><a class="pagination-link is-current" href="/page/2/">2</a></li>
-        
-    </ul>
-</nav>
     
     </div>
 </section>
