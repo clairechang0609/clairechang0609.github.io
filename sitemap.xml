@@ -173,20 +173,6 @@
 
   
   <url>
-    <loc>https://clairechang0609.github.io/tags/nuxt/</loc>
-    <lastmod>2022-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clairechang0609.github.io/tags/nuxt-js/</loc>
-    <lastmod>2022-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://clairechang0609.github.io/tags/vue/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -195,6 +181,20 @@
   
   <url>
     <loc>https://clairechang0609.github.io/tags/vue-js/</loc>
+    <lastmod>2022-12-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/tags/nuxt/</loc>
+    <lastmod>2022-12-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/tags/nuxt-js/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -243,6 +243,34 @@
   </url>
   
   <url>
+    <loc>https://clairechang0609.github.io/tags/seo/</loc>
+    <lastmod>2022-12-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/tags/meta-tags/</loc>
+    <lastmod>2022-12-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/tags/ga/</loc>
+    <lastmod>2022-12-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clairechang0609.github.io/tags/gtm/</loc>
+    <lastmod>2022-12-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://clairechang0609.github.io/tags/create-nuxt-app/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -264,6 +292,13 @@
   </url>
   
   <url>
+    <loc>https://clairechang0609.github.io/tags/sitemap/</loc>
+    <lastmod>2022-12-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://clairechang0609.github.io/tags/swiper/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -271,14 +306,7 @@
   </url>
   
   <url>
-    <loc>https://clairechang0609.github.io/tags/seo/</loc>
-    <lastmod>2022-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clairechang0609.github.io/tags/meta-tags/</loc>
+    <loc>https://clairechang0609.github.io/tags/vee-validate/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -298,45 +326,17 @@
     <priority>0.2</priority>
   </url>
   
-  <url>
-    <loc>https://clairechang0609.github.io/tags/ga/</loc>
-    <lastmod>2022-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clairechang0609.github.io/tags/gtm/</loc>
-    <lastmod>2022-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clairechang0609.github.io/tags/sitemap/</loc>
-    <lastmod>2022-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clairechang0609.github.io/tags/vee-validate/</loc>
-    <lastmod>2022-12-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
 
   
   <url>
-    <loc>https://clairechang0609.github.io/categories/Nuxt/</loc>
+    <loc>https://clairechang0609.github.io/categories/Vue/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clairechang0609.github.io/categories/Vue/</loc>
+    <loc>https://clairechang0609.github.io/categories/Nuxt/</loc>
     <lastmod>2022-12-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
