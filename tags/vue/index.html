@@ -163,6 +163,48 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
+            <a href="/2022/12/29/nuxt/nuxt-loading/" itemprop="url">Nuxt.js 自訂頁面 Loading 效果</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        
+            <span class="column is-narrow article-category">
+                <i class="far fa-folder"></i>
+                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
+            </span>
+            <span class="column is-narrow">｜</span>
+        
+        <span class="column is-narrow">
+            
+                <span>2022-12-29</span>
+            
+        </span>
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><blockquote>
+<p><strong>版本：nuxt 2.15.8</strong></p>
+</blockquote>
+<p>Nuxt.js 有預設的 loading 效果（進度條），在切換路徑的時候顯示，我們可以調整樣式、關閉 loading、或者是客製化介面。</p>
+<h2 id="設定-Loading-樣式"><a href="#設定-Loading-樣式" class="headerlink" title="設定 Loading 樣式"></a><strong>設定 Loading 樣式</strong></h2><h3 id="1-關閉-loading-效果"><a href="#1-關閉-loading-效果" class="headerlink" title="1. 關閉 loading 效果"></a><strong>1. 關閉 loading 效果</strong></h3><p>全域關閉效果</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// nuxt.config.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">loading</span>: <span class="hljs-literal">false</span><br>};<br></code></pre></td></tr></tbody></table></figure></body></html>
+        <p class="article-more-link">
+            <a href="/2022/12/29/nuxt/nuxt-loading/#more">閱讀更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
             <a href="/2022/12/23/nuxt/nuxt-masonry/" itemprop="url">Nuxt.js 套件應用：Masonry 打造瀑布流版面</a>
         
     </h1>
@@ -313,7 +355,7 @@
 </blockquote>
 
 <p>新增 plugins/vee-validate.js，在 nuxt.config.js 配置</p>
-<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">plugins</span>: [<br>        { <span class="hljs-attr">src</span>: <span class="hljs-string">'@/plugins/vee-validate.js'</span>, <span class="hljs-attr">mode</span>: <span class="hljs-string">'client'</span> }<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure></body></html>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// nuxt.config.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">plugins</span>: [<br>        { <span class="hljs-attr">src</span>: <span class="hljs-string">'@/plugins/vee-validate.js'</span>, <span class="hljs-attr">mode</span>: <span class="hljs-string">'client'</span> }<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure></body></html>
         <p class="article-more-link">
             <a href="/2022/12/17/nuxt/nuxt-veevalidate/#more">閱讀更多</a>
         </p>
@@ -481,46 +523,6 @@
 <p>CKEditor 是一套歷史悠久且功能完整、輕量的富文本編輯器（rich text editor），為使用者提供所見即所得（WYSIWYG）的編輯區域，CKEditor 5 與舊版不同，使用 MVC 架構、ES6 編寫、UI 簡潔，且因應現在的前後端分離趨勢，與前端框架 React、Angular、and Vue.js 做整合，讓我們可以更便利的開發應用。</p></body></html>
         <p class="article-more-link">
             <a href="/2022/12/01/nuxt/nuxt-ckeditor5/#more">閱讀更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2022/11/29/nuxt/nuxt-swiper/" itemprop="url">Nuxt.js 套件應用：Swiper 製作輪播動畫</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        
-            <span class="column is-narrow article-category">
-                <i class="far fa-folder"></i>
-                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
-            </span>
-            <span class="column is-narrow">｜</span>
-        
-        <span class="column is-narrow">
-            
-                <span>2022-11-29</span>
-            
-        </span>
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <html><head></head><body><blockquote>
-<p><strong>版本：nuxt 2.15.8</strong></p>
-</blockquote>
-<p>網站開發常使用到輪播功能，<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.npmjs.com/package/swiper">Swiper</a> 是一款基於 js 開發、功能完整實用性高的輪播套件，今天來介紹如何在 Nuxt.js 專案內應用，我們會搭配 Vue 整合套件 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.npmjs.com/package/vue-awesome-swiper">vue-awesome-swiper</a> 使用</p></body></html>
-        <p class="article-more-link">
-            <a href="/2022/11/29/nuxt/nuxt-swiper/#more">閱讀更多</a>
         </p>
     
     </div>

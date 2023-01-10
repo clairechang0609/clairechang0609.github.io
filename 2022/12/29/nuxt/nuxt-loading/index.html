@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>Nuxt.js 自訂頁面 Loading 效果 - Claire&#39;s Notes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="程式學習筆記">
+
+
+
+
+
+    <meta name="description" content="版本：nuxt 2.15.8  Nuxt.js 有預設的 loading 效果（進度條），在切換路徑的時候顯示，我們可以調整樣式、關閉 loading、或者是客製化介面。 設定 Loading 樣式1. 關閉 loading 效果全域關閉效果 &#x2F;&#x2F; nuxt.config.jsexport default {    loading: false};">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nuxt.js 自訂頁面 Loading 效果">
+<meta property="og:url" content="https://clairechang0609.github.io/2022/12/29/nuxt/nuxt-loading/index.html">
+<meta property="og:site_name" content="Claire&#39;s Notes">
+<meta property="og:description" content="版本：nuxt 2.15.8  Nuxt.js 有預設的 loading 效果（進度條），在切換路徑的時候顯示，我們可以調整樣式、關閉 loading、或者是客製化介面。 設定 Loading 樣式1. 關閉 loading 效果全域關閉效果 &#x2F;&#x2F; nuxt.config.jsexport default {    loading: false};">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-12-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-10T15:47:25.098Z">
+<meta property="article:author" content="Claire Chang">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="vue.js">
+<meta property="article:tag" content="nuxt">
+<meta property="article:tag" content="nuxt.js">
+<meta property="article:tag" content="ssr">
+<meta property="article:tag" content="loading">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night-eighties.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                    
+                    <img src="/images/claire-logo.svg" alt height="28">
+                    
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">文章</a>
+            
+            <a class="navbar-item " href="/categories">分類</a>
+            
+            <a class="navbar-item " href="/about">關於我</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜尋" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Nuxt.js 自訂頁面 Loading 效果
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        
+            <span class="column is-narrow article-category">
+                <i class="far fa-folder"></i>
+                <a class="article-category-link" href="/categories/Nuxt/">Nuxt</a>
+            </span>
+            <span class="column is-narrow">｜</span>
+        
+        <span class="column is-narrow">
+            
+                <span>2022-12-29</span>
+            
+        </span>
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><blockquote>
+<p><strong>版本：nuxt 2.15.8</strong></p>
+</blockquote>
+<p>Nuxt.js 有預設的 loading 效果（進度條），在切換路徑的時候顯示，我們可以調整樣式、關閉 loading、或者是客製化介面。</p>
+<h2 id="設定-Loading-樣式"><a href="#設定-Loading-樣式" class="headerlink" title="設定 Loading 樣式"></a><strong>設定 Loading 樣式</strong></h2><h3 id="1-關閉-loading-效果"><a href="#1-關閉-loading-效果" class="headerlink" title="1. 關閉 loading 效果"></a><strong>1. 關閉 loading 效果</strong></h3><p>全域關閉效果</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// nuxt.config.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">loading</span>: <span class="hljs-literal">false</span><br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<span id="more"></span>
+
+<p>或是針對單頁關閉效果</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br>&lt;template&gt;<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>About<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-attr">loading</span>: <span class="hljs-literal">false</span></span></span><br><span class="language-javascript"><span class="language-xml">    };</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="2-調整預設元件樣式"><a href="#2-調整預設元件樣式" class="headerlink" title="2. 調整預設元件樣式"></a><strong>2. 調整預設元件樣式</strong></h3><figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// nuxt.config.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">loading</span>: {<br>        <span class="hljs-attr">color</span>: <span class="hljs-string">'blue'</span>,<br>        <span class="hljs-attr">height</span>: <span class="hljs-string">'5px'</span><br>    }<br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>參數如下：</strong></p>
+<table>
+<thead>
+<tr>
+<th>參數</th>
+<th>Type</th>
+<th>預設值</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>color</td>
+<td>String</td>
+<td>‘black’</td>
+<td>進度條色彩</td>
+</tr>
+<tr>
+<td>failedColor</td>
+<td>String</td>
+<td>‘red’</td>
+<td>錯誤時進度條色彩</td>
+</tr>
+<tr>
+<td>height</td>
+<td>String</td>
+<td>‘2px’</td>
+<td>進度條高度</td>
+</tr>
+<tr>
+<td>throttle</td>
+<td>Number</td>
+<td>200</td>
+<td>顯示進度條前的緩衝時間 (ms)</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>Number</td>
+<td>5000</td>
+<td>進度條顯示最長時間 (ms)</td>
+</tr>
+<tr>
+<td>continuous</td>
+<td>Boolean</td>
+<td>false</td>
+<td>loading 時間大於 duration 時，是否持續顯示進度條</td>
+</tr>
+<tr>
+<td>css</td>
+<td>Boolean</td>
+<td>true</td>
+<td>設定 false 會移除預設進度條樣式（並可自行設定樣式）</td>
+</tr>
+<tr>
+<td>rtl</td>
+<td>Boolean</td>
+<td>false</td>
+<td>進度條方向是否由右至左（預設由左至右）</td>
+</tr>
+</tbody></table>
+<h3 id="3-客製化-Loading-樣式"><a href="#3-客製化-Loading-樣式" class="headerlink" title="3. 客製化 Loading 樣式"></a><strong>3. 客製化 Loading 樣式</strong></h3><p>如果不想使用預設 loading 樣式，也可以自己建立，新增 <code>components/TheLoading.vue</code>（命名自訂）</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// nuxt.config.js</span><br>&lt;template&gt;<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">"loading"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"loading-page"</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">return</span> {</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-attr">loading</span>: <span class="hljs-literal">false</span></span></span><br><span class="language-javascript"><span class="language-xml">        }</span></span><br><span class="language-javascript"><span class="language-xml">    },</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-attr">methods</span>: {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-title function_">start</span>(<span class="hljs-params"></span>) {</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-variable language_">this</span>.<span class="hljs-property">loading</span> = <span class="hljs-literal">true</span></span></span><br><span class="language-javascript"><span class="language-xml">    },</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">finish</span>(<span class="hljs-params"></span>) {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-variable language_">this</span>.<span class="hljs-property">loading</span> = <span class="hljs-literal">false</span></span></span><br><span class="language-javascript"><span class="language-xml">    }</span></span><br><span class="language-javascript"><span class="language-xml">}</span></span><br><span class="language-javascript"><span class="language-xml">};</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>接著註冊到 nuxt.config.js</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// nuxt.config.js</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {<br>    <span class="hljs-attr">loading</span>: <span class="hljs-string">'@/components/TheLoading.vue'</span><br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="觸發-Loading-事件"><a href="#觸發-Loading-事件" class="headerlink" title="觸發 Loading 事件"></a><strong>觸發 Loading 事件</strong></h2><p>我們可以透過 <code>start()</code>、<code>finish()</code> 方法來觸發跟結束 loading 效果</p>
+<figure class="highlight jsx hljs"><table><tbody><tr><td class="code"><pre><code class="hljs jsx"><span class="hljs-comment">// pages/about.vue</span><br>&lt;template&gt;<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>About：<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span><br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>name：{{ info.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br>    &lt;h3&gt;age：{{ info.<span class="hljs-property">age</span> }}&lt;h3&gt;<br>&lt;/template&gt;<br><br><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="language-javascript"><span class="language-xml"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">return</span> {</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-attr">info</span>: {</span></span><br><span class="language-javascript"><span class="language-xml">                <span class="hljs-attr">name</span>: <span class="hljs-string">''</span>,</span></span><br><span class="language-javascript"><span class="language-xml">                <span class="hljs-attr">age</span>: <span class="hljs-string">''</span></span></span><br><span class="language-javascript"><span class="language-xml">            }</span></span><br><span class="language-javascript"><span class="language-xml">        };</span></span><br><span class="language-javascript"><span class="language-xml">    },</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getInfo</span>();</span></span><br><span class="language-javascript"><span class="language-xml">    },</span></span><br><span class="language-javascript"><span class="language-xml">    <span class="hljs-attr">methods</span>: {</span></span><br><span class="language-javascript"><span class="language-xml">        <span class="hljs-keyword">async</span> <span class="hljs-title function_">getInfo</span>(<span class="hljs-params"></span>) {</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-comment">// loading 開始</span></span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-variable language_">this</span>.<span class="hljs-property">$nuxt</span>.<span class="hljs-property">$loading</span>.<span class="hljs-title function_">start</span>();</span></span><br><span class="language-javascript"><span class="language-xml"></span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> $axios.$get(<span class="hljs-string">'/api/info'</span>);</span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-variable language_">this</span>.<span class="hljs-property">info</span> = response;</span></span><br><span class="language-javascript"><span class="language-xml"></span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-comment">// loading 結束</span></span></span><br><span class="language-javascript"><span class="language-xml">            <span class="hljs-variable language_">this</span>.<span class="hljs-property">$nuxt</span>.<span class="hljs-property">$loading</span>.<span class="hljs-title function_">finish</span>();</span></span><br><span class="language-javascript"><span class="language-xml">        }</span></span><br><span class="language-javascript"><span class="language-xml">    }</span></span><br><span class="language-javascript"><span class="language-xml">};</span></span><br><span class="language-javascript"><span class="language-xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></tbody></table></figure>
+
+<hr>
+<p>參考文章：</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://nuxtjs.org/docs/features/loading/">https://nuxtjs.org/docs/features/loading/</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://ithelp.ithome.com.tw/articles/10205496">https://ithelp.ithome.com.tw/articles/10205496</a></p>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue/">#vue</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/vue-js/">#vue.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt/">#nuxt</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/nuxt-js/">#nuxt.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ssr/">#ssr</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/loading/">#loading</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2022/12/23/nuxt/nuxt-masonry/">Nuxt.js 套件應用：Masonry 打造瀑布流版面</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2023/01/10/vue/vue-recursive-component/">Vue.js Recursive Component 遞迴元件實作巢狀選單</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=638b091d4b058f001938c857&amp;product=sop" async="async"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">評論</h3>
+    <!-- 
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div> -->
+    <style>
+        .utterances{max-width: 100%;}
+    </style>
+    <script src="https://utteranc.es/client.js" repo="clairechang0609/hexo-board" issue-term="title" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</div>
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow">
+                &copy; 2023
+                Claire Chang&nbsp;
+                All rights reserved.
+                <br>
+                Powered by Hexo.
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/clairechang0609">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="external nofollow noopener noreferrer" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-TW");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery > p > .gallery-item').unwrap();
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站內搜尋">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+    
+</body>
+</html>
